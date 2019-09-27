@@ -33,7 +33,7 @@ class SidebarHeader extends Component {
                               <img src={Logo} alt="logo" />
                            )}                           
                         </div>
-                        <span className="text align-middle">Jokko Apps</span>
+                        <span className="text align-middle"></span>
                      </NavLink>
                   </div>
                </div>

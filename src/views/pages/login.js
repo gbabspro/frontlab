@@ -25,7 +25,7 @@ class Login extends Component {
       super(props);
       this.state = {
          isChecked: true,
-         usernameOrEmail: "",
+         email: "",
          password: ""
       }
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -72,14 +72,14 @@ class Login extends Component {
                <Col xs="12" className="d-flex align-items-center justify-content-center">
                   <Card className="text-center width-400">
                      <CardBody>
-                        <h5 className="black py-2">Connectez-vous à votre compte</h5>
+                        <h6 className="text-uppercase text-bold-500 black py-2">Connectez-vous à votre compte</h6>
                         <Form className="pt-2" onSubmit={this.handleSubmit}>
                            <FormGroup>
                               <Col md="12">
                                  <Input
                                     type="email"
                                     className="form-control"
-                                    name="usernameOrEmail"
+                                    name="email"
                                     onChange={this.handleChange}
                                     id="inputEmail"
                                     placeholder="Adresse e-mail"

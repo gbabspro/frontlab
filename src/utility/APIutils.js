@@ -31,6 +31,22 @@ export function login(loginRequest) {
     });
 }
 
+export function resetPassword(passwordRequest) {
+    return request({
+        url: API_BASE_URL + "/auth/resetPassword",
+        method: 'POST',
+        body: JSON.stringify(passwordRequest)
+    });
+}
+
+export function changerPassword(changerPasswordRequest) {
+    return request({
+        url: API_BASE_URL + "/auth/changePassword",
+        method: 'POST',
+        body: JSON.stringify(changerPasswordRequest)
+    });
+}
+
 export function register(signupRequest) {
     return request({
         url: API_BASE_URL + "/auth/signup",
@@ -39,9 +55,49 @@ export function register(signupRequest) {
     });
 }
 
+
+export function updateProfile(profileRequest) {
+    return request({
+        url: API_BASE_URL + "/user/updateProfil",
+        method: 'POST',
+        body: JSON.stringify(profileRequest)
+    });
+}
+
+export function updatePassword(passwordRequest) {
+    return request({
+        url: API_BASE_URL + "/user/updatePassword",
+        method: 'POST',
+        body: JSON.stringify(passwordRequest)
+    });
+}
+
+export function updateEmail(emailRequest) {
+    return request({
+        url: API_BASE_URL + "/user/updateEmail",
+        method: 'POST',
+        body: JSON.stringify(emailRequest)
+    });
+}
+
+export function newCommande(commandeRequest) {
+    return request({
+        url: API_BASE_URL + "/commande/new/service",
+        method: 'POST',
+        body: JSON.stringify(commandeRequest)
+    });
+}
+
 export function checkUsernameAvailability(username) {
     return request({
         url: API_BASE_URL + "/user/checkUsernameAvailability?username=" + username,
+        method: 'GET'
+    });
+}
+
+export function serviceGetListAgent(idService) {
+    return request({
+        url: API_BASE_URL + "/service/list/agent/" + idService,
         method: 'GET'
     });
 }
@@ -61,6 +117,18 @@ export function getCurrentUser() {
 
     return request({
         url: API_BASE_URL + "/user/me",
+        method: 'GET'
+    });
+}
+
+
+export function getServices() {
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/service/list",
         method: 'GET'
     });
 }

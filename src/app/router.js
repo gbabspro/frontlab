@@ -8,15 +8,19 @@ import { getCurrentUser } from '../utility/APIutils';
 // import internal(own) modules
 import MainLayoutRoutes from "../layouts/routes/mainRoutes";
 import FullPageLayout from "../layouts/routes/fullpageRoutes";
-import ErrorLayoutRoute from "../layouts/routes/errorRoutes";
+// import ErrorLayoutRoute from "../layouts/routes/errorRoutes";
 
 // Full Layout
 const LazyForgotPassword = lazy(() => import("../views/pages/forgotPassword"));
 const LazyLogin = lazy(() => import("../views/pages/login"));
 const LazyRegister = lazy(() => import("../views/pages/register"));
-const LazyMaintainance = lazy(() => import("../views/pages/maintainance"));
-const LazyLockScreen = lazy(() => import("../views/pages/lockScreen"));
+const LazyResetPassword = lazy(() => import("../views/pages/resetPassword"));
+// const LazyMaintainance = lazy(() => import("../views/pages/maintainance"));
+// const LazyLockScreen = lazy(() => import("../views/pages/lockScreen"));
 const LazyUserProfile = lazy(() => import("../views/pages/userProfile"));
+const LazyMarketPlace = lazy(() => import("../views/pages/marketPlace"));
+const LazyServices = lazy(() => import("../views/pages/services"));
+const LazySingleService = lazy(() => import("../views/pages/singleService"));
 
 // Error Pages
 const LazyErrorPage = lazy(() => import("../views/pages/error"));
@@ -98,13 +102,52 @@ class Router extends Component {
                      </Suspense>
                   )}
                />
+               <FullPageLayout
+                  exact
+                  path="/pages/changer-password/:token"
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <LazyResetPassword {...matchprops} />
+                     </Suspense>
+                  )}
+               />
                <MainLayoutRoutes
                   exact
                   path="/pages/user-profile"
                   currentUser={this.state.currentUser}
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
-                        <LazyUserProfile {...matchprops} />
+                        <LazyUserProfile currentUser={this.state.currentUser} {...matchprops} />
+                     </Suspense>
+                  )}
+               />
+               <MainLayoutRoutes
+                  exact
+                  path="/pages/marketplace"
+                  currentUser={this.state.currentUser}
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <LazyMarketPlace currentUser={this.state.currentUser} {...matchprops} />
+                     </Suspense>
+                  )}
+               />
+               <MainLayoutRoutes
+                  exact
+                  path="/pages/services"
+                  currentUser={this.state.currentUser}
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <LazyServices currentUser={this.state.currentUser} {...matchprops} />
+                     </Suspense>
+                  )}
+               />
+                              <MainLayoutRoutes
+                  exact
+                  path="/pages/service/:idService"
+                  currentUser={this.state.currentUser}
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <LazySingleService currentUser={this.state.currentUser} {...matchprops} />
                      </Suspense>
                   )}
                />

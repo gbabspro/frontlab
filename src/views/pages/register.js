@@ -10,9 +10,6 @@ import {
    PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH
 } from '../../constants';
 import {
-   Edit,
-   Mail,
-   Phone,
    AlertCircle
 } from "react-feather";
 import {
@@ -22,7 +19,6 @@ import {
    Form, 
    FormGroup,
    Button,
-   Label,
    Card,   
    CardBody,
    CardFooter
@@ -106,15 +102,15 @@ class Register extends Component {
          <div className="container-fluid gradient-deep-orange-orange">
             <Row className="full-height-vh">
                <Col xs="12" className="d-flex align-items-center justify-content-center">
-                  <Card className="register-card text-center width-450">
+                  <Card className="register-card text-center width-400">
                      <CardBody>
-                        <h5 className="white py-2 black">Créer un compte Jokko Apps</h5>
+                        <h6 className="text-uppercase text-bold-500 black py-2">Créer votre compte</h6>
                         <Form onSubmit={this.handleSubmit} className="pt-2">
                            <FormGroup>
                               <Col md="12">
                                  <Input
                                     type="text"
-                                    className="form-control"
+                                    className="input-style"
                                     name="firstname"
                                     onBlur={(event) => this.handleInputChange(event, this.validateName)}
                                     autoComplete="off"
@@ -259,7 +255,7 @@ class Register extends Component {
                               </Row>
                            </FormGroup> */}
                            <FormGroup>
-                              <Col md="6">
+                              <Col md="12">
                                  <Button type="submit" color="default" block className="btnjokko btn-raised">
                                     Créer un compte
                                  </Button>
@@ -288,7 +284,7 @@ class Register extends Component {
 
     // Validation Functions
 
-    validateName = (name) => {
+   validateName = (name) => {
 
       if(name.length < NAME_MIN_LENGTH) {
           return {
@@ -308,7 +304,7 @@ class Register extends Component {
       }
   }
 
-  validateEmail = (email) => {
+   validateEmail = (email) => {
       if(!email) {
           return {
               validateStatus: 'error',
@@ -486,7 +482,7 @@ class Register extends Component {
    if(this.state.password.value !== password) {
        return {
            validateStatus: 'error',
-           errorMsg: `Password is too.)`
+           errorMsg: `Les mot de passes ne sont pas identiques`
        }
    } else {
        return {
