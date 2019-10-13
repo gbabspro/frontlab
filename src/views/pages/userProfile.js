@@ -36,7 +36,7 @@ import {
    PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH
 } from '../../constants';
 import classnames from "classnames";
-
+import Spinner from "../../components/spinner/spinner";
 import avatarm8 from "../../assets/img/portrait/medium/avatar-m-8.png";
 import photo14 from "../../assets/img/photos/14.jpg";
 
@@ -97,6 +97,8 @@ class UserProfile extends Component {
          this.state.profile.lastname.value = this.props.currentUser.lastname;
          this.state.profile.phone.value = this.props.currentUser.phone;
       }
+
+      console.log("this.props.currentUser ", this.props.currentUser);
    }
    toggle = tab => {
       if (this.state.activeTab !== tab) {
@@ -265,7 +267,7 @@ class UserProfile extends Component {
       const currentUser = this.props.currentUser;
 
       if(currentUser == null){
-         return(<div></div>)
+         return(<Spinner />)
       }
 
       return (

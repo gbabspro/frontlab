@@ -64,6 +64,35 @@ export function updateProfile(profileRequest) {
     });
 }
 
+export function updatePersonnelProfile(profileRequest) {
+    return request({
+        url: API_BASE_URL + "/personnel/updateProfil/"+profileRequest.id,
+        method: 'POST',
+        body: JSON.stringify(profileRequest)
+    });
+}
+
+export function lockPersonnel(id) {
+    return request({
+        url: API_BASE_URL + "/personnel/lock/"+id,
+        method: 'PUT'
+    });
+}
+
+export function unlockPersonnel(id) {
+    return request({
+        url: API_BASE_URL + "/personnel/unlock/"+id,
+        method: 'PUT'
+    });
+}
+
+export function deletePersonnel(id) {
+    return request({
+        url: API_BASE_URL + "/personnel/delete/"+id,
+        method: 'DELETE'
+    });
+}
+
 export function updatePassword(passwordRequest) {
     return request({
         url: API_BASE_URL + "/user/updatePassword",
@@ -99,6 +128,29 @@ export function serviceGetListAgent(idService) {
     return request({
         url: API_BASE_URL + "/service/list/agent/" + idService,
         method: 'GET'
+    });
+}
+
+export function newPersonnel(idService, personnelRequest) {
+    return request({
+        url: API_BASE_URL + "/agent/" + idService+"/new",
+        method: 'POST',
+        body: JSON.stringify(personnelRequest)
+    });
+}
+
+export function getService(idService) {
+    return request({
+        url: API_BASE_URL + "/service/" + idService,
+        method: 'GET'
+    });
+}
+
+export function updateService(idService, updateServiceRequest) {
+    return request({
+        url: API_BASE_URL + "/service/" + idService,
+        method: 'PUT',
+        body: JSON.stringify(updateServiceRequest)
     });
 }
 

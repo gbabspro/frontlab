@@ -21,6 +21,7 @@ const LazyUserProfile = lazy(() => import("../views/pages/userProfile"));
 const LazyMarketPlace = lazy(() => import("../views/pages/marketPlace"));
 const LazyServices = lazy(() => import("../views/pages/services"));
 const LazySingleService = lazy(() => import("../views/pages/singleService"));
+const LazyCallInterface = lazy(() => import("../views/pages/callInterface"));
 
 // Error Pages
 const LazyErrorPage = lazy(() => import("../views/pages/error"));
@@ -47,11 +48,19 @@ class Router extends Component {
       getCurrentUser()
       .then(response => {
          console.log("currentUser : ", response)
-        this.setState({
-          currentUser: response,
-          isAuthenticated: true,
-          isLoading: false
-        });
+         if(response.authorities[0].authority == "ROLE_MANAGER"){
+            this.setState({
+               currentUser: response,
+               isAuthenticated: true,
+               isLoading: false
+             });
+         }else if(response.authorities[0].authority != "ROLE_AGENT"){
+
+         }else if(response.authorities[0].authority != "ROLE_SUP"){
+
+         }
+
+
       }).catch(error => {
         this.setState({
           isLoading: false
@@ -141,13 +150,22 @@ class Router extends Component {
                      </Suspense>
                   )}
                />
-                              <MainLayoutRoutes
+               <MainLayoutRoutes
                   exact
                   path="/pages/service/:idService"
                   currentUser={this.state.currentUser}
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
                         <LazySingleService currentUser={this.state.currentUser} {...matchprops} />
+                     </Suspense>
+                  )}
+               />
+               <FullPageLayout
+                  exact
+                  path="/pages/agent/interface"
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <LazyCallInterface {...matchprops} />
                      </Suspense>
                   )}
                />

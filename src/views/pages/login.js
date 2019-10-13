@@ -26,11 +26,14 @@ class Login extends Component {
       this.state = {
          isChecked: true,
          email: "",
-         password: ""
+         password: "",
+         hasError:{
+            status: false,
+            message:""
+         }
       }
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleChange = this.handleChange.bind(this);
-      
   }
 
    handleSubmit(event) {
@@ -44,10 +47,12 @@ class Login extends Component {
                   this.props.history.push("/pages/user-profile");
             }).catch(error => {
                   if(error.status === 401) {
-                     const toastrOptions = {
-                        timeOut: 9000,
-                     }
-                     toastr.info('Erreur de connexion', "E-mail ou mot de passe incorrect !", toastrOptions)
+                     this.setState({
+                        hasError:{
+                           status: true,
+                           message: "Identifiant ou mot de passe incorrect !"
+                        }
+                     })
                   } else {
                                       
                   }
@@ -73,6 +78,9 @@ class Login extends Component {
                   <Card className="text-center width-400">
                      <CardBody>
                         <h6 className="text-uppercase text-bold-500 black py-2">Connectez-vous à votre compte</h6>
+                        <div className="danger" >
+                        {(this.state.hasError.status)?this.state.hasError.message:""}
+                        </div>
                         <Form className="pt-2" onSubmit={this.handleSubmit}>
                            <FormGroup>
                               <Col md="12">

@@ -274,7 +274,7 @@ class MarketPlace extends Component {
                   </Row>
 
                </ModalBody>
-               <ModalFooter>
+               <ModalFooter className="">
                      <Button className="btn-sm btnjokko" color="default" type="submit">
                         Enrégistrer ma commande
                      </Button>
