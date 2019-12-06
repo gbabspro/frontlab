@@ -8,6 +8,9 @@ import Sidebar from "./components/sidebar/sidebar";
 import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
 import templateConfig from "../templateConfig";
+import {setCurrentProject, LoadProjects} from "../redux/actions/projects/projectsActions";
+import {getUserProjects} from "../utility/APIutils";
+import { connect } from 'react-redux';
 
 class MainLayout extends PureComponent {
    state = {
@@ -35,6 +38,17 @@ class MainLayout extends PureComponent {
       if (window !== "undefined") {
          window.addEventListener("resize", this.updateWidth, false);
       }
+
+      getUserProjects()      
+      .then(response => {
+
+
+         console.log("reponse ", response);
+         this.props.getProjects(response);
+         this.props.setCurrent(response[0])
+      }).catch(error => {
+         console.log("error ", error);
+      });
    }
 
    componentWillUnmount() {
@@ -88,4 +102,13 @@ class MainLayout extends PureComponent {
    }
 }
 
-export default MainLayout;
+
+const mapDispatchToProps = dispatch => ({
+   setCurrent: (project) => dispatch(setCurrentProject(project)),
+   getProjects: (projects) => dispatch(LoadProjects(projects))
+})
+ 
+export default connect(
+   null,
+   mapDispatchToProps
+)(MainLayout)

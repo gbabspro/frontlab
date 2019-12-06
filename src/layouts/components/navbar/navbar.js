@@ -8,7 +8,8 @@ import {
    UncontrolledDropdown,
    DropdownToggle,
    DropdownMenu,
-   DropdownItem
+   DropdownItem,
+   Form
 } from "reactstrap";
 import {
    Menu,
@@ -16,7 +17,7 @@ import {
    User,
    LogOut
 } from "react-feather";
-
+import NavbarSearch from "../../../components/search/Search";
 import userImage from "../../../assets/img/portrait/small/avatar-s-1.png";
 
 class ThemeNavbar extends Component {
@@ -39,7 +40,7 @@ class ThemeNavbar extends Component {
 
    render() {
       return (
-         <Navbar className="border-bottom navbar navbar-expand-lg navbar-light bg-faded">
+         <Navbar style={{background: "white"}} className="border-bottom navbar navbar-expand-lg navbar-white px-3 bg-faded">
             <div className="container-fluid px-0">
                <div className="navbar-header">
                   <Menu
@@ -48,7 +49,9 @@ class ThemeNavbar extends Component {
                      onClick={this.handleClick.bind(this)}
                      data-toggle="collapse"
                   />
-
+                  <Form className="navbar-form float-left" role="search">
+                     <NavbarSearch />
+                  </Form>
                   {/* <Moon size={20} color="#333" className="m-2 cursor-pointer"/> */}
                   <MoreVertical
                      className="mt-1 navbar-toggler black no-border float-right"
@@ -63,17 +66,20 @@ class ThemeNavbar extends Component {
 
                         <UncontrolledDropdown nav inNavbar className="pr-1">
                            <DropdownToggle style={{borderRadius: '5px'}} className="rounded bg-white" nav>
-                              <img src={userImage} alt="logged-in-user" className="rounded-circle width-35" />
-                              <span className="font-small-5 .font-medium-2 font-weight-normal ml-1 text-black">
+                              {/* <img src={userImage} alt="logged-in-user" className="rounded-circle width-35" /> */}
+                              {/* <span className="font-small-5 .font-medium-2 font-weight-normal ml-1 text-black">
                                     {this.props.currentUser ? this.props.currentUser.firstname+' '+
                                     this.props.currentUser.lastname  : ''}
-                              </span>
+                              </span> */}
+                              <div style={{background: "#dee2e6", padding: "0px 9px", borderBottom: "1px solid rgba(0,0,0,0.125)"}} className="rounded-circle">
+                              <User size={16} color="white" className="" />
+                              </div>
                            </DropdownToggle>
                            <DropdownMenu right>
 
                               <Link to="/pages/user-profile" className="p-0">
                                  <DropdownItem>
-                                    <User size={16} className="mr-1" /> My Profile
+                                    <User size={16} color="white" style={{color: "white"}} className="mr-1" /> My Profile
                                  </DropdownItem>
                               </Link>
                               <DropdownItem divider />

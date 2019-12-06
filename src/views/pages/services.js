@@ -1,8 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { getServices } from '../../utility/APIutils';
-import CustomTabs from "../../components/tabs/customTabs";
-import ContentHeader from "../../components/contentHead/contentHeader";
-import ContentSubHeader from "../../components/contentHead/contentSubHeader";
 import { Card, CardBody, CardTitle, Row, Col, Table, Badge } from "reactstrap";
 import {
     PhoneCall,

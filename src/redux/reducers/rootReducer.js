@@ -5,9 +5,11 @@ import setMicErrorReducer from "./config/micErrorReducer";
 import dialogReducer from "./dialog/dialogReducer";
 import callStateReducer from "./state/callStateReducer";
 import chats from "./chat/chats";
-
+import projectReducer from "./projects/projectsReducer"
 import callReducer from "./call/";
 import { reducer as toastrReducer } from "react-redux-toastr";
+import currentProjectReducer from "./projects/currentProjectReducer";
+import OperatorsReducer from "./operators/operatorsReducer"
 
 const rootReducer = combineReducers({
    toastr: toastrReducer, // <- Mounted at toastr.
@@ -16,7 +18,10 @@ const rootReducer = combineReducers({
    call: callReducer,
    dialog: dialogReducer,
    call_state: callStateReducer,
-   chatState: chats
+   chatState: chats,
+   projects: projectReducer,
+   currentProject: currentProjectReducer,
+   operators: OperatorsReducer
 
 });
 

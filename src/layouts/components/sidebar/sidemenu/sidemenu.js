@@ -5,7 +5,11 @@ import {
    Home,
    Layers,
    CreditCard,
-   ShoppingCart
+   ShoppingCart,
+   MessageSquare,
+   PhoneCall,
+   Settings,
+   Users
 } from "react-feather";
 import { NavLink } from "react-router-dom";
 
@@ -20,7 +24,7 @@ class SideMenuContent extends Component {
          <SideMenu className="sidebar-content" toggleSidebarMenu={this.props.toggleSidebarMenu}>
          
             <SideMenu.MenuSingleItem badgeColor="danger">
-               <NavLink to="/email" activeclassname="active">
+               <NavLink to="/pages/dashboard" activeclassname="active">
                   <i className="menu-icon">
                      <Home size={18} />
                   </i>
@@ -28,11 +32,27 @@ class SideMenuContent extends Component {
                </NavLink>
             </SideMenu.MenuSingleItem>
             <SideMenu.MenuSingleItem badgeColor="danger">
-               <NavLink to="/pages/services" activeclassname="active">
+               <NavLink to="/pages/operators" activeclassname="active">
                   <i className="menu-icon">
-                     <Layers size={18} />
+                     <Users size={18} />
                   </i>
-                  <span className="menu-item-text">Mes services</span>
+                  <span className="menu-item-text">Opérateurs</span>
+               </NavLink>
+            </SideMenu.MenuSingleItem>
+            <SideMenu.MenuSingleItem badgeColor="danger">
+               <NavLink to="/pages/chats" activeclassname="active">
+                  <i className="menu-icon">
+                     <MessageSquare size={18} />
+                  </i>
+                  <span className="menu-item-text">Chat</span>
+               </NavLink>
+            </SideMenu.MenuSingleItem>
+            <SideMenu.MenuSingleItem badgeColor="danger">
+               <NavLink to="/pages/chats" activeclassname="active">
+                  <i className="menu-icon">
+                     <PhoneCall size={18} />
+                  </i>
+                  <span className="menu-item-text">Call</span>
                </NavLink>
             </SideMenu.MenuSingleItem>
             <SideMenu.MenuSingleItem badgeColor="danger">
@@ -44,13 +64,21 @@ class SideMenuContent extends Component {
                </NavLink>
             </SideMenu.MenuSingleItem>
             <SideMenu.MenuSingleItem badgeColor="danger">
+               <NavLink to="/pages/account" activeclassname="active">
+                  <i className="menu-icon">
+                     <Settings size={18} />
+                  </i>
+                  <span className="menu-item-text">Mon compte</span>
+               </NavLink>
+            </SideMenu.MenuSingleItem>
+            {/* <SideMenu.MenuSingleItem badgeColor="danger">
                <NavLink to="/pages/marketplace" activeclassname="active">
                   <i className="menu-icon">
                      <ShoppingCart size={18} />
                   </i>
                   <span className="menu-item-text">Marketplace</span>
                </NavLink>
-            </SideMenu.MenuSingleItem>
+            </SideMenu.MenuSingleItem> */}
          </SideMenu>
       );
    }

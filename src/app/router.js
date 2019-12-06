@@ -8,6 +8,8 @@ import { getCurrentUser } from '../utility/APIutils';
 // import internal(own) modules
 import MainLayoutRoutes from "../layouts/routes/mainRoutes";
 import FullPageLayout from "../layouts/routes/fullpageRoutes";
+import Dashboard from "../views/pages/dash/dashboard";
+import Operators from "../views/pages/operators/operators";
 // import ErrorLayoutRoute from "../layouts/routes/errorRoutes";
 
 // Full Layout
@@ -151,6 +153,27 @@ class Router extends Component {
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
                         <RegistrationConfirm {...matchprops} />
+                     </Suspense>
+                  )}
+               />
+               <MainLayoutRoutes
+                  exact
+                  path="/pages/dashboard"
+                  currentUser={this.state.currentUser}
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <Dashboard currentUser={this.state.currentUser} {...matchprops} />
+                     </Suspense>
+                  )}
+               />
+
+               <MainLayoutRoutes
+                  exact
+                  path="/pages/operators"
+                  currentUser={this.state.currentUser}
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <Operators currentUser={this.state.currentUser} {...matchprops} />
                      </Suspense>
                   )}
                />

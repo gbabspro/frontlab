@@ -131,6 +131,22 @@ export function serviceGetListAgent(idService) {
     });
 }
 
+
+export function getUserProjects() {
+    return request({
+        url: API_BASE_URL + "/user/services/list",
+        method: 'GET'
+    });
+}
+
+
+export function getUserOperators() {
+    return request({
+        url: API_BASE_URL + "/operators/list",
+        method: 'GET'
+    });
+}
+
 export function getCommandeList () {
     return request({
         url: API_BASE_URL + "/commandes/list/",
