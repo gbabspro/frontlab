@@ -3,9 +3,6 @@ import React, { Fragment, Component } from "react";
 import { Link } from "react-router-dom";
 import { updateProfile, updatePassword, updateEmail } from '../../utility/APIutils';
 import {
-   TabContent,
-   TabPane,
-   NavLink,
    Row,
    Col,
    Button,
@@ -17,28 +14,20 @@ import {
    ModalHeader, 
    ModalBody, 
    ModalFooter,
-   Card,
-   CardHeader,
-   CardBody,
-   CardFooter
+   Card
 } from "reactstrap";
 import {
-   Edit,
    Mail,
    Phone,
-   Settings,
    Lock
 } from "react-feather";
 import { 
    NAME_MIN_LENGTH, NAME_MAX_LENGTH, 
-   USERNAME_MIN_LENGTH, USERNAME_MAX_LENGTH,
    EMAIL_MAX_LENGTH,
    PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH
 } from '../../constants';
-import classnames from "classnames";
 import Spinner from "../../components/spinner/spinner";
 import avatarm8 from "../../assets/img/portrait/medium/avatar-m-8.png";
-import photo14 from "../../assets/img/photos/14.jpg";
 
 class UserProfile extends Component {
 

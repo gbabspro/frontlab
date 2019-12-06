@@ -3,23 +3,9 @@ import React, { Component } from "react";
 
 import {
    Home,
-   Mail,
-   MessageSquare,
-   ChevronRight,
-   Aperture,
-   Box,
-   Edit,
-   Grid,
    Layers,
-   Sliders,
-   Map,
-   BarChart2,
-   Calendar,
-   Copy,
-   Book,
    CreditCard,
-   ShoppingCart,
-   Users
+   ShoppingCart
 } from "react-feather";
 import { NavLink } from "react-router-dom";
 
@@ -50,7 +36,7 @@ class SideMenuContent extends Component {
                </NavLink>
             </SideMenu.MenuSingleItem>
             <SideMenu.MenuSingleItem badgeColor="danger">
-               <NavLink to="/email" activeclassname="active">
+               <NavLink to="/pages/billing" activeclassname="active">
                   <i className="menu-icon">
                      <CreditCard size={18} />
                   </i>

@@ -26,13 +26,12 @@ export const openChat = id => ({
     id
 })
 
-export const chatSearch = (searchTerm) => ({
-    type: 'FILTER_CHAT',
-    searchTerm
+export const receivMsg = (chatMsg) => ({
+    type: 'RECEIV_MSG',
+    chatMsg: chatMsg
 })
 
-export const sendMsg = (id, chatMsg) => ({
+export const sendMsg = (chatMsg) => ({
     type: 'SEND_MSG',
-    id,
-    chatMsg
+    chatMsg: chatMsg
 })

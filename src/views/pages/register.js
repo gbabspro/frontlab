@@ -344,7 +344,7 @@ class Register extends Component {
           }
       } else {
           return {
-              validateStatus: null,
+              validateStatus: "success",
               errorMsg: null
           }
       }

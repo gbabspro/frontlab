@@ -4,15 +4,9 @@ import { NavLink } from "react-router-dom";
 import { changerPassword } from '../../utility/APIutils';
 import { Row, Col, Input, Form, FormGroup, Button, Card, CardBody, CardFooter, UncontrolledTooltip } from "reactstrap";
 import {
-    Edit,
-    Mail,
-    Phone,
     AlertCircle
  } from "react-feather";
  import { 
-    NAME_MIN_LENGTH, NAME_MAX_LENGTH, 
-    USERNAME_MIN_LENGTH, USERNAME_MAX_LENGTH,
-    EMAIL_MAX_LENGTH,
     PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH
  } from '../../constants';
 
@@ -120,7 +114,7 @@ class ResetPassword extends Component {
                                     type="password"
                                     className="form-control"
                                     name="passwordConfirmation"
-                                    id="inputPass"
+                                    id="inputConfirm"
                                     onBlur={(event) => this.handleInputChange(event, this.validateConfirmPassword)}
                                     placeholder="Retapez mot de passe"
                                     required

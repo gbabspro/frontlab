@@ -5,6 +5,6 @@ const mapStateToProps = state => ({
     chatDetails: state.chatApp.chats[state.chatApp.chatContent - 1]
 })
 
-export default connect(
-    mapStateToProps
-)(chatContent)
+    export default connect(
+        mapStateToProps
+    )(chatContent)

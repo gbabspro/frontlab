@@ -1,14 +1,11 @@
-import chatData from './chatData';
+const chatDefaultSate = []; 
 
-const chats = (state = chatData, action) => {
+const chats = (state = chatDefaultSate, action) => {
     switch (action.type) {
         case 'SEND_MSG':
-            return state.map(chat =>
-                (chat.id === action.id
-                    ?
-                    Object.assign({}, chat, chat.chatHistory[0][1]['to'].push(action.chatMsg))
-                    : chat
-                ));
+            return [...state, action.chatMsg]
+        case 'RECEIV_MSG':
+            return [...state, action.chatMsg]
         default: 
             return state
     }

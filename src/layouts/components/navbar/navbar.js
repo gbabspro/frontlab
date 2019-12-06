@@ -2,41 +2,22 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import {
-   Form,
-   Media,
    Collapse,
    Navbar,
    Nav,
-   NavItem,
    UncontrolledDropdown,
    DropdownToggle,
    DropdownMenu,
    DropdownItem
 } from "reactstrap";
-import PerfectScrollbar from "react-perfect-scrollbar";
 import {
-   // Moon,
-   Mail,
    Menu,
    MoreVertical,
-   Check,
-   Bell,
    User,
-   AlertTriangle,
-   Inbox,
-   Phone,
-   Calendar,
-   Lock,
-   X,
    LogOut
 } from "react-feather";
-import NavbarSearch from "../../../components/search/Search";
-import ReactCountryFlag from "react-country-flag";
 
 import userImage from "../../../assets/img/portrait/small/avatar-s-1.png";
-import userImage2 from "../../../assets/img/portrait/small/avatar-s-2.png";
-import userImage3 from "../../../assets/img/portrait/small/avatar-s-3.png";
-import userImage4 from "../../../assets/img/portrait/small/avatar-s-4.png";
 
 class ThemeNavbar extends Component {
    handleClick = e => {

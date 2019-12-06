@@ -167,3 +167,30 @@ form .form-control {
 .table thead th {
   font-weight: 500 !important;
 }
+.msg-to:after {
+  width: 0;
+  height: 0;
+  content: "";
+  top: -6px;
+  left: 22px;
+  position: relative;
+  border-style: solid;
+  border-width: 13px 13px 0 0;
+  border-color: #f8f9fa transparent transparent transparent;
+}
+.msg-from:before {
+  width: 0;
+  height: 0;
+  content: "";
+  top: -6px;
+  left: -22px;
+  position: relative;
+  border-style: solid;
+  border-width: 0 13px 13px 0;
+  border-color: transparent white transparent transparent;
+}
+
+.msg-to{
+  display: flex;
+  border: none;
+}

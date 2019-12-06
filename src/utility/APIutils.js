@@ -131,9 +131,23 @@ export function serviceGetListAgent(idService) {
     });
 }
 
+export function getCommandeList () {
+    return request({
+        url: API_BASE_URL + "/commandes/list/",
+        method: 'GET'
+    });
+}
+
+export function getBtnConf(idService) {
+    return request({
+        url: API_BASE_URL + "/service/btnconf/" + idService,
+        method: 'GET'
+    });
+}
+
 export function newPersonnel(idService, personnelRequest) {
     return request({
-        url: API_BASE_URL + "/agent/" + idService+"/new",
+        url: API_BASE_URL + "/personnel/" + idService+"/new",
         method: 'POST',
         body: JSON.stringify(personnelRequest)
     });
@@ -188,6 +202,14 @@ export function getServices() {
 export function getUserProfile(username) {
     return request({
         url: API_BASE_URL + "/users/" + username,
+        method: 'GET'
+    });
+}
+
+
+export function confirmRegister(token) {
+    return request({
+        url: API_BASE_URL + "/auth/regitrationConfirm?token=" + token,
         method: 'GET'
     });
 }

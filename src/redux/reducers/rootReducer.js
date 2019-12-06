@@ -1,24 +1,23 @@
 // import external modules
 import { combineReducers } from "redux";
-// import internal(own) modules
-import calenderReducer from "./calenderReducer";
-import emailReducer from "./email/";
-// import chatReducer from "./chatReducer";
-import chatReducer from "./chat/";
-import contactsReducer from "./contacts/";
-import todoReducer from "./todo/";
 import customizer from "./customizer/";
+import setMicErrorReducer from "./config/micErrorReducer";
+import dialogReducer from "./dialog/dialogReducer";
+import callStateReducer from "./state/callStateReducer";
+import chats from "./chat/chats";
 
+import callReducer from "./call/";
 import { reducer as toastrReducer } from "react-redux-toastr";
 
 const rootReducer = combineReducers({
-   calender: calenderReducer,
-   emailApp: emailReducer,
-   contactApp: contactsReducer,
-   todoApp: todoReducer,
    toastr: toastrReducer, // <- Mounted at toastr.
-   chatApp: chatReducer,
-   customizer: customizer
+   customizer: customizer,
+   micConfig: setMicErrorReducer,
+   call: callReducer,
+   dialog: dialogReducer,
+   call_state: callStateReducer,
+   chatState: chats
+
 });
 
 export default rootReducer;

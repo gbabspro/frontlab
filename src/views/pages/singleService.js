@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { deletePersonnel, unlockPersonnel, lockPersonnel, serviceGetListAgent, getService, newPersonnel, updateService, updatePersonnelProfile } from '../../utility/APIutils';
+import { getBtnConf, deletePersonnel, unlockPersonnel, lockPersonnel, serviceGetListAgent, getService, newPersonnel, updateService, updatePersonnelProfile } from '../../utility/APIutils';
 import { Card, CardBody, CardTitle, Row, Col, Table, Button,
     Form,
     Input,
@@ -58,10 +58,10 @@ class SingleService extends Component {
          contactName:"",
          loadingEdit: false,
          btnSetting: {
-            btnBackground: "#22194D",
-            btnText: "Contacter nous"
+            btnBackground: "",
+            btnText: "",
+            color: ""
          },
-         
          hasErrorEditInfo:{
             value: false,
             message: ""
@@ -84,6 +84,7 @@ class SingleService extends Component {
 
 
     toggleScript = () => {
+        this.getServiceBtnConfig();
         this.setState({ collapseScript: !this.state.collapseScript });
      }
 
@@ -122,6 +123,26 @@ class SingleService extends Component {
 
     };
 
+    getServiceBtnConfig(){
+        getBtnConf(this.state.currentService.id)        
+        .then(response => {
+        
+            console.log("response", response);
+            
+            this.setState({
+                btnSetting:{
+                
+                    btnBackground: response.background,
+                    color: response.color,
+                    btnText: response.content
+                }
+            })
+        
+        }).catch(error => {
+            console.log("error", error);
+        });
+    }
+
     handleSubmitPersonnel(event) {
   
         event.preventDefault();
@@ -156,6 +177,14 @@ class SingleService extends Component {
         this.openModalNewAgent();
         }).catch(error => {
             console.log("error", error);
+
+            if(error.success === false){
+                this.setState({
+                    hasError: {value: true, message: error.message},
+                    loadingEdit: false
+                });
+            }
+
             if(error.status === 400){
                 this.setState({
                     hasError: {value: true, message: error.errors[0].defaultMessage},
@@ -272,7 +301,10 @@ class SingleService extends Component {
     }
 
     handleChangeBtnText(e) {
-        const { name, value } = e.target;
+        let { name, value } = e.target;
+        if(value.length > 18){
+            value = value.substring(0, 15)+"...";
+        }
         this.setState({btnSetting: { ...this.state.btnSetting, btnText: value }});
     }
 
@@ -528,16 +560,23 @@ class SingleService extends Component {
                             </Col>
                             <Col md="6" className="align-middle">
                                 <div style={{boder: "1px solid red"}} className="d-flex justify-content-center border-secondary">
-                                    <Button style={{background:this.state.btnSetting.btnBackground, color:"#fff", borderRadius:"10px"}} className="shadow-z-2 mb-0 align-middle btn-raised py-2">
+                                    <Button style={{backgroundColor:"#"+this.state.btnSetting.btnBackground, color:"#"+this.state.btnSetting.color, borderRadius:"10px"}} className="shadow-z-2 mb-0 align-middle btn-raised py-2">
                                         <Phone size={30} className="mr-1" />  {this.state.btnSetting.btnText }
                                     </Button>
                                 </div>
-                                <div style={{width:"100%", height: "auto", position:"relative",}} className="border border-secondary mt-3 py-3 px-2">
-                                    {'<script type="text/javascript" src="http://babacargaye.com/scriptjokko.js?callcenter=fdfddfdffdf"></script>'}
-                                
-                                    <Button type="submit" style={{background:"#fff", position:"absolute", right:0, bottom:0, borderRadius:"20px 0px 0px 0px"}} className="mb-0 mt-3 ml-3 bg-light text-dark border-secondary btn-raised">
-                                        Copier
-                                    </Button>
+                                <hr />
+                                <div className="mt-2">
+                                <FormGroup className="mb-0">
+                                        <Input
+                                            type="text"
+                                            className="form-control"
+                                            name="contentButton"
+                                            autoComplete="off"
+                                            onChange={this.handleChangeBtnText}
+                                            defaultValue={this.state.btnSetting.btnText || ''}
+                                            required
+                                        />
+                                    </FormGroup>
                                 </div>
                             </Col>
                         </Row>
@@ -548,23 +587,13 @@ class SingleService extends Component {
 
                             <ul className="mb-0 list-inline">
                                 <li className="list-inline-item">
-                                    <FormGroup className="mb-0">
-                                        <Col md="12">
-                                        <Input
-                                            type="text"
-                                            className="form-control"
-                                            name="contentButton"
-                                            autoComplete="off"
-                                            onChange={this.handleChangeBtnText}
-                                            defaultValue={this.state.btnSetting.btnText || ''}
-                                            required
-                                        />
-                                        </Col>
-                                    </FormGroup>
+                                <Button  className="mb-0 ml-0 btn-primary btn-raised">
+                                        Sauvegarder
+                                </Button>
                                 </li>
-                                <li className="list-inline-item float-right align-bottom">
-                                    <Button style={{border:"1px solid #225077"}} className="mb-0 ml-0 btnjokko btn-raised">
-                                        Valider
+                                <li className="list-inline-item ">
+                                    <Button className="mb-0 ml-0 btn-warning btn-raised">
+                                        Générer Script
                                     </Button>
                                 </li>
                             </ul>
@@ -576,78 +605,78 @@ class SingleService extends Component {
            </Col>
            <Col sm="6">
                 <Card>
-                        <CardHeader className="p-2">                    
-                            <Button onClick={this.toggleSetting} type="submit" className="bg-light mb-0 ml-0 py-1 px-1 text-dark rounded-circle border-secondary btn-raised">
-                                <ChevronDown />
-                            </Button>
-                            <span className="ml-2 text-bold-400 mt-1">
-                                Modifier les informations
-                            </span>
-                        </CardHeader>
-                        <Collapse isOpen={this.state.collapseSetting}>
-                            <CardBody>
-                            <Row>
-                                <Col xs="12" md="12">
-                                  {(this.state.hasErrorEditInfo.value==true)?this.handleError(this.state.hasErrorEditInfo.message):""}
-                                </Col>
-                                <Col xs="6" md="6">
-                                
-                                <FormGroup>
-                                    <Input
-                                        type="text"
-                                        className="form-control"
-                                        name="serviceName"
-                                        autoComplete="off"
-                                        defaultValue={this.state.contactName || ''}
-                                        onChange={this.handleChange}
-                                        placeholder="Nom du centre de contact"
-                                        id="inputName"
-                                        disabled={this.state.loadingEdit}
-                                        required
-                                    />
-                                </FormGroup>
-                                </Col>
-                                <Col xs="6" md="6">
-                                <FormGroup>
-                                    <Input
-                                        type="text"
-                                        className="form-control"
-                                        name="organisationInput"
-                                        defaultValue={this.state.organisationInput || ''}
-                                        onChange={this.handleChange}
-                                        placeholder="Organisation"
-                                        autoComplete="off"
-                                        id="inputName"
-                                        disabled={this.state.loadingEdit}
-                                        required
-                                    />
-                                </FormGroup>
-                                </Col>
-                            </Row>
-                            </CardBody>
-                            <CardFooter style={{paddingLeft:"1rem", paddingRight:"1rem"}}>
-                                <ul className="list-inline mb-0">
-                                    <li className="list-inline-item">
-                                        <Button onClick={this.handleSubmitEditService} disabled={this.state.loadingEdit} style={{border:"1px solid #225077"}} className="mb-0 ml-0 btnjokko">
-                                            Valider
-                                        </Button>
-                                    </li>
-                                    <li className="list-inline-item align-middle">
-                                        {(this.state.loadingEdit)?
-                                            (<BounceLoader  					
-                                                className="clip-loader right"
-                                                sizeUnit={"px"}
-                                                size={25}
-                                                color={'#7e7e86'}
-                                                loading={true} 
-                                            />):''
+                    <CardHeader className="p-2">                    
+                        <Button onClick={this.toggleSetting} type="submit" className="bg-light mb-0 ml-0 py-1 px-1 text-dark rounded-circle border-secondary btn-raised">
+                            <ChevronDown />
+                        </Button>
+                        <span className="ml-2 text-bold-400 mt-1">
+                            Modifier les informations
+                        </span>
+                    </CardHeader>
+                    <Collapse isOpen={this.state.collapseSetting}>
+                        <CardBody>
+                        <Row>
+                            <Col xs="12" md="12">
+                                {(this.state.hasErrorEditInfo.value==true)?this.handleError(this.state.hasErrorEditInfo.message):""}
+                            </Col>
+                            <Col xs="6" md="6">
+                            
+                            <FormGroup>
+                                <Input
+                                    type="text"
+                                    className="form-control"
+                                    name="serviceName"
+                                    autoComplete="off"
+                                    defaultValue={this.state.contactName || ''}
+                                    onChange={this.handleChange}
+                                    placeholder="Nom du centre de contact"
+                                    id="inputName"
+                                    disabled={this.state.loadingEdit}
+                                    required
+                                />
+                            </FormGroup>
+                            </Col>
+                            <Col xs="6" md="6">
+                            <FormGroup>
+                                <Input
+                                    type="text"
+                                    className="form-control"
+                                    name="organisationInput"
+                                    defaultValue={this.state.organisationInput || ''}
+                                    onChange={this.handleChange}
+                                    placeholder="Organisation"
+                                    autoComplete="off"
+                                    id="inputName"
+                                    disabled={this.state.loadingEdit}
+                                    required
+                                />
+                            </FormGroup>
+                            </Col>
+                        </Row>
+                        </CardBody>
+                        <CardFooter style={{paddingLeft:"1rem", paddingRight:"1rem"}}>
+                            <ul className="list-inline mb-0">
+                                <li className="list-inline-item">
+                                    <Button onClick={this.handleSubmitEditService} disabled={this.state.loadingEdit} style={{border:"1px solid #225077"}} className="mb-0 ml-0 btnjokko">
+                                        Valider
+                                    </Button>
+                                </li>
+                                <li className="list-inline-item align-middle">
+                                    {(this.state.loadingEdit)?
+                                        (<BounceLoader  					
+                                            className="clip-loader right"
+                                            sizeUnit={"px"}
+                                            size={25}
+                                            color={'#7e7e86'}
+                                            loading={true} 
+                                        />):''
 
-                                        }
+                                    }
 
-                                    </li>
-                                </ul>                       
-                            </CardFooter>
-                        </Collapse>
+                                </li>
+                            </ul>                       
+                        </CardFooter>
+                    </Collapse>
                 </Card>
            </Col>
         </Row>
@@ -697,6 +726,7 @@ class SingleService extends Component {
                                                     name="firstnameInput"
                                                     autoComplete="off"
                                                     onChange={this.handleChange}
+                                                    disabled={this.state.loadingEdit}
                                                     // onChange={(event) => this.handlePasswordChange(event, this.validatePassword)}
                                                     placeholder="Prénom"
                                                     required

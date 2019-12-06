@@ -12,7 +12,10 @@ import FullPageLayout from "../layouts/routes/fullpageRoutes";
 
 // Full Layout
 const LazyForgotPassword = lazy(() => import("../views/pages/forgotPassword"));
-const LazyLogin = lazy(() => import("../views/pages/login"));
+const LazyLogin = lazy(() => import("../views/pages/login/login"));
+//const LoginBox = lazy(() => import("../jsx/page_login"));
+// const LoginCall = lazy(() => import("../jsx/page_calls"));
+
 const LazyRegister = lazy(() => import("../views/pages/register"));
 const LazyResetPassword = lazy(() => import("../views/pages/resetPassword"));
 // const LazyMaintainance = lazy(() => import("../views/pages/maintainance"));
@@ -21,10 +24,14 @@ const LazyUserProfile = lazy(() => import("../views/pages/userProfile"));
 const LazyMarketPlace = lazy(() => import("../views/pages/marketPlace"));
 const LazyServices = lazy(() => import("../views/pages/services"));
 const LazySingleService = lazy(() => import("../views/pages/singleService"));
-const LazyCallInterface = lazy(() => import("../views/pages/callInterface"));
-
+const LazyCallInterface = lazy(() => import("../views/pages/call/callInterface"));
+const LazyChatInterface = lazy(() => import("../views/pages/chat/chatInterface"));
+const LazyBilling = lazy(() => import("../views/pages/billing"));
+const Catalogue = lazy(() => import("../views/pages/catalogue/catalogue"));
 // Error Pages
 const LazyErrorPage = lazy(() => import("../views/pages/error"));
+
+const RegistrationConfirm = lazy(() => import("../views/pages/regitrationConfirm"));
 
 class Router extends Component {
 
@@ -33,18 +40,15 @@ class Router extends Component {
       this.state = {
         currentUser: null,
         isAuthenticated: false,
-        isLoading: false
+        isLoading: true
       }
       // this.handleLogout = this.handleLogout.bind(this);
       this.loadCurrentUser = this.loadCurrentUser.bind(this);
       this.handleLogin = this.handleLogin.bind(this);
       this.loadCurrentUser();
-    }
+   }
 
    loadCurrentUser() {
-      this.setState({
-        isLoading: true
-      });
       getCurrentUser()
       .then(response => {
          console.log("currentUser : ", response)
@@ -54,8 +58,10 @@ class Router extends Component {
                isAuthenticated: true,
                isLoading: false
              });
+            //  this.props.history.push("/pages/user-profile");
          }else if(response.authorities[0].authority != "ROLE_AGENT"){
 
+            // this.props.history.push("/pages/agent/interface");
          }else if(response.authorities[0].authority != "ROLE_SUP"){
 
          }
@@ -69,9 +75,9 @@ class Router extends Component {
     }
 
 
-    handleLogin() {
+   handleLogin() {
       this.loadCurrentUser();
-    }
+   }
   
 
    render() {
@@ -98,16 +104,35 @@ class Router extends Component {
                   path="/pages/login"
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
-                        <LazyLogin onLogin={this.handleLogin} {...matchprops} />
+                        <LazyLogin onLogin={this.handleLogin} />
                      </Suspense>
                   )}
                />
+
+               {/* <FullPageLayout
+                  exact
+                  path="/pages/call"
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <LoginCall  />
+                     </Suspense>
+                  )}
+               /> */}
                <FullPageLayout
                   exact
                   path="/pages/register"
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
                         <LazyRegister {...matchprops} />
+                     </Suspense>
+                  )}
+               />
+               <FullPageLayout
+                  exact
+                  path="/"
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <Catalogue {...matchprops} />
                      </Suspense>
                   )}
                />
@@ -120,6 +145,16 @@ class Router extends Component {
                      </Suspense>
                   )}
                />
+               <FullPageLayout
+                  exact
+                  path="/pages/confirm-registration/:token"
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <RegistrationConfirm {...matchprops} />
+                     </Suspense>
+                  )}
+               />
+
                <MainLayoutRoutes
                   exact
                   path="/pages/user-profile"
@@ -150,6 +185,16 @@ class Router extends Component {
                      </Suspense>
                   )}
                />
+              <MainLayoutRoutes
+                  exact
+                  path="/pages/billing"
+                  currentUser={this.state.currentUser}
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <LazyBilling currentUser={this.state.currentUser} {...matchprops} />
+                     </Suspense>
+                  )}
+               />
                <MainLayoutRoutes
                   exact
                   path="/pages/service/:idService"
@@ -162,10 +207,20 @@ class Router extends Component {
                />
                <FullPageLayout
                   exact
-                  path="/pages/agent/interface"
+                  path="/portail/call"
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
                         <LazyCallInterface {...matchprops} />
+                     </Suspense>
+                  )}
+               />
+
+               <FullPageLayout
+                  exact
+                  path="/portail/chat"
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <LazyChatInterface {...matchprops} />
                      </Suspense>
                   )}
                />

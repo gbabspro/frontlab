@@ -48,6 +48,7 @@ const Maintainance = props => {
          </Row>
       </div>
    );
-};
+
+}
 
 export default Maintainance;
