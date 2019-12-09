@@ -53,11 +53,11 @@ class NavbarSearch extends Component {
             /> */}
             <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
                
-               <DropdownToggle className="text-left mb-0" style={{boxShadow: "0 1px 2px 0 rgba(60,64,67,0.302)", color:"#60848c", background: "#d9dfe4", width: "250px"}}>
+               <DropdownToggle className="text-left pl-0 mb-0" style={{color:"#60848c", background: "transparent", width: "250px"}}>
                <div>
-               <Globe size={18} className="mr-2" />  
+               <Globe size={22} className="mr-2" />  
                   <span className="">{(this.props.currentProject)?this.props.currentProject.domaine_name:""}</span>
-                  <ChevronDown size={18} className="ml-3 pull-right mt-1" />  
+                  <ChevronDown style={{marginTop:"3px"}} size={18} className="ml-3 pull-right" />  
                </div>
 
                </DropdownToggle>
@@ -75,7 +75,7 @@ class NavbarSearch extends Component {
 
                </DropdownMenu>
             </Dropdown>
-{/* 
+            {/* 
             <div className="form-control-position">
                <Search size={16} className="mb-0" />
             </div> */}

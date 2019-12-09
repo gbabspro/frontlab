@@ -491,7 +491,7 @@ export default class VertoRTC {
 			userData: null,
 			localVideo: null,
 			screenShare: false,
-			useCamera: "any",
+			useCamera: false,
 			iceServers: false,
 			videoParams: {},
 			audioParams: {},
@@ -512,8 +512,8 @@ export default class VertoRTC {
 		};
 
 		this.constraints = {
-			offerToReceiveAudio: this.options.useSpeak === "none" ? false : true,
-			offerToReceiveVideo: this.options.useVideo ? true : false,
+			offerToReceiveAudio: false,
+			offerToReceiveVideo: false,
 		};
 
 		if (this.options.useVideo) {
@@ -800,7 +800,7 @@ export default class VertoRTC {
 			}
 		}
 
-		return {audio: null, video: null, useVideo: useVideo};
+		return {audio: audio, video: video, useVideo: useVideo};
 	}
 
 
@@ -838,10 +838,11 @@ export default class VertoRTC {
 					sdp: self.remoteSDP
 				}
 			});
-
+			
 			onStreamSuccess(self, stream);
 		}
 
+		onSuccess();
 		function onError(e) {
 			onStreamError(self, e);
 		}
@@ -867,15 +868,15 @@ export default class VertoRTC {
 			});
 		}
 
-		getUserMedia({
-			constraints: {
-				audio: mediaParams.audio,
-				video: false
-			},
-			video: mediaParams.useVideo,
-			onsuccess: onSuccess,
-			onerror: onError
-		});
+		// getUserMedia({
+		// 	constraints: {
+		// 		audio: false,
+		// 		video: mediaParams.video
+		// 	},
+		// 	video: mediaParams.useVideo,
+		// 	onsuccess: onSuccess,
+		// 	onerror: onError
+		// });
 
 	}
 

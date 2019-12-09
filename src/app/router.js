@@ -12,6 +12,12 @@ import Dashboard from "../views/pages/dash/dashboard";
 import Operators from "../views/pages/operators/operators";
 // import ErrorLayoutRoute from "../layouts/routes/errorRoutes";
 
+import { connect } from 'react-redux';
+
+
+
+
+
 // Full Layout
 const LazyForgotPassword = lazy(() => import("../views/pages/forgotPassword"));
 const LazyLogin = lazy(() => import("../views/pages/login/login"));
@@ -34,7 +40,8 @@ const Catalogue = lazy(() => import("../views/pages/catalogue/catalogue"));
 const LazyErrorPage = lazy(() => import("../views/pages/error"));
 
 const RegistrationConfirm = lazy(() => import("../views/pages/regitrationConfirm"));
-
+const LazyLiveChat = lazy(() => import("../views/pages/chat/liveChat"));
+const LazyPhoneCall = lazy(() => import("../views/pages/call/phoneCall"));
 class Router extends Component {
 
    constructor(props) {
@@ -188,6 +195,30 @@ class Router extends Component {
                      </Suspense>
                   )}
                />
+
+               <MainLayoutRoutes
+                  exact
+                  path="/pages/live-chat"
+                  currentUser={this.state.currentUser}
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <LazyLiveChat currentUser={this.state.currentUser} {...matchprops} />
+                     </Suspense>
+                  )}
+               />
+
+              <MainLayoutRoutes
+                  exact
+                  path="/pages/phone-call"
+                  currentUser={this.state.currentUser}
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <LazyPhoneCall currentUser={this.state.currentUser} {...matchprops} />
+                     </Suspense>
+                  )}
+               />
+               
+
                <MainLayoutRoutes
                   exact
                   path="/pages/marketplace"
@@ -228,6 +259,9 @@ class Router extends Component {
                      </Suspense>
                   )}
                />
+
+
+
                <FullPageLayout
                   exact
                   path="/portail/call"
@@ -254,4 +288,12 @@ class Router extends Component {
    }
 }
 
-export default Router;
+const mapStateToProps = state => ({
+   currentProject: state.currentProject
+})
+
+ 
+export default connect(
+   mapStateToProps,
+   null
+)(Router)

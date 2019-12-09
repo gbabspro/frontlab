@@ -15,7 +15,8 @@ import {
    Menu,
    MoreVertical,
    User,
-   LogOut
+   LogOut,
+   ChevronRight
 } from "react-feather";
 import NavbarSearch from "../../../components/search/Search";
 import userImage from "../../../assets/img/portrait/small/avatar-s-1.png";
@@ -42,7 +43,7 @@ class ThemeNavbar extends Component {
       return (
          <Navbar style={{background: "white"}} className="border-bottom navbar navbar-expand-lg navbar-white px-3 bg-faded">
             <div className="container-fluid px-0">
-               <div className="navbar-header">
+               <div style={{borderRight: "1px solid grey"}} className="navbar-header">
                   <Menu
                      size={14}
                      className="navbar-toggle d-lg-none float-left"
@@ -58,8 +59,9 @@ class ThemeNavbar extends Component {
                      size={50}
                      onClick={this.toggle}
                   />
-               </div>
 
+
+               </div>
                <div className="navbar-container">
                   <Collapse isOpen={this.state.isOpen} navbar>
                      <Nav className="ml-auto float-right" navbar>

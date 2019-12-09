@@ -7,12 +7,13 @@ import {
    CreditCard,
    ShoppingCart,
    MessageSquare,
+   MessageCircle,
    PhoneCall,
    Settings,
    Users
 } from "react-feather";
 import { NavLink } from "react-router-dom";
-
+import { connect } from 'react-redux';
 // Styling
 import "../../../../assets/scss/components/sidebar/sidemenu/sidemenu.scss";
 // import internal(own) modules
@@ -31,6 +32,7 @@ class SideMenuContent extends Component {
                   <span className="menu-item-text">Dashboard</span>
                </NavLink>
             </SideMenu.MenuSingleItem>
+            
             <SideMenu.MenuSingleItem badgeColor="danger">
                <NavLink to="/pages/operators" activeclassname="active">
                   <i className="menu-icon">
@@ -39,22 +41,45 @@ class SideMenuContent extends Component {
                   <span className="menu-item-text">Opérateurs</span>
                </NavLink>
             </SideMenu.MenuSingleItem>
-            <SideMenu.MenuSingleItem badgeColor="danger">
+            {/* <SideMenu.MenuSingleItem badgeColor="danger">
                <NavLink to="/pages/chats" activeclassname="active">
                   <i className="menu-icon">
                      <MessageSquare size={18} />
                   </i>
                   <span className="menu-item-text">Chat</span>
                </NavLink>
-            </SideMenu.MenuSingleItem>
-            <SideMenu.MenuSingleItem badgeColor="danger">
+            </SideMenu.MenuSingleItem> */}
+
+            {
+                  (this.props.currentProject.typeService == "SERVICE_CALL")?
+                  (<SideMenu.MenuSingleItem badgeColor="danger">
+                     <NavLink to="/pages/phone-call" activeclassname="active">
+                        <i className="menu-icon">
+                           <PhoneCall size={18} />
+                        </i>
+                        <span className="menu-item-text">Phone Call</span>
+                     </NavLink>
+                  </SideMenu.MenuSingleItem>
+                  ):(
+                     <SideMenu.MenuSingleItem badgeColor="danger">
+                     <NavLink to="/pages/live-chat" activeclassname="active">
+                        <i className="menu-icon">
+                           <MessageCircle size={18} />
+                        </i>
+                        <span className="menu-item-text">Live Chat</span>
+                     </NavLink>
+                  </SideMenu.MenuSingleItem>
+                  )
+            }
+
+            {/* <SideMenu.MenuSingleItem badgeColor="danger">
                <NavLink to="/pages/chats" activeclassname="active">
                   <i className="menu-icon">
                      <PhoneCall size={18} />
                   </i>
                   <span className="menu-item-text">Call</span>
                </NavLink>
-            </SideMenu.MenuSingleItem>
+            </SideMenu.MenuSingleItem> */}
             <SideMenu.MenuSingleItem badgeColor="danger">
                <NavLink to="/pages/billing" activeclassname="active">
                   <i className="menu-icon">
@@ -63,6 +88,7 @@ class SideMenuContent extends Component {
                   <span className="menu-item-text">Facturation</span>
                </NavLink>
             </SideMenu.MenuSingleItem>
+
             <SideMenu.MenuSingleItem badgeColor="danger">
                <NavLink to="/pages/account" activeclassname="active">
                   <i className="menu-icon">
@@ -84,4 +110,12 @@ class SideMenuContent extends Component {
    }
 }
 
-export default SideMenuContent;
+const mapStateToProps = state => ({
+   currentProject: state.currentProject
+})
+
+ 
+export default connect(
+   mapStateToProps,
+   null
+)(SideMenuContent)

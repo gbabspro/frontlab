@@ -6,7 +6,7 @@ import ContentHeader from "../../../components/contentHead/contentHeader";
 import ContentSubHeader from "../../../components/contentHead/contentSubHeader";
 import {
  } from "react-feather";
- import { connect } from 'react-redux'
+ import { connect } from 'react-redux';
 import { getUserOperators } from "../../../utility/APIutils";
 import { LoadOperators } from "../../../redux/actions/operators/operatorsActions";
 import { Users, Trash2, Edit } from "react-feather";
@@ -35,7 +35,7 @@ class Operators extends Component {
       return (
         <Fragment>
             <ContentHeader className="pl-1">
-            <th style={{fontSize:"14px"}}><Users size={22} className="" />  Opérateurs</th> </ContentHeader>
+            <span style={{fontSize:"14px"}}><Users size={22} className="" />  Opérateurs</span> </ContentHeader>
             <Row>
             <Col sm="12">
                 <Card>
@@ -54,19 +54,19 @@ class Operators extends Component {
                         
                             {
                                 (this.props.operators)?
-                                this.props.operators.map((operator) =>{
+                                this.props.operators.map((operator, id) =>{
                                 return (
-                                    <tr><td>{operator.firstname+" "+operator.lastname}</td>
+                                    <tr key={id}><td>{operator.firstname+" "+operator.lastname}</td>
                                         <td>{operator.email}</td>
                                         <td>{operator.service.domaine_name}</td>
-                                        <td>{<Toggle
+                                        <td>{<Toggle 
                                                 defaultChecked={operator.enabled}
                                                 onChange={() => {}}
                                             />}</td>
                                         <td className="d-flex justify-content-end">
                                             
-                                            <Button color="danger" className="btn-sm rounded-circle"><Edit size={15} /></Button>
-                                            <Button color="danger" className="btn-sm ml-2 rounded-circle"><Trash2 size={15} /></Button>
+                                            <Button style={{}} className="btn-sm btn-grey rounded-circle"><Edit size={15} /></Button>
+                                            <Button style={{}} className="btn-sm btn-red ml-2 rounded-circle"><Trash2 size={15} /></Button>
                                         </td>
                                             
                                     </tr>

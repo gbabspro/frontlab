@@ -28,7 +28,7 @@ import { connect } from 'react-redux'
 import Spinner from "../../../components/spinner/spinner";
 import verto from "../verto/verto";
 import {verto_params, verto_callbacks} from "./verto";
-import {sendMsg} from "../../../redux/actions/chat/chatActions"
+import {sendMsg} from "../../../redux/actions/chat/chatActions";
 
 
 class ChatInterface extends Component {

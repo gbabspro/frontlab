@@ -194,3 +194,24 @@ form .form-control {
   display: flex;
   border: none;
 }
+.btn-grey:hover{
+
+  color: white;
+  background: grey;
+}
+.btn-grey{
+
+  background: transparent;
+  color: grey;
+  border: 1px solid grey;
+}
+.btn-red{
+  background: transparent;
+  color: red;
+  border: 1px solid red;
+}
+.btn-red:hover{
+  color: white;
+  background: red;
+  border: 1px solid grey;
+}
