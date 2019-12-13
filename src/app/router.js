@@ -18,6 +18,7 @@ import { connect } from 'react-redux';
 
 
 
+
 // Full Layout
 const LazyForgotPassword = lazy(() => import("../views/pages/forgotPassword"));
 const LazyLogin = lazy(() => import("../views/pages/login/login"));
@@ -37,7 +38,7 @@ const LazyChatInterface = lazy(() => import("../views/pages/chat/chatInterface")
 const LazyBilling = lazy(() => import("../views/pages/billing"));
 const Catalogue = lazy(() => import("../views/pages/catalogue/catalogue"));
 const WidgetSetting = lazy(() => import("../views/pages/widget/widgetSetting"));
-
+const LazyHome = lazy(() => import("../views/pages/home/home"));
 
 // Error Pages
 const LazyErrorPage = lazy(() => import("../views/pages/error"));
@@ -144,7 +145,7 @@ class Router extends Component {
                   path="/"
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
-                        <Catalogue {...matchprops} />
+                        <LazyHome {...matchprops} />
                      </Suspense>
                   )}
                />
@@ -166,6 +167,7 @@ class Router extends Component {
                      </Suspense>
                   )}
                />
+
                <MainLayoutRoutes
                   exact
                   path="/pages/dashboard"
