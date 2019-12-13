@@ -10,7 +10,8 @@ import {
    MessageCircle,
    PhoneCall,
    Settings,
-   Users
+   Users,
+   Sliders
 } from "react-feather";
 import { NavLink } from "react-router-dom";
 import { connect } from 'react-redux';
@@ -88,6 +89,16 @@ class SideMenuContent extends Component {
                   <span className="menu-item-text">Facturation</span>
                </NavLink>
             </SideMenu.MenuSingleItem>
+
+            <SideMenu.MenuSingleItem badgeColor="danger">
+               <NavLink to="/pages/widget" activeclassname="active">
+                  <i className="menu-icon">
+                     <Sliders size={18} />
+                  </i>
+                  <span className="menu-item-text">Widget</span>
+               </NavLink>
+            </SideMenu.MenuSingleItem>
+
 
             <SideMenu.MenuSingleItem badgeColor="danger">
                <NavLink to="/pages/account" activeclassname="active">

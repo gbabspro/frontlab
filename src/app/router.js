@@ -36,6 +36,9 @@ const LazyCallInterface = lazy(() => import("../views/pages/call/callInterface")
 const LazyChatInterface = lazy(() => import("../views/pages/chat/chatInterface"));
 const LazyBilling = lazy(() => import("../views/pages/billing"));
 const Catalogue = lazy(() => import("../views/pages/catalogue/catalogue"));
+const WidgetSetting = lazy(() => import("../views/pages/widget/widgetSetting"));
+
+
 // Error Pages
 const LazyErrorPage = lazy(() => import("../views/pages/error"));
 
@@ -173,6 +176,18 @@ class Router extends Component {
                      </Suspense>
                   )}
                />
+
+               <MainLayoutRoutes
+                  exact
+                  path="/pages/widget"
+                  currentUser={this.state.currentUser}
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <WidgetSetting currentUser={this.state.currentUser} {...matchprops} />
+                     </Suspense>
+                  )}
+               />
+
 
                <MainLayoutRoutes
                   exact
