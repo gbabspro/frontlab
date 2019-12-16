@@ -389,7 +389,7 @@ class Inputs extends Component {
                                     <Label for="iconLeft">Icon Left Class</Label>
                                     <div className="position-relative has-icon-left">
                                        <Input type="text" id="iconLeft" name="iconLeft" />
-                                       <div className="form-control-position">
+                                       <div  className="form-control-position">
                                           <Search size={16} className="info" />
                                        </div>
                                     </div>

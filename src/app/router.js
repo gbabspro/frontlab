@@ -25,7 +25,7 @@ const LazyLogin = lazy(() => import("../views/pages/login/login"));
 //const LoginBox = lazy(() => import("../jsx/page_login"));
 // const LoginCall = lazy(() => import("../jsx/page_calls"));
 
-const LazyRegister = lazy(() => import("../views/pages/register"));
+const LazyRegister = lazy(() => import("../views/pages/register/register"));
 const LazyResetPassword = lazy(() => import("../views/pages/resetPassword"));
 // const LazyMaintainance = lazy(() => import("../views/pages/maintainance"));
 // const LazyLockScreen = lazy(() => import("../views/pages/lockScreen"));
