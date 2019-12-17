@@ -58,7 +58,7 @@ class Operators extends Component {
                                 return (
                                     <tr key={id}><td>{operator.firstname+" "+operator.lastname}</td>
                                         <td>{operator.email}</td>
-                                        <td>{operator.service.domaine_name}</td>
+                                        <td>{operator.service.domaine}</td>
                                         <td>{<Toggle 
                                                 defaultChecked={operator.enabled}
                                                 onChange={() => {}}

@@ -38,12 +38,9 @@ export default class Step1 extends Component {
           },
           password: {
               value: ''
-          },
-          passwordConfirmation: {
-            value: ''
-         }
+          }
       }
-      // this.handleInputChange = this.handleInputChange.bind(this);
+      this.handleInputChange = this.handleInputChange.bind(this);
       // this.handleSubmit = this.handleSubmit.bind(this);
       // this.validateUsernameAvailability = this.validateUsernameAvailability.bind(this);
       this.validateEmailAvailability = this.validateEmailAvailability.bind(this);
@@ -53,6 +50,76 @@ export default class Step1 extends Component {
    componentDidMount() {}
 
    componentWillUnmount() {}
+
+    handleInputChange(event, validationFun) {
+
+        const target = event.target;
+        const inputName = target.name;        
+        const inputValue = target.value;
+
+        this.setState({
+        [inputName] : {
+            value: inputValue,
+            ...validationFun(inputValue)
+        }
+        });
+    }
+
+    getStore() {
+        return this.sampleStore;
+     }
+  
+     updateStore() {
+        this.props.updateStore(this.state);
+     }
+  
+  
+  
+     handleSubmit(event) {
+        event.preventDefault();
+    
+        if(this.isFormInvalid()){
+           return;
+        }
+  
+        
+  
+        const signupRequest = {
+            firstname: this.state.firstname.value,
+            lastname: this.state.lastname.value,
+            email: this.state.email.value,
+            password: this.state.password.value,
+        };
+  
+        this.updateStore(signupRequest);
+  
+        // console.log("singup ", signupRequest)
+        // register(signupRequest)
+        // .then(response => {
+           
+        //     this.props.history.push("/pages/login");
+        // }).catch(error => {
+  
+        // });
+    }
+  
+     isFormInvalid() {
+        return !(this.state.firstname.validateStatus === 'success' &&
+            this.state.lastname.validateStatus === 'success' &&
+            this.state.email.validateStatus === 'success' &&
+            this.state.password.validateStatus === 'success' &&
+            this.state.passwordConfirmation.validateStatus === 'success'
+        );
+    }
+    
+
+    isFormInvalid() {
+        return !(this.state.firstname.validateStatus === 'success' &&
+            this.state.lastname.validateStatus === 'success' &&
+            this.state.email.validateStatus === 'success' &&
+            this.state.password.validateStatus === 'success'
+        );
+    }
 
    // not required as this component has no forms or user entry
    // isValidated() {}
@@ -68,13 +135,15 @@ export default class Step1 extends Component {
                         className="input-style py-3"
                         name="firstname"
                         onBlur={(event) => this.handleInputChange(event, this.validateName)}
+                        onFocus={(event) => {this.setState({firstname:{validateStatus: '',
+                        errorMsg: null,}})}}
                         autoComplete="off"
                         id="inputName"
                         placeholder="Prénom"
                         required
                      />
                      {this.state.firstname.validateStatus === "error" ? (
-                        <div className="form-control-position pr-4">
+                        <div className="form-control-position pr-4 pt-1">
                            <AlertCircle id="firstnameTooltip" className="danger"/>
                            <UncontrolledTooltip
                               placement="right"
@@ -93,13 +162,15 @@ export default class Step1 extends Component {
                         className="form-control py-3"
                         name="lastname"
                         onBlur={(event) => this.handleInputChange(event, this.validateName)}
+                        onFocus={(event) => {this.setState({lastname:{validateStatus: '',
+                        errorMsg: null,}})}}
                         autoComplete="off"
                         id="inputLastName"
                         placeholder="Nom"
                         required
                      />
                      {this.state.lastname.validateStatus === "error" ? (
-                        <div className="form-control-position pr-4">
+                        <div className="form-control-position pr-4 pt-1">
                            <AlertCircle id="lastnameTooltip"  className="danger"/>
                            <UncontrolledTooltip
                               placement="right"
@@ -119,13 +190,15 @@ export default class Step1 extends Component {
                         className="form-control py-3"
                         name="email"
                         id="inputEmail"
+                        onFocus={(event) => {this.setState({inputEmail:{validateStatus: '',
+                        errorMsg: null,}})}}
                         placeholder="Adresse e-mail"
                         onBlur={(event) => this.handleInputChange(event, this.validateEmail)}
                         required
                      />
                      
                      {this.state.email.validateStatus === "error" ? (
-                        <div className="form-control-position pr-4">
+                        <div className="form-control-position pr-4 pt-1">
                            <AlertCircle id="emailTooltip" className="danger"/>
                            <UncontrolledTooltip
                               placement="right"
@@ -145,6 +218,8 @@ export default class Step1 extends Component {
                         type="password"
                         className="form-control py-3"
                         name="password"
+                        onFocus={(event) => {this.setState({password:{validateStatus: '',
+                        errorMsg: null,}})}}
                         onBlur={this.validateEmailAvailability}
                         id="inputPass"
                         placeholder="Mot de passe"
@@ -152,7 +227,7 @@ export default class Step1 extends Component {
                         required
                      />
                      {this.state.password.validateStatus === "error" ? (
-                        <div className="form-control-position pr-4">
+                        <div className="form-control-position pr-4 pt-1">
                            <AlertCircle id="passwordTooltip" className="danger"/>
                            <UncontrolledTooltip
                               placement="right"
@@ -372,21 +447,6 @@ export default class Step1 extends Component {
           };            
       }
   }
-
-
-  validateConfirmPassword = (password) => {
-   if(this.state.password.value !== password) {
-       return {
-           validateStatus: 'error',
-           errorMsg: `Les mot de passes ne sont pas identiques`
-       }
-   } else {
-       return {
-           validateStatus: 'success',
-           errorMsg: null,
-       };            
-   }
-}
 
 
 }

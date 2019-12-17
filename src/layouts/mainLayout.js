@@ -1,7 +1,7 @@
 // import external modules
 import React, { PureComponent } from "react";
 import classnames from "classnames";
-
+import  { Redirect } from 'react-router-dom'
 // import internal(own) modules
 import { FoldedContentConsumer, FoldedContentProvider } from "../utility/context/toggleContentContext";
 import Sidebar from "./components/sidebar/sidebar";
@@ -12,12 +12,28 @@ import {setCurrentProject, LoadProjects} from "../redux/actions/projects/project
 import {getUserProjects} from "../utility/APIutils";
 import { connect } from 'react-redux';
 
+
+
+import Spinner from "../components/spinner/spinner";
+
 class MainLayout extends PureComponent {
+   constructor(props) {
+      super(props);
+      this.state = {
+        isLoading: true,
+        width: window.innerWidth,
+        sidebarState: "close",
+        sidebarSize: '',
+        layout: ''
+      }
+      // this.handleLogout = this.handleLogout.bind(this);
+      // this.loadCurrentUser = this.loadCurrentUser.bind(this);
+      // this.handleLogin = this.handleLogin.bind(this);
+      // this.loadCurrentUser();
+   }
+
    state = {
-      width: window.innerWidth,
-      sidebarState: "close",
-      sidebarSize: '',
-      layout: ''
+
    };
 
    updateWidth = () => {
@@ -39,7 +55,7 @@ class MainLayout extends PureComponent {
          window.addEventListener("resize", this.updateWidth, false);
       }
 
-      getUserProjects()      
+   getUserProjects()      
       .then(response => {
 
 
@@ -62,7 +78,18 @@ class MainLayout extends PureComponent {
       this.setState({ sidebarState });
    }
 
+
+   handleLogin() {
+      this.loadCurrentUser();
+   }
+
+
    render() {
+
+      if(!this.props.currentUser.isAuthenticated){
+         return <Redirect to='/pages/login'  />
+      }
+
       return (
             <FoldedContentProvider>
                <FoldedContentConsumer>
@@ -89,7 +116,7 @@ class MainLayout extends PureComponent {
                         />
                         <Navbar
                            toggleSidebarMenu={this.toggleSidebarMenu.bind(this)}
-                           currentUser={this.props.currentUser}
+                           // currentUser={this.props.currentUser}
                            sidebarState={this.state.sidebarState}
                         />
                         <main>{this.props.children}</main>
@@ -103,12 +130,17 @@ class MainLayout extends PureComponent {
 }
 
 
+const mapStateToProps = state => ({
+   currentUser: state.currentUser,
+})
+
+
 const mapDispatchToProps = dispatch => ({
    setCurrent: (project) => dispatch(setCurrentProject(project)),
    getProjects: (projects) => dispatch(LoadProjects(projects))
 })
  
 export default connect(
-   null,
+   mapStateToProps,
    mapDispatchToProps
 )(MainLayout)

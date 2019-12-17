@@ -3,17 +3,18 @@ import React, { Component, Suspense, lazy } from "react";
 import { BrowserRouter, Switch } from "react-router-dom";
 import Spinner from "../components/spinner/spinner";
 
-import { getCurrentUser } from '../utility/APIutils';
 
 // import internal(own) modules
 import MainLayoutRoutes from "../layouts/routes/mainRoutes";
 import FullPageLayout from "../layouts/routes/fullpageRoutes";
+import AuthLayout from "../layouts/routes/authLayout";
 import Dashboard from "../views/pages/dash/dashboard";
 import Operators from "../views/pages/operators/operators";
+import {setCurrentUser} from "../redux/actions/user/userActions";
 // import ErrorLayoutRoute from "../layouts/routes/errorRoutes";
 
 import { connect } from 'react-redux';
-
+import { getCurrentUser } from '../utility/APIutils';
 
 
 
@@ -51,27 +52,26 @@ class Router extends Component {
    constructor(props) {
       super(props);
       this.state = {
-        currentUser: null,
-        isAuthenticated: false,
-        isLoading: true
-      }
-      // this.handleLogout = this.handleLogout.bind(this);
+         isLoading: true
+       }
       this.loadCurrentUser = this.loadCurrentUser.bind(this);
-      this.handleLogin = this.handleLogin.bind(this);
       this.loadCurrentUser();
    }
+  
 
    loadCurrentUser() {
       getCurrentUser()
       .then(response => {
          console.log("currentUser : ", response)
          if(response.authorities[0].authority == "ROLE_MANAGER"){
+
+
+            this.props.setCurrentUser({...response, isAuthenticated: true})
+
             this.setState({
-               currentUser: response,
-               isAuthenticated: true,
                isLoading: false
-             });
-            //  this.props.history.push("/pages/user-profile");
+            })
+            
          }else if(response.authorities[0].authority != "ROLE_AGENT"){
 
             // this.props.history.push("/pages/agent/interface");
@@ -87,23 +87,19 @@ class Router extends Component {
       });
     }
 
-
-   handleLogin() {
-      this.loadCurrentUser();
-   }
-  
-
    render() {
-         if(this.state.isLoading) {
-           return (<div></div>);
-         }
+
+      if(this.state.isLoading){
+         return <Spinner />
+      }
+
       return (
          // Set the directory path if you are deplying in sub-folder
          <BrowserRouter basename="/">
             <Switch>
 
                {/* Saperate Pages Views */}
-               <FullPageLayout
+               <AuthLayout
                   exact
                   path="/pages/forgot-password"
                   render={matchprops => (
@@ -112,12 +108,12 @@ class Router extends Component {
                      </Suspense>
                   )}
                />
-               <FullPageLayout
+               <AuthLayout
                   exact
                   path="/pages/login"
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
-                        <LazyLogin onLogin={this.handleLogin} />
+                        <LazyLogin {...matchprops} />
                      </Suspense>
                   )}
                />
@@ -131,7 +127,7 @@ class Router extends Component {
                      </Suspense>
                   )}
                /> */}
-               <FullPageLayout
+               <AuthLayout
                   exact
                   path="/pages/register"
                   render={matchprops => (
@@ -149,7 +145,7 @@ class Router extends Component {
                      </Suspense>
                   )}
                />
-               <FullPageLayout
+               <AuthLayout
                   exact
                   path="/pages/changer-password/:token"
                   render={matchprops => (
@@ -158,7 +154,7 @@ class Router extends Component {
                      </Suspense>
                   )}
                />
-               <FullPageLayout
+               <AuthLayout
                   exact
                   path="/pages/confirm-registration/:token"
                   render={matchprops => (
@@ -171,10 +167,10 @@ class Router extends Component {
                <MainLayoutRoutes
                   exact
                   path="/pages/dashboard"
-                  currentUser={this.state.currentUser}
+                  
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
-                        <Dashboard currentUser={this.state.currentUser} {...matchprops} />
+                        <Dashboard  {...matchprops} />
                      </Suspense>
                   )}
                />
@@ -182,10 +178,10 @@ class Router extends Component {
                <MainLayoutRoutes
                   exact
                   path="/pages/widget"
-                  currentUser={this.state.currentUser}
+                  
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
-                        <WidgetSetting currentUser={this.state.currentUser} {...matchprops} />
+                        <WidgetSetting  {...matchprops} />
                      </Suspense>
                   )}
                />
@@ -194,10 +190,10 @@ class Router extends Component {
                <MainLayoutRoutes
                   exact
                   path="/pages/operators"
-                  currentUser={this.state.currentUser}
+                  
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
-                        <Operators currentUser={this.state.currentUser} {...matchprops} />
+                        <Operators  {...matchprops} />
                      </Suspense>
                   )}
                />
@@ -205,10 +201,10 @@ class Router extends Component {
                <MainLayoutRoutes
                   exact
                   path="/pages/user-profile"
-                  currentUser={this.state.currentUser}
+                  
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
-                        <LazyUserProfile currentUser={this.state.currentUser} {...matchprops} />
+                        <LazyUserProfile  {...matchprops} />
                      </Suspense>
                   )}
                />
@@ -216,10 +212,10 @@ class Router extends Component {
                <MainLayoutRoutes
                   exact
                   path="/pages/live-chat"
-                  currentUser={this.state.currentUser}
+                  
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
-                        <LazyLiveChat currentUser={this.state.currentUser} {...matchprops} />
+                        <LazyLiveChat  {...matchprops} />
                      </Suspense>
                   )}
                />
@@ -227,10 +223,10 @@ class Router extends Component {
               <MainLayoutRoutes
                   exact
                   path="/pages/phone-call"
-                  currentUser={this.state.currentUser}
+                  
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
-                        <LazyPhoneCall currentUser={this.state.currentUser} {...matchprops} />
+                        <LazyPhoneCall  {...matchprops} />
                      </Suspense>
                   )}
                />
@@ -239,40 +235,40 @@ class Router extends Component {
                <MainLayoutRoutes
                   exact
                   path="/pages/marketplace"
-                  currentUser={this.state.currentUser}
+                  
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
-                        <LazyMarketPlace currentUser={this.state.currentUser} {...matchprops} />
+                        <LazyMarketPlace  {...matchprops} />
                      </Suspense>
                   )}
                />
                <MainLayoutRoutes
                   exact
                   path="/pages/services"
-                  currentUser={this.state.currentUser}
+                  
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
-                        <LazyServices currentUser={this.state.currentUser} {...matchprops} />
+                        <LazyServices  {...matchprops} />
                      </Suspense>
                   )}
                />
               <MainLayoutRoutes
                   exact
                   path="/pages/billing"
-                  currentUser={this.state.currentUser}
+                  
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
-                        <LazyBilling currentUser={this.state.currentUser} {...matchprops} />
+                        <LazyBilling  {...matchprops} />
                      </Suspense>
                   )}
                />
                <MainLayoutRoutes
                   exact
                   path="/pages/service/:idService"
-                  currentUser={this.state.currentUser}
+                  
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
-                        <LazySingleService currentUser={this.state.currentUser} {...matchprops} />
+                        <LazySingleService  {...matchprops} />
                      </Suspense>
                   )}
                />
@@ -309,8 +305,12 @@ const mapStateToProps = state => ({
    currentProject: state.currentProject
 })
 
+const mapDispatchToProps = dispatch => ({
+   setCurrentUser: (user) => dispatch(setCurrentUser(user)) 
+})
+
  
 export default connect(
    mapStateToProps,
-   null
+   mapDispatchToProps
 )(Router)

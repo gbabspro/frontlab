@@ -151,6 +151,7 @@ export default class StepZilla extends Component {
 
                if (proceed) {
                   if (!movingBack) {
+                     
                      // looks like we are moving forward, 'reduce' a new array of step>validated values we need to check and
                      // ... 'some' that to get a decision on if we should allow moving forward
                      passThroughStepsNotValid = this.props.steps
@@ -286,9 +287,9 @@ export default class StepZilla extends Component {
       return this.props.steps.map((s, i) => (
          <li
             className={this.getClassName("progtrckr", i)}
-            onClick={evt => {
-               this.jumpToStep(evt);
-            }}
+            // onClick={evt => {
+            //    this.jumpToStep(evt);
+            // }}
             key={i}
             value={i}
          >
@@ -331,7 +332,7 @@ export default class StepZilla extends Component {
             {this.props.showSteps ? <ol className="progtrckr">{this.renderSteps()}</ol> : <span />}
 
             {compToRender}
-            <div style={this.props.showNavigation ? {} : this.hidden} className="d-flex justify-content-center footer-buttons">
+            <div style={this.props.showNavigation ? {} : this.hidden} className="d-flex justify-content-left footer-buttons">
                <Button
                   style={this.state.showPreviousBtn ? {} : this.hidden}
                   // className={props.backButtonCls}
@@ -348,6 +349,7 @@ export default class StepZilla extends Component {
                   // hidden={this.state.showNextBtn ? {} : this.hidden}
                   onClick={() => {
                      this.next();
+                     compToRender.updateStore();
                   }}
                   id="next-button"
                >

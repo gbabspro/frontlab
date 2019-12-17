@@ -33,6 +33,8 @@ class Login extends Component {
       }
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleChange = this.handleChange.bind(this);
+
+      console.log("this.props ", this.props)
   }
 
    handleSubmit = (event) => {
@@ -42,12 +44,13 @@ class Login extends Component {
             login(loginRequest)
             .then( (response) => {
                   localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-                  this.props.onLogin();
+                  // this.props.onLogin();
                   console.log("this.props ", this.props)
                   this.setState({isLogin:true});
-                  return <Redirect to='/pages/services' />
-                  // this.props.history.push("/pages/services");
+                  this.props.history.push("/pages/dashboard");
             }).catch(error => {
+
+               console.log("error ", error)
                   if(error.status === 401) {
                      this.setState({
                         hasError:{
@@ -72,13 +75,7 @@ class Login extends Component {
       }));
    };
 
-   render() {  
-
-
-      if(this.state.isLogin){
-         return <Redirect to='/pages/services' />
-      }
-
+   render() {     
       return (
          <div className="container-fluid gradient-deep-orange-orange">
             <Row className="full-height-vh">

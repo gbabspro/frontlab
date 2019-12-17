@@ -1,54 +1,88 @@
 import React from "react";
-import { Row, Col, Form, FormGroup, Label, Input } from "reactstrap";
+import {
+   Card,
+   CardDeck,
+   CardImg,
+   CardTitle,
+   CardSubtitle,
+   CardText,
+   CardBody,
+   CardFooter,
+   Row,
+   Col,
+   Button,
+   Modal,
+   ModalHeader, 
+   ModalBody, 
+   ModalFooter,
+   Form,
+   Input,
+   FormGroup,
+   CustomInput
+} from "reactstrap";
 
 const Step2 = props => (
    <div className="step step2">
       <Form>
          <div className="form-body">
-            <Row>
-               <Col md="6">
-                  <FormGroup>
-                     <Label for="companyName">Company</Label>
-                     <Input type="text" id="companyName" name="company" />
-                  </FormGroup>
-               </Col>
-               <Col md="6">
-                  <FormGroup>
-                     <Label for="jobtitle">Job Title</Label>
-                     <Input type="text" id="jobtitle" name="jobtitle" />
-                  </FormGroup>
-               </Col>
-            </Row>
+
 
             <Row>
-               <Col md="6">
+
+                  <Col md="12">
                   <FormGroup>
-                     <Label for="projectinput5">Interested in</Label>
-                     <Input type="select" id="projectinput5" name="interested">
-                        <option value="none" defaultValue="" disabled="">
-                           Interested in
-                        </option>
-                        <option value="design">design</option>
-                        <option value="development">development</option>
-                        <option value="illustration">illustration</option>
-                        <option value="branding">branding</option>
-                        <option value="video">video</option>
-                     </Input>
+                     <Input
+                        type="text"
+                        className="input-style py-3"
+                        name="domaine"
+                        autoComplete="off"
+                        placeholder="Site web : monsite.com"
+                        required
+                     />
                   </FormGroup>
-               </Col>
+                  </Col>
 
                <Col md="6">
                   <FormGroup>
-                     <Label for="projectinput6">Budget</Label>
-                     <Input type="select" id="projectinput6" name="budget">
-                        <option value="0" defaultValue="" disabled="">
-                           Budget
-                        </option>
-                        <option value="less than 5000$">less than 5000$</option>
-                        <option value="5000$ - 10000$">5000$ - 10000$</option>
-                        <option value="10000$ - 20000$">10000$ - 20000$</option>
-                        <option value="more than 20000$">more than 20000$</option>
-                     </Input>
+                     <CardDeck>
+                        <Card style={{boxShadow:"0 6px 0px 0 rgba(0, 0, 0, 0.01), 0 15px 32px 0 rgba(0, 0, 0, 0.06)"}} className md="12" className="cursor-pointer" onClick={() => this.handleCheck("OFFRE_PREMIUM")}>
+        
+                           <CardBody>
+                              <CardTitle className="font-weight-bold text-center">Live Chat</CardTitle>
+                              <CardSubtitle className="text-center">Gratuit à vie</CardSubtitle>
+                              {/* <CardText className="text-center"><span style={{fontSize: "30px"}} color="orange" className="text-bold-400">25 000<b style={{fontSize: "14px"}} className="ml-1 text-bold-400">Fcfa / mois</b></span></CardText> */}
+                              <CardFooter className="pb-0 ">
+                                 <Col md="12" className="d-flex justify-content-center">
+                                    <FormGroup check className="px-0">
+                                       <CustomInput value="OFFRE_PREMIUM"  checked={false} type="radio" id="offrePremiumId" />
+                                    </FormGroup>
+                                 </Col>              
+                              </CardFooter>
+                           </CardBody>
+                        </Card>
+                     </CardDeck>
+                  </FormGroup>
+               </Col>
+
+               <Col md="6">
+                  <FormGroup>
+                     <CardDeck>
+                        <Card style={{boxShadow:"0 6px 0px 0 rgba(0, 0, 0, 0.01), 0 15px 32px 0 rgba(0, 0, 0, 0.06)"}} md="12" className="cursor-pointer" onClick={() => this.handleCheck("OFFRE_BUSINESS")}>
+
+                           <CardBody>
+                              <CardTitle className="font-weight-bold text-center">Web to Call</CardTitle>
+                              <CardSubtitle className="text-center">Gratuit en béta</CardSubtitle>
+                              {/* <CardText className="text-center"><span style={{fontSize: "30px"}} color="orange" className="text-bold-400">75 000<b style={{fontSize: "14px"}} className="ml-1 text-bold-400">Fcfa / mois</b></span></CardText> */}
+                              <CardFooter className="pb-0 ">
+                                 <Col md="12" className="d-flex justify-content-center">
+                                    <FormGroup check className="px-0">
+                                       <CustomInput value="OFFRE_BUSINESS"  checked={false} type="radio" id="offreBusinessId" />
+                                    </FormGroup>
+                                 </Col>              
+                              </CardFooter>
+                           </CardBody>
+                        </Card>
+                     </CardDeck>
                   </FormGroup>
                </Col>
             </Row>

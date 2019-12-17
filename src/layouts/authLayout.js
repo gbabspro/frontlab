@@ -2,11 +2,10 @@ import React from "react";
 import templateConfig from "../templateConfig";
 import classnames from "classnames";
 
-const FullPageLayout = ({ children, ...rest }) => {
-
+const AuthLayout = ({ children, ...rest }) => {
    return (
       <div
-         className={classnames("login-layout wrapper ", {
+         className={classnames("login-layout wrapper gradient-deep-orange-orange", {
             "layout-dark": templateConfig.layoutDark
          })}
       >
@@ -15,4 +14,6 @@ const FullPageLayout = ({ children, ...rest }) => {
    );
 };
 
-export default FullPageLayout;
+export default AuthLayout;
+
+

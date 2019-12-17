@@ -56,7 +56,7 @@ class NavbarSearch extends Component {
                <DropdownToggle className="text-left pl-0 mb-0" style={{color:"#60848c", background: "transparent", width: "250px"}}>
                <div>
                <Globe size={22} className="mr-2" />  
-                  <span className="">{(this.props.currentProject)?this.props.currentProject.domaine_name:""}</span>
+                  <span className="">{(this.props.currentProject)?this.props.currentProject.domaine:""}</span>
                   <ChevronDown style={{marginTop:"3px"}} size={18} className="ml-3 pull-right" />  
                </div>
 
@@ -69,7 +69,7 @@ class NavbarSearch extends Component {
                         return (
                         <DropdownItem key={id} onClick={() => {this.props.setCurrent(project)}} className="px-2">
                             <Globe size={18} className="mr-2" /> 
-                           {project.domaine_name}</DropdownItem>)
+                           {project.domaine}</DropdownItem>)
                      }):""
                   }  
 

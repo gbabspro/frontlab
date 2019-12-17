@@ -9,7 +9,9 @@ import projectReducer from "./projects/projectsReducer"
 import callReducer from "./call/";
 import { reducer as toastrReducer } from "react-redux-toastr";
 import currentProjectReducer from "./projects/currentProjectReducer";
-import OperatorsReducer from "./operators/operatorsReducer"
+import OperatorsReducer from "./operators/operatorsReducer";
+import currentUser from "./user/userReducer";
+
 
 const rootReducer = combineReducers({
    toastr: toastrReducer, // <- Mounted at toastr.
@@ -21,8 +23,8 @@ const rootReducer = combineReducers({
    chatState: chats,
    projects: projectReducer,
    currentProject: currentProjectReducer,
-   operators: OperatorsReducer
-
+   operators: OperatorsReducer,
+   currentUser: currentUser
 });
 
 export default rootReducer;
