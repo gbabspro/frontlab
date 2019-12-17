@@ -16,12 +16,41 @@ class Dashboard extends Component {
         {/* <ContentHeader>Extended Tables </ContentHeader>
             <ContentSubHeader>Tables with some extra elements and feathers.</ContentSubHeader> */}
             <Row>
-            <Col sm="12">
-                <Card>
-                    <CardBody>
-                    </CardBody>
-                </Card>
-            </Col>
+              <Col sm="4">
+                  <Card>
+                      <CardBody>
+                      </CardBody>
+                  </Card>
+              </Col>
+
+              <Col sm="8">
+              <Row>
+                <Col sm="6">
+                  <Card>
+                      <CardBody>
+                      </CardBody>
+                  </Card>
+                </Col>
+                <Col sm="6">
+                  <Card>
+                      <CardBody>
+                      </CardBody>
+                  </Card>
+                </Col>
+                <Col sm="6">
+                  <Card>
+                      <CardBody>
+                      </CardBody>
+                  </Card>
+                </Col>
+                <Col sm="6">
+                  <Card>
+                      <CardBody>
+                      </CardBody>
+                  </Card>
+                </Col>
+              </Row>
+              </Col>
             </Row>
         </Fragment>
       );
