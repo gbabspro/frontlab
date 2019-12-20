@@ -1,6 +1,6 @@
 // import external modules
 import React, { Component } from "react";
-import { login } from '../../../utility/APIutils';
+import { login, getCurrentUser } from '../../../utility/APIutils';
 import { NavLink } from "react-router-dom";
 import {
    Row,
@@ -15,7 +15,9 @@ import {
 } from "reactstrap";
 
 import { ACCESS_TOKEN } from '../../../constants';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {setCurrentUser} from "../../../redux/actions/user/userActions";
 
 class Login extends Component {
 
@@ -44,10 +46,31 @@ class Login extends Component {
             login(loginRequest)
             .then( (response) => {
                   localStorage.setItem(ACCESS_TOKEN, response.accessToken);
-                  // this.props.onLogin();
-                  console.log("this.props ", this.props)
-                  this.setState({isLogin:true});
-                  this.props.history.push("/pages/dashboard");
+
+                  getCurrentUser()
+                  .then(response => {
+                     console.log("currentUser : ", response)
+                     if(response.authorities[0].authority == "ROLE_MANAGER"){
+            
+                        this.props.setCurrentUser({...response, isAuthenticated: true})
+                        this.props.history.push("/pages/dashboard");
+                        
+                     }else if(response.authorities[0].authority == "ROLE_AGENT"){
+            
+                        this.props.setCurrentUser({...response, isAuthenticated: true})
+                        this.props.history.push("/pages/dashboard");
+
+                     }else if(response.authorities[0].authority != "ROLE_SUP"){
+            
+                     }
+            
+            
+                  }).catch(error => {
+                     
+                     console.log("error ", error)
+
+                  });  
+
             }).catch(error => {
 
                console.log("error ", error)
@@ -162,4 +185,16 @@ class Login extends Component {
    }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+   currentUser: state.currentUser,
+})
+
+const mapDispatchToProps = dispatch => ({
+   setCurrentUser: (user) => dispatch(setCurrentUser(user)) 
+})
+
+ 
+export default connect(
+   mapStateToProps,
+   mapDispatchToProps
+)(Login)

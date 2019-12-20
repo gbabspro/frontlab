@@ -13,6 +13,9 @@ class PhoneCall extends Component {
 
     constructor(props) {
       super(props);
+      this.state = {
+        dropdownOpen: false
+      };  
     }
 
     componentDidMount(){
@@ -34,6 +37,12 @@ class PhoneCall extends Component {
   
     hangupCall = () => {
         verto.dialog.hangup();
+    }
+    
+    toggle = () => {
+        this.setState(prevState => ({
+           dropdownOpen: !prevState.dropdownOpen
+        }));
     }
 
    render() {
@@ -121,7 +130,7 @@ class PhoneCall extends Component {
                 <Col sm="4" className="pl-0">
                    <Card style={{background: "#262f3c", boxShadow:"0 1px 2px 0 rgba(0,0,0,0.06)", minHeight: "500px",}} className="">                  
                         <CardBody>
-                            <Dropdown className="px-3" >
+                            <Dropdown isOpen={this.state.dropdownOpen} className="px-3" toggle={this.toggle}>
                 
                                 <DropdownToggle className="text-left mb-0" style={{boxShadow: "0 1px 2px 0 rgba(60,64,67,0.302)", color:"#60848c", background: "#3c485b", width:"100%"}}>
                                 <div>

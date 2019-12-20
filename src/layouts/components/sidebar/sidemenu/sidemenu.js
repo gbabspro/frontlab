@@ -34,14 +34,6 @@ class SideMenuContent extends Component {
                </NavLink>
             </SideMenu.MenuSingleItem>
             
-            <SideMenu.MenuSingleItem badgeColor="danger">
-               <NavLink to="/pages/operators" activeclassname="active">
-                  <i className="menu-icon">
-                     <Users size={18} />
-                  </i>
-                  <span className="menu-item-text">Opérateurs</span>
-               </NavLink>
-            </SideMenu.MenuSingleItem>
             {/* <SideMenu.MenuSingleItem badgeColor="danger">
                <NavLink to="/pages/chats" activeclassname="active">
                   <i className="menu-icon">
@@ -81,23 +73,43 @@ class SideMenuContent extends Component {
                   <span className="menu-item-text">Call</span>
                </NavLink>
             </SideMenu.MenuSingleItem> */}
-            <SideMenu.MenuSingleItem badgeColor="danger">
+
+
+            {/* <SideMenu.MenuSingleItem badgeColor="danger">
                <NavLink to="/pages/billing" activeclassname="active">
                   <i className="menu-icon">
                      <CreditCard size={18} />
                   </i>
                   <span className="menu-item-text">Facturation</span>
                </NavLink>
-            </SideMenu.MenuSingleItem>
+            </SideMenu.MenuSingleItem> */}
 
-            <SideMenu.MenuSingleItem badgeColor="danger">
+            {
+               (this.props.currentUser.authorities && this.props.currentUser.authorities[0].authority == "ROLE_MANAGER")?
+               (<SideMenu.MenuSingleItem badgeColor="danger">
                <NavLink to="/pages/widget" activeclassname="active">
                   <i className="menu-icon">
                      <Sliders size={18} />
                   </i>
                   <span className="menu-item-text">Widget</span>
                </NavLink>
-            </SideMenu.MenuSingleItem>
+            </SideMenu.MenuSingleItem>):""
+            }
+
+            {
+               (this.props.currentUser.authorities && this.props.currentUser.authorities[0].authority == "ROLE_MANAGER")?
+               (<SideMenu.MenuSingleItem badgeColor="danger">
+               <NavLink to="/pages/operators" activeclassname="active">
+                  <i className="menu-icon">
+                     <Users size={18} />
+                  </i>
+                  <span className="menu-item-text">Opérateurs</span>
+               </NavLink>
+            </SideMenu.MenuSingleItem>):""
+            }
+
+
+            
 
 
             <SideMenu.MenuSingleItem badgeColor="danger">
@@ -122,7 +134,8 @@ class SideMenuContent extends Component {
 }
 
 const mapStateToProps = state => ({
-   currentProject: state.currentProject
+   currentProject: state.currentProject,
+   currentUser: state.currentUser
 })
 
  

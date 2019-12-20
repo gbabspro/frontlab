@@ -363,7 +363,7 @@ class SingleService extends Component {
         this.setState({
             modalNewAgent: !this.state.modalNewAgent
         });
-     }
+    }
 
      openModalEditPersonnel = (id) => {
         

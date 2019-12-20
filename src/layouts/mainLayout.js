@@ -9,7 +9,9 @@ import Navbar from "./components/navbar/navbar";
 import Footer from "./components/footer/footer";
 import templateConfig from "../templateConfig";
 import {setCurrentProject, LoadProjects} from "../redux/actions/projects/projectsActions";
-import {getUserProjects} from "../utility/APIutils";
+import {LoadOperators} from "../redux/actions/operators/operatorsActions";
+import {setCurrentUser} from "../redux/actions/user/userActions";
+import {getUserProjects, getServiceOperators, getUserOperator} from "../utility/APIutils";
 import { connect } from 'react-redux';
 
 
@@ -30,6 +32,8 @@ class MainLayout extends PureComponent {
       // this.loadCurrentUser = this.loadCurrentUser.bind(this);
       // this.handleLogin = this.handleLogin.bind(this);
       // this.loadCurrentUser();
+
+      console.log("props main layout ", this.props)
    }
 
    state = {
@@ -55,17 +59,67 @@ class MainLayout extends PureComponent {
          window.addEventListener("resize", this.updateWidth, false);
       }
 
-   getUserProjects()      
-      .then(response => {
+
+      if(this.props.currentUser.authorities && this.props.currentUser.authorities[0].authority == "ROLE_MANAGER"){
+
+         getUserProjects()      
+         .then(response => {
+
+            console.log("reponse ", response);
+            this.props.getProjects(response);
+            this.props.setCurrent(response[0])
+
+            getServiceOperators(response[0].id)
+            .then(response => {
+   
+               console.log("reponse ", response);
+               this.props.getOperatorsList(response);
+               this.setState({
+                  isLoading: false
+               })
+
+            }).catch(error => {
+               console.log("error ", error);
+               this.setState({
+                  isLoading: false
+               })
+            });
+
+         }).catch(error => {
+            console.log("error ", error);
+         });
+         
+      }else if(this.props.currentUser.roles && this.props.currentUser.roles[0].name == "ROLE_AGENT"){
+
+         getUserOperator()
+         .then(response => {
+
+            console.log("response project current ", response)
+
+            this.props.setCurrent(response.service);        
+            this.props.handleCurrentUser({...response, isAuthenticated: true});
+            this.setState({
+               isLoading: false
+            })
 
 
-         console.log("reponse ", response);
-         this.props.getProjects(response);
-         this.props.setCurrent(response[0])
-      }).catch(error => {
-         console.log("error ", error);
-      });
-   }
+         }).catch(error => {
+            console.log("error ", error);
+            this.setState({
+               isLoading: false
+            })
+         });
+      }else{
+         this.setState({
+            isLoading: false
+         })
+      }
+
+
+
+      }
+
+      
 
    componentWillUnmount() {
       if (window !== "undefined") {
@@ -85,6 +139,10 @@ class MainLayout extends PureComponent {
 
 
    render() {
+
+      if(this.state.isLoading){
+         return <Spinner />;
+      }
 
       if(!this.props.currentUser.isAuthenticated){
          return <Redirect to='/pages/login'  />
@@ -137,7 +195,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
    setCurrent: (project) => dispatch(setCurrentProject(project)),
-   getProjects: (projects) => dispatch(LoadProjects(projects))
+   getProjects: (projects) => dispatch(LoadProjects(projects)),
+   getOperatorsList: (operators) => dispatch(LoadOperators(operators)),
+   handleCurrentUser: (user) => dispatch(setCurrentUser(user)),
 })
  
 export default connect(

@@ -14,3 +14,12 @@ export const setCurrentProject = (project) => {
         project: project
     }
 }
+
+
+export const addProject = (project) => {
+    
+    return {
+        type: 'ADD_PROJECT',
+        project
+    }
+}

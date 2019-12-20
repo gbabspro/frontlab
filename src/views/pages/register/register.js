@@ -411,50 +411,50 @@ onServiceChanged(e){
          
                                              </FormGroup>
                                              </Col>
+                              
+                                             <Col md="6">
+                                                <FormGroup>
+                                                   <CardDeck>
+                                                      <Card onClick={() => this.handleCheck("SERVICE_CHAT")} style={{borderRadius: "10px", boxShadow: (!this.state.selectedService.value=="SERVICE_CHAT")? "0 6px 0px 0 rgba(0, 0, 0, 0.01), 0 15px 32px 0 rgba(0, 0, 0, 0.06)":"0 6px 0px 0 rgba(0, 0, 0, 0.01), 0 15px 32px 0 rgba(0, 0, 0, 0.06)"}} className md="12" className="cursor-pointer" >
+                                       
+                                                         <CardBody>
+                                                            <CardTitle className="font-weight-bold text-center">Live Chat</CardTitle>
+                                                            <CardSubtitle className="text-center">Gratuit à vie</CardSubtitle>
+                                                            {/* <CardText className="text-center"><span style={{fontSize: "30px"}} color="orange" className="text-bold-400">25 000<b style={{fontSize: "14px"}} className="ml-1 text-bold-400">Fcfa / mois</b></span></CardText> */}
+                                                            <CardFooter className="pb-0 ">
+                                                               <Col md="12" className="d-flex justify-content-center">
+                                                                  <FormGroup check className="px-0">
+                                                                     <CustomInput value="SERVICE_CHAT"  checked={this.state.selectedService.value=="SERVICE_CHAT"} onChange={this.onServiceChanged} type="radio" id="serviceChat" />
+                                                                  </FormGroup>
+                                                               </Col>              
+                                                            </CardFooter>
+                                                         </CardBody>
+                                                      </Card>
+                                                   </CardDeck>
+                                                </FormGroup>
+                                             </Col>
                            
-                                          <Col md="6">
-                                             <FormGroup>
-                                                <CardDeck>
-                                                   <Card onClick={() => this.handleCheck("SERVICE_CHAT")} style={{borderRadius: "10px", boxShadow: (!this.state.selectedService.value=="SERVICE_CHAT")? "0 6px 0px 0 rgba(0, 0, 0, 0.01), 0 15px 32px 0 rgba(0, 0, 0, 0.06)":"0 6px 0px 0 rgba(0, 0, 0, 0.01), 0 15px 32px 0 rgba(0, 0, 0, 0.06)"}} className md="12" className="cursor-pointer" >
-                                    
-                                                      <CardBody>
-                                                         <CardTitle className="font-weight-bold text-center">Live Chat</CardTitle>
-                                                         <CardSubtitle className="text-center">Gratuit à vie</CardSubtitle>
-                                                         {/* <CardText className="text-center"><span style={{fontSize: "30px"}} color="orange" className="text-bold-400">25 000<b style={{fontSize: "14px"}} className="ml-1 text-bold-400">Fcfa / mois</b></span></CardText> */}
-                                                         <CardFooter className="pb-0 ">
-                                                            <Col md="12" className="d-flex justify-content-center">
-                                                               <FormGroup check className="px-0">
-                                                                  <CustomInput value="SERVICE_CHAT"  checked={this.state.selectedService.value=="SERVICE_CHAT"} onChange={this.onServiceChanged} type="radio" id="serviceChat" />
-                                                               </FormGroup>
-                                                            </Col>              
-                                                         </CardFooter>
-                                                      </CardBody>
-                                                   </Card>
-                                                </CardDeck>
-                                             </FormGroup>
-                                          </Col>
-                           
-                                          <Col md="6">
-                                             <FormGroup>
-                                                <CardDeck>
-                                                   <Card onClick={() => this.handleCheck("SERVICE_CALL")} style={{borderRadius: "10px",boxShadow:"0 6px 0px 0 rgba(0, 0, 0, 0.01), 0 15px 32px 0 rgba(0, 0, 0, 0.06)"}} md="12" className=" cursor-pointer" >
-                           
-                                                      <CardBody >
-                                                         <CardTitle className="font-weight-bold text-center">Web to Call</CardTitle>
-                                                         <CardSubtitle className="text-center">Gratuit en béta</CardSubtitle>
-                                                         {/* <CardText className="text-center"><span style={{fontSize: "30px"}} color="orange" className="text-bold-400">75 000<b style={{fontSize: "14px"}} className="ml-1 text-bold-400">Fcfa / mois</b></span></CardText> */}
-                                                         <CardFooter className="pb-0 ">
-                                                            <Col md="12" className="d-flex justify-content-center">
-                                                               <FormGroup check className="px-0">
-                                                                  <CustomInput value="SERVICE_CALL"  checked={this.state.selectedService.value=="SERVICE_CALL"} onChange={this.onServiceChanged} type="radio" id="serviceCall" />
-                                                               </FormGroup>
-                                                            </Col>              
-                                                         </CardFooter>
-                                                      </CardBody>
-                                                   </Card>
-                                                </CardDeck>
-                                             </FormGroup>
-                                          </Col>
+                                             <Col md="6">
+                                                <FormGroup>
+                                                   <CardDeck>
+                                                      <Card onClick={() => this.handleCheck("SERVICE_CALL")} style={{borderRadius: "10px",boxShadow:"0 6px 0px 0 rgba(0, 0, 0, 0.01), 0 15px 32px 0 rgba(0, 0, 0, 0.06)"}} md="12" className=" cursor-pointer" >
+                              
+                                                         <CardBody >
+                                                            <CardTitle className="font-weight-bold text-center">Web to Call</CardTitle>
+                                                            <CardSubtitle className="text-center">Gratuit en béta</CardSubtitle>
+                                                            {/* <CardText className="text-center"><span style={{fontSize: "30px"}} color="orange" className="text-bold-400">75 000<b style={{fontSize: "14px"}} className="ml-1 text-bold-400">Fcfa / mois</b></span></CardText> */}
+                                                            <CardFooter className="pb-0 ">
+                                                               <Col md="12" className="d-flex justify-content-center">
+                                                                  <FormGroup check className="px-0">
+                                                                     <CustomInput value="SERVICE_CALL"  checked={this.state.selectedService.value=="SERVICE_CALL"} onChange={this.onServiceChanged} type="radio" id="serviceCall" />
+                                                                  </FormGroup>
+                                                               </Col>              
+                                                            </CardFooter>
+                                                         </CardBody>
+                                                      </Card>
+                                                   </CardDeck>
+                                                </FormGroup>
+                                             </Col>
                                           <Col md="12">
                                              <FormGroup className="d-flex justify-content-center">
                                                 <Button type="submit" className="mt-2" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"rgb(30, 131, 172)", width:"200px", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>

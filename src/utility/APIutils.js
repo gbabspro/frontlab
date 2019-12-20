@@ -109,11 +109,11 @@ export function updateEmail(emailRequest) {
     });
 }
 
-export function newCommande(commandeRequest) {
+export function newService(query) {
     return request({
-        url: API_BASE_URL + "/commande/new/service",
+        url: API_BASE_URL + "/new/service",
         method: 'POST',
-        body: JSON.stringify(commandeRequest)
+        body: JSON.stringify(query)
     });
 }
 
@@ -147,6 +147,14 @@ export function getUserOperators() {
     });
 }
 
+export function getServiceOperators(idService) {
+    return request({
+        url: API_BASE_URL + "/service/operators/list/" +  idService,
+        method: 'GET'
+    });
+}
+
+
 export function getCommandeList () {
     return request({
         url: API_BASE_URL + "/commandes/list/",
@@ -175,6 +183,30 @@ export function getService(idService) {
         method: 'GET'
     });
 }
+
+export function getServiceWidget(idService) {
+    return request({
+        url: API_BASE_URL + "/service/widget/" + idService,
+        method: 'GET'
+    });
+}
+
+export function updateServiceWidget(widget) {
+    return request({
+        url: API_BASE_URL + "/update/widget/" + widget.id,
+        method: 'POST',
+        body: JSON.stringify(widget)
+    });
+}
+
+
+export function getUserOperator() {
+    return request({
+        url: API_BASE_URL + "/operator/me",
+        method: 'GET'
+    });
+}
+
 
 export function updateService(idService, updateServiceRequest) {
     return request({
@@ -228,4 +260,8 @@ export function confirmRegister(token) {
         url: API_BASE_URL + "/auth/regitrationConfirm?token=" + token,
         method: 'GET'
     });
+}
+
+export function logOut() {
+    localStorage.removeItem(ACCESS_TOKEN);
 }

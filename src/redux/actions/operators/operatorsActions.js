@@ -5,3 +5,12 @@ export const LoadOperators = (operators) => {
         operators: operators
     }
 }
+
+
+export const addOperator = (operator) => {
+    
+    return {
+        type: 'ADD_OPERATOR',
+        operator
+    }
+}

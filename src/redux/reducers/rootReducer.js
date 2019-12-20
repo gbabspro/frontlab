@@ -11,6 +11,7 @@ import { reducer as toastrReducer } from "react-redux-toastr";
 import currentProjectReducer from "./projects/currentProjectReducer";
 import OperatorsReducer from "./operators/operatorsReducer";
 import currentUser from "./user/userReducer";
+import widgetReducer from "./widget/widgetReducer";
 
 
 const rootReducer = combineReducers({
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
    projects: projectReducer,
    currentProject: currentProjectReducer,
    operators: OperatorsReducer,
-   currentUser: currentUser
+   currentUser: currentUser,
+   widgetReducer: widgetReducer
 });
 
 export default rootReducer;
