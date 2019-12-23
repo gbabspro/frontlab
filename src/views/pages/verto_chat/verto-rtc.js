@@ -158,19 +158,19 @@ function FSRTCattachMediaStream(element, stream) {
 // }
 
 function onRemoteStream(self, stream) {
-	if (self.options.useVideo) {
-		self.options.useVideo.style.display = 'block';
-	}
+	// if (self.options.useVideo) {
+	// 	self.options.useVideo.style.display = 'block';
+	// }
 
-	var element = self.options.useAudio;
-	console.log("REMOTE STREAM", stream, element);
+	// var element = self.options.useAudio;
+	// console.log("REMOTE STREAM", stream, element);
 
-	FSRTCattachMediaStream(element, stream);
+	// FSRTCattachMediaStream(element, stream);
 
-	console.log("self.options ", self.options);
+	// console.log("self.options ", self.options);
 
-	self.options.useAudio.play();
-	self.remoteStream = stream;
+	// self.options.useAudio.play();
+	// self.remoteStream = stream;
 }
 
 function onOfferSDP(self, sdp) {
@@ -853,20 +853,20 @@ export default class VertoRTC {
 		console.log("Audio constraints", mediaParams.audio);
 		console.log("Video constraints", mediaParams.video);
 
-		if (self.options.useVideo && self.options.localVideo) {
-			getUserMedia({
-				constraints: {
-					audio: false,
-					video: {
-					// mandatory: self.options.videoParams,
-					//optional: []
-					},
-				},
-				localVideo: self.options.localVideo,
-				onsuccess: function(e) {self.options.localVideoStream = e; console.log("local video ready");},
-				onerror: function(e) {console.error("local video error!");}
-			});
-		}
+		// if (self.options.useVideo && self.options.localVideo) {
+		// 	getUserMedia({
+		// 		constraints: {
+		// 			audio: false,
+		// 			video: {
+		// 			// mandatory: self.options.videoParams,
+		// 			//optional: []
+		// 			},
+		// 		},
+		// 		localVideo: self.options.localVideo,
+		// 		onsuccess: function(e) {self.options.localVideoStream = e; console.log("local video ready");},
+		// 		onerror: function(e) {console.error("local video error!");}
+		// 	});
+		// }
 
 		// getUserMedia({
 		// 	constraints: {

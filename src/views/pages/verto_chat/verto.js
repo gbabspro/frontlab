@@ -159,11 +159,11 @@ class Verto {
 		}
 
 		if (!this.options.deviceParams.useMic) {
-			this.options.deviceParams.useMic = "any";
+			this.options.deviceParams.useMic = null;
 		}
 
 		if (!this.options.deviceParams.useSpeak) {
-			this.options.deviceParams.useSpeak = "any";
+			this.options.deviceParams.useSpeak = null;
 		}
 
 		if (this.options.sessid) {
@@ -898,29 +898,29 @@ class Verto {
 			// if (runtime) runtime(false);
 		}
 
-		function checkTypes(devs) {
-			for (var i = 0; i !== devs.length; ++i) {
+		// function checkTypes(devs) {
+		// 	for (var i = 0; i !== devs.length; ++i) {
 
-				if (devs[i].kind === 'audioinput') {
-					has_audio++;
-				}
-			}
+		// 		if (devs[i].kind === 'audioinput') {
+		// 			has_audio++;
+		// 		}
+		// 	}
 
-			if (!has_audio) return false;
+		// 	if (!has_audio) return false;
 
-			navigator.mediaDevices.getUserMedia({
-					audio: (has_audio > 0 ? true : false)
-				}, function(stream) {
-					Xstream = stream;
-					navigator.mediaDevices.enumerateDevices().then(gotDevices).catch(handleError);
-					store.dispatch(setMicError({has_error: false, error: ""}));
-				}, function(err) {
-					console.log("The following error occurred: " + err.name);
-					store.dispatch(setMicError({has_error: true, error: err.name}));
-				});
-		}
+		// 	navigator.mediaDevices.getUserMedia({
+		// 			audio: (has_audio > 0 ? true : false)
+		// 		}, function(stream) {
+		// 			Xstream = stream;
+		// 			navigator.mediaDevices.enumerateDevices().then(gotDevices).catch(handleError);
+		// 			store.dispatch(setMicError({has_error: false, error: ""}));
+		// 		}, function(err) {
+		// 			console.log("The following error occurred: " + err.name);
+		// 			store.dispatch(setMicError({has_error: true, error: err.name}));
+		// 		});
+		// }
 
-		navigator.mediaDevices.enumerateDevices().then(checkTypes).catch(handleError);
+		// navigator.mediaDevices.enumerateDevices().then(checkTypes).catch(handleError);
 
 	}
 

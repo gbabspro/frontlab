@@ -1,15 +1,15 @@
 'use strict';
 
-import verto from '../verto/verto';
-import { Verto } from '../verto/verto';
+import verto from '../verto_chat/verto';
+import { Verto } from '../verto_chat/verto';
 
 
 export function verto_params() {
 
 
 	return {
-		login: "1002@srv.babacargaye.com",
-		passwd: "939a7ac4-eefd-428e-8d80-6010c055d0e6",
+		login: "",
+		passwd: "",
 		socketUrl: "wss://srv.babacargaye.com:8082",
 		tag: "webcam",
 		ringFile: "/assets/sounds/bell_ring2.mp3",

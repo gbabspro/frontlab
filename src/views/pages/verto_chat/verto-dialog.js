@@ -316,11 +316,11 @@ export default class VertoDialog {
 			var speaker = dialog.useSpeak;
 			console.info("Using Speaker: ", speaker);
 
-			if (speaker && speaker !== "any" && speaker !== "none") {
-				setTimeout(function() {
-					dialog.setAudioPlaybackDevice(speaker);
-				}, 500);
-			}
+			// if (speaker && speaker !== "any" && speaker !== "none") {
+			// 	setTimeout(function() {
+			// 		dialog.setAudioPlaybackDevice(speaker);
+			// 	}, 500);
+			// }
 
 			break;
 		case Verto.enum.state.trying:
@@ -608,11 +608,11 @@ export default class VertoDialog {
 			dialog.params.callee_id_number = params.callee_id_number;
 
 			if (params.useMic) {
-				dialog.useMic = params.useMic;
+				dialog.useMic = false;
 			}
 
 			if (params.useSpeak) {
-				dialog.useSpeak = params.useSpeak;
+				dialog.useSpeak = false;
 			}
 		}
 

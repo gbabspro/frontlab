@@ -9,6 +9,7 @@ import opera from  "../../../assets/img/opera.png";
 import idee from  "../../../assets/img/idee.PNG";
 import friend from  "../../../assets/img/friend.png";
 import world from  "../../../assets/img/world.PNG";
+import { Link } from "react-router-dom";
 
 
 class Home extends Component {
@@ -40,9 +41,11 @@ class Home extends Component {
                                 <CardBody className="py-1 d-flex justify-content-end">
 
                                     <FormGroup className="d-flex justify-content-center mb-0" block>
-                                        <Button className="btnGoToApp px-4 py-1 text-center my-0 text-bold-600" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)", display: 'flex', alignItem:"center", borderRadius: "6px", justifyContent: 'center',}}>
-                                            DEMARRER
-                                        </Button>
+                                        <Link to="/pages/login">
+                                            <Button className="btnGoToApp px-4 py-1 text-center my-0 text-bold-600" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)", display: 'flex', alignItem:"center", borderRadius: "6px", justifyContent: 'center',}}>
+                                                Connexion
+                                            </Button>
+                                        </Link>
                                     </FormGroup>
                                 </CardBody>
                             </Card>

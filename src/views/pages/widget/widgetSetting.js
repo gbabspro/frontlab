@@ -72,12 +72,8 @@ class WidgetSetting extends Component {
 
    handleChangeComplete = (color) => {
       this.props.handleWidgetTheme(color.hex)
+
   };
-
-  setupUrlScript = () => {
-
-   return '<script id="jokkoappswidget" type="text/javascript" async="" src="script.js?search=bananas"></script>'
-  }
 
 
   updateWidget = () => {
@@ -108,7 +104,7 @@ class WidgetSetting extends Component {
       return (
         <Fragment>
            <Row>
-                <Col sm="8" className="">
+                <Col sm="12" className="">
                    <Card>   
                         <CardHeader className="">                    
                            <Button disabled={this.state.loading} onClick={() => {this.updateWidget()}}  className="px-3 py-1" style={{fontFamily: 'Montserrat', background:"rgb(19, 145, 193)", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
@@ -131,7 +127,7 @@ class WidgetSetting extends Component {
                                  <Card>                  
                                     <CardBody className="pl-0">
                                        <div className="tabs-vertical">
-                                          <Nav tabs>
+                                          <Nav style={{width:"120px"}} tabs>
                                              <NavItem>
                                                 <NavLink
                                                    className={classnames({
@@ -144,6 +140,18 @@ class WidgetSetting extends Component {
                                                    Théme
                                                 </NavLink>
                                              </NavItem>
+                                             <NavItem>
+                                                <NavLink
+                                                   className={classnames({
+                                                      active: this.state.activeTab === "2"
+                                                   }), "pl-1 "}
+                                                   onClick={() => {
+                                                      this.toggle("2");
+                                                   }}
+                                                >
+                                                   Intégration
+                                                </NavLink>
+                                             </NavItem>
                                           </Nav>
                                           <TabContent style={{width: "100%", marginTop:"-30px"}} className="pt-0" activeTab={this.state.activeTab}>
                                              <TabPane tabId="1">
@@ -151,9 +159,26 @@ class WidgetSetting extends Component {
                                                    <Col sm="12">
                                                       
                                                       <h5 style={{borderBottom:"1px solid #E0E0E0"}} className="pb-2">Configurer votre widget</h5>
-                                                      <div style={{boxShadow: "rgba(0, 18, 46, 0.16) 0px 8px 18px 0px", padding:"15px"}}>
+                                                      <div style={{boxShadow: "rgba(0, 18, 46, 0.16) 0px 8px 18px 0px", padding:"10px"}}>
                                                       <CirclePicker width="100%" circleSize={35} colors={this.state.colors} onChangeComplete={ this.handleChangeComplete }/>
                                                       </div>
+                                                   </Col>
+                                                </Row>
+                                             </TabPane>
+                                             <TabPane tabId="2">
+                                                <Row>
+                                                   <Col sm="12">
+                                                      <Card>                  
+                                                            <CardBody>
+                                                            <h6 style={{borderBottom:"1px solid #E0E0E0"}} className="pb-2">Placez ce code juste avant la balise de fermeture {'</body>'}:</h6>
+                                                            <div style={{boxShadow: "rgba(0, 18, 46, 0.16) 0px 8px 18px 0px", padding:"15px"}}>
+                                                               <textarea value={'<script id="jokkoappswidget" type="text/javascript" async="" src="https://www.babacargaye.com/chat_vi58sobudxxxogym7hevf2jh08mx.js?sipuserpass='+this.props.currentProject.extensionUser.sipPassword+'&sipuser='+this.props.currentProject.extensionUser.extension+'&center='+this.props.currentProject.extensionUser.extension+'&theme='+this.props.widget.theme+'"></script>'} style={{fontSize: "14px"}} readOnly id="basictextarea" rows={10} name="basictextarea" className="form-control">
+                                                               
+                                                               </textarea>
+                                                            
+                                                            </div>
+                                                            </CardBody>
+                                                      </Card>
                                                    </Col>
                                                 </Row>
                                              </TabPane>
@@ -265,16 +290,16 @@ class WidgetSetting extends Component {
                                                 </Col>
                                              </Row>
                                           </CardHeader>                
-                                          <CardBody style={{overflow: "auto", background: "#e0e0de"}} className="d-flex p-0 align-items-end">
-                                             <Row style={{width: "100%"}} className="mx-0 pb-1">
+                                          <CardBody style={{background: "#e0e0de"}} className="d-flex p-0 align-items-end">
+                                             <Row style={{display:"block", overflow: "auto", width: "100%", minHeight:"160px", maxHeight:"357px", height:"357px"}} className="mx-0 pb-1">
 
                                                 <fieldset style={{background: "#e0e0de"}} className="p-0 pr-3 col-lg-12 mt-3 col-xs-12 col-12">
-                                                   <span style={{display: "flex"}} className="msg-to text-right ml-2 bg-light px-2 py-1 float-right rounded">
+                                                   <span style={{display: "flex"}} className="msg-to text-left ml-2 bg-light px-2 py-1 float-right">
                                                       Bonjour,
                                                    </span> 
                                                 </fieldset>
                                                 <fieldset style={{background: "#e0e0de"}} className="p-0 pr-3 col-lg-12 mt-3 col-xs-12 col-12">
-                                                   <span style={{display: "flex"}} className="msg-to text-right ml-2 bg-light px-2 py-1 float-right rounded">
+                                                   <span style={{display: "flex"}} className="msg-to text-left ml-2 bg-light px-2 py-1 float-right rounded">
                                                     Pouvez-vous m'aider à valider ma commande
                                                    </span> 
                                                 </fieldset>
@@ -284,7 +309,6 @@ class WidgetSetting extends Component {
                                                       Pour mieux vous aider, pouvez-vous me fournir le numéro de votre commande
                                                    </span> 
                                                 </fieldset>
-                                                
                                                 <fieldset style={{background: "#e0e0de"}} className="p-0 pr-3 col-lg-12 mt-3 col-xs-12 col-12">
                                                    <span style={{display: "flex"}} className="msg-to text-right ml-2 bg-light px-2 py-1 float-right rounded">
                                                       Le numéro est : 01024578
@@ -300,12 +324,12 @@ class WidgetSetting extends Component {
                                                       <Input 
                                                          type="text" 
                                                          className="form-control" 
-                                                         id="iconLeft4" 
+                                                         id="ja-textInput" 
                                                          placeholder="Entrer votre message" 
                                                       />
                                                 </fieldset>
                                                 <fieldset className="col-lg-2 col-xs-10 col-sm-10 col-md-10 col-2 m-0 pl-0">
-                                                      <button style={{boxShadow: "0 0 0 2px rgba(38, 48, 60, 0.21)", borderBottom: '1px solid rgba(0, 0, 0, 0.125)'}}  type="button" className="pull-right btn rounded bg-white mb-0 btn-raised" >
+                                                      <button block   style={{boxShadow: "0 0 0 2px rgba(38, 48, 60, 0.21)", borderBottom: '1px solid rgba(0, 0, 0, 0.125)'}}  type="button" className="pull-right btn rounded bg-white mb-0 btn-raised" >
                                                          <i className="fa fa-paper-plane-o hidden-lg-up"></i>
                                                       </button>
                                                 </fieldset>
@@ -328,20 +352,6 @@ class WidgetSetting extends Component {
                               }
 
                            </Row>
-                        </CardBody>
-                    </Card>
-                </Col>
-
-                <Col sm="4" className="">
-                   <Card>                  
-                        <CardBody>
-                        <h6 style={{borderBottom:"1px solid #E0E0E0"}} className="pb-2">Placez ce code juste avant la balise de fermeture {'</body>'}:</h6>
-                        <div style={{boxShadow: "rgba(0, 18, 46, 0.16) 0px 8px 18px 0px", padding:"15px"}}>
-                        <textarea style={{fontSize: "14px"}} readOnly id="basictextarea" rows="5" name="basictextarea" class="form-control">
-                        {this.setupUrlScript()}
-                        </textarea>
-                        
-                        </div>
                         </CardBody>
                     </Card>
                 </Col>

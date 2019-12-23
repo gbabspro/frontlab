@@ -34,11 +34,30 @@ class LiveChat extends Component {
   
      loginUserSip () {
   
+
           
+        if(this.props.currentUser.authorities[0].authority == "ROLE_MANAGER"){
+
+            const params = {
+                    login: this.props.currentProject.extensionUser.extension+"@srv.babacargaye.com",
+                    passwd: this.props.currentProject.extensionUser.sipPassword,
+                    socketUrl: "wss://srv.babacargaye.com:8082",
+                    tag: "webcam",
+                    ringFile: "/assets/sounds/bell_ring2.mp3",
+                    iceServers: [
+                        // { url: 'stun:[YOUR_STUN_SERVER]',}
+                    ],
+                    deviceParams: {
+                        useMic: false,
+                        useSpeak: false
+                    }
+                }
+
+                verto.connect(params);
+                verto.login();
+      
+        }
           
-          console.log("verto_params() ", verto.options)
-          verto.connect(verto_params());
-          verto.login();
 
      }
      
@@ -206,8 +225,6 @@ class LiveChat extends Component {
                     </Card>
                 </Col>
             </Row>
-            <audio id="ringer" autoPlay="autoplay"/>
-			<audio id="webcam" className="webcam" autoPlay="autoplay"/>
         </Fragment>
       );
    }
@@ -217,7 +234,8 @@ class LiveChat extends Component {
  const mapStateToProps = state => ({
     currentProject: state.currentProject,
     call_state: state.call_state,
-    chatsMessages: state.chatState
+    chatsMessages: state.chatState,
+    currentUser: state.currentUser
  })
  
  const mapDispatchToProps = dispatch => {
