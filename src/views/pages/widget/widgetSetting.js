@@ -104,7 +104,7 @@ class WidgetSetting extends Component {
       return (
         <Fragment>
            <Row>
-                <Col sm="12" className="">
+                <Col sm="12" lg="8" className="">
                    <Card>   
                         <CardHeader className="">                    
                            <Button disabled={this.state.loading} onClick={() => {this.updateWidget()}}  className="px-3 py-1" style={{fontFamily: 'Montserrat', background:"rgb(19, 145, 193)", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>

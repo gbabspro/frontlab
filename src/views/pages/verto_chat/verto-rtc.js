@@ -823,7 +823,7 @@ export default class VertoRTC {
 					return onICEComplete(self);
 				},
 				onRemoteStream: function(stream) {
-					return onRemoteStream(self, stream);
+					// return onRemoteStream(self, stream);
 				},
 				onICESDP: function(sdp) {
 					return onICESDP(self, sdp);
@@ -839,19 +839,19 @@ export default class VertoRTC {
 				}
 			});
 			
-			onStreamSuccess(self, stream);
+			// onStreamSuccess(self, stream);
 		}
 
-		onSuccess();
-		function onError(e) {
-			onStreamError(self, e);
-		}
+		onSuccess(null);
+		// function onError(e) {
+		// 	onStreamError(self, e);
+		// }
 
-		this.options.useCamera = params.useCamera;
-		var mediaParams = this.getMediaParams();
+		// this.options.useCamera = params.useCamera;
+		// var mediaParams = this.getMediaParams();
 
-		console.log("Audio constraints", mediaParams.audio);
-		console.log("Video constraints", mediaParams.video);
+		// console.log("Audio constraints", mediaParams.audio);
+		// console.log("Video constraints", mediaParams.video);
 
 		// if (self.options.useVideo && self.options.localVideo) {
 		// 	getUserMedia({
