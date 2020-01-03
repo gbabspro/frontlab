@@ -172,7 +172,7 @@ class WidgetSetting extends Component {
                                                             <CardBody>
                                                             <h6 style={{borderBottom:"1px solid #E0E0E0"}} className="pb-2">Placez ce code juste avant la balise de fermeture {'</body>'}:</h6>
                                                             <div style={{boxShadow: "rgba(0, 18, 46, 0.16) 0px 8px 18px 0px", padding:"15px"}}>
-                                                               <textarea value={'<script id="jokkoappswidget" type="text/javascript" async="" src="https://www.babacargaye.com/chat_vi58sobudxxxogym7hevf2jh08mx.js?sipuserpass='+this.props.currentProject.extensionUser.sipPassword+'&sipuser='+this.props.currentProject.extensionUser.extension+'&center='+this.props.currentProject.extensionUser.extension+'&theme='+this.props.widget.theme+'"></script>'} style={{fontSize: "14px"}} readOnly id="basictextarea" rows={10} name="basictextarea" className="form-control">
+                                                               <textarea value={'<script id="jokkoappswidget" type="text/javascript" async="" src="https://www.babacargaye.com/vi58sobudxxxogym7hevf2jh08mx.js?sipuserpass='+this.props.currentProject.extensionUser.sipPassword+'&sipuser='+this.props.currentProject.extensionUser.extension+'&center='+this.props.currentProject.contactId+'&theme='+this.props.widget.theme+'"></script>'} style={{fontSize: "14px"}} readOnly id="basictextarea" rows={10} name="basictextarea" className="form-control">
                                                                
                                                                </textarea>
                                                             
