@@ -11,4 +11,13 @@ const OperatorsReducer = (state = listOperators, action) => {
     }
 }
 
-export default OperatorsReducer;
+const OperatorStatusReducer = (state = false, action) => {
+    switch (action.type) {
+        case 'SET_LOGGED':
+            return true
+        default: 
+            return state
+    }
+}
+
+export default OperatorsReducer || OperatorStatusReducer;

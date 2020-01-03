@@ -14,3 +14,11 @@ export const addOperator = (operator) => {
         operator
     }
 }
+
+
+export const loggedUser = () => {
+    
+    return {
+        type: 'SET_LOGGED'
+    }
+}

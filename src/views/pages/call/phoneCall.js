@@ -72,7 +72,7 @@ class PhoneCall extends Component {
             {/* <ContentHeader className="pl-1">
             <span style={{fontSize:"14px"}}><Users size={22} className="" />  Opérateurs</span> </ContentHeader> */}
             <Row>
-                <Col sm="8" className="pr-0">
+                <Col className="pr-0 col-md-6 col-lg-6">
                     <Card style={{boxShadow:"0 1px 2px 0 rgba(0,0,0,0.06)", minHeight: "500px",}} className="pr-0">                  
                         <CardHeader className="bg-white p-2" style={{borderBottom: '1px solid rgba(0, 0, 0, 0.125)'}} >   
 
@@ -144,7 +144,7 @@ class PhoneCall extends Component {
                         </CardBody>
                     </Card>
                 </Col>
-                <Col sm="4" className="pl-0">
+                <Col className="pl-0 col-sm-4 col-md-3 col-lg-3 col-xs-4">
                    <Card style={{background: "#262f3c", boxShadow:"0 1px 2px 0 rgba(0,0,0,0.06)", minHeight: "500px",}} className="">                  
                         <CardBody>
                             <Dropdown isOpen={this.state.dropdownOpen} className="px-3" toggle={this.toggle}>
@@ -158,10 +158,13 @@ class PhoneCall extends Component {
 
                                 </DropdownToggle>
                                 <DropdownMenu style={{width: "250px"}}>
-                                    <DropdownItem className="px-2">
+
+                                    </DropdownMenu>
+                                <DropdownMenu style={{width: "250px"}}>
+                                    <DropdownItem onClick={() => {this.onProjectChange(project.id)}} className="px-2">
                                         Online
                                     </DropdownItem>
-                                    <DropdownItem className="px-2">
+                                    <DropdownItem onClick={() => {this.onProjectChange(project.id)}} className="px-2">
                                         Offline
                                     </DropdownItem>
                                 </DropdownMenu>

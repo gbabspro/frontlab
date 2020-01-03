@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Card, CardBody, CardTitle, Row, Col, Table, Button, FormGroup, Input, CardFooter, ListGroup, ListGroupItem } from "reactstrap";
-import { ArrowRight, Search, Mail, Phone, Headphones, MessageSquare, Check, CheckCircle } from "react-feather";
+import { ArrowRight, Search, Mail, Phone, Headphones, MessageSquare, Check, CheckCircle, HelpCircle } from "react-feather";
 import chromLogo from  "../../../assets/img/chrome.png";
 import fireFoxLogo from  "../../../assets/img/firefox.png";
 import edge from  "../../../assets/img/edge.jpg";
@@ -9,6 +9,7 @@ import opera from  "../../../assets/img/opera.png";
 import idee from  "../../../assets/img/idee.PNG";
 import friend from  "../../../assets/img/friend.png";
 import world from  "../../../assets/img/world.PNG";
+import backfont from "../../../assets/img/backfont.jpg";
 import { Link } from "react-router-dom";
 
 
@@ -25,7 +26,7 @@ class Home extends Component {
    render() {
 
       return (
-<div className="">
+    <div className="">
             <nav style={{background:this.state.navBackground, border:"1px solid #cfcfcf", boxShadow:"0 2px 2px rgba(0,0,60,.08)", zIndex:"999"}}>
                 <div className="container" style={{backgroundColor:this.state.navBackground}}>
                     <Row>
@@ -53,8 +54,27 @@ class Home extends Component {
                     </Row>
                 </div>
             </nav>
+
+
+            <section className="mb-1" style={{paddingTop:"120px", paddingBottom:"120px", boxShadow:"0 2px 2px rgba(0,0,60,.08)", backgroundImage: `url(${backfont})`, backgroundPosition: 'right', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
+                <div className="container" >
+                    <Row >
+                        <Col sm="6" className="">
+                            <h3 className="text-left bg-transparent" style={{fontSize:"40px", lineHeight:"1.3", color: "#000", fontWeight:"600"}}>
+                                Premiére plateforme permettant de créer des centres d'appel web au Sénégal.
+                            </h3>
+                            <h5 className="text-left" style={{lineHeight:"1.5", letterSpacing:"", color: "#000", fontWeight:"400"}}>
+                                Nous fournissons un service CCaaS (Contact Center as a Service) qui propose une application de gestion et d'exploitation de centre d'appel web.
+                            </h5>
+                        </Col>
+                        <Col sm="6" className="" >
+
+                        </Col>
+                    </Row> 
+                </div>
+            </section>
         
-            <section style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)"}} className="bg-white py-4">
+            <section  className="bg-white py-4">
                 <div className="container">
                     <Row>
                         <Col sm="12">
@@ -65,37 +85,38 @@ class Home extends Component {
                                     
                                     </div>
                                 </Col>
-                                <Col sm="3" className="d-flex justify-content-center">
-                                    <div style={{boxShadow:"rgba(0, 18, 46, 0.16) 0px 8px 18px 0px", borderRadius:"100px", height:"200px", width:"200px"}} className="align-self-center">
-                                    </div>
-                                </Col>
-                                <Col sm="6">
+                                <Col sm="9">
                                     <div>
                                         <ul className="list-group">
                                             <li className="list-group-item" style={{border:"none"}}>
                                                 <Button className="mb-0" style={{boxShadow:"0 4px 12px 0 rgba(42,125,251,.6)", background:"#1391c1", padding:"4px 5px",alignItem:"center", border:"1px solid #cfcfcf", borderRadius:"18px"}}>
                                                     <ArrowRight size={20} />
                                                 </Button>
+                                                <span className="mx-2" style={{color:"#000", fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"400"}}>Maximisez les opportunités de vente, un moyen rapide et simple de vous contacter.</span>
                                             </li>
                                             <li className="list-group-item" style={{border:"none"}}>
                                                 <Button className="mb-0" style={{boxShadow:"0 4px 12px 0 rgba(42,125,251,.6)", background:"#1391c1", padding:"4px 5px",alignItem:"center", border:"1px solid #cfcfcf", borderRadius:"18px"}}>
                                                     <ArrowRight size={20} />
                                                 </Button>
+                                                <span className="mx-2" style={{color:"#000", fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"400"}}>Encouragez vos clients à vous appeler s'ils souhaiteraient des précisions.</span>
                                             </li>
                                             <li className="list-group-item" style={{border:"none"}}>
                                                 <Button className="mb-0" style={{boxShadow:"0 4px 12px 0 rgba(42,125,251,.6)", background:"#1391c1", padding:"4px 5px",alignItem:"center", border:"1px solid #cfcfcf", borderRadius:"18px"}}>
                                                     <ArrowRight size={20} />
                                                 </Button>
+                                                <span className="mx-2" style={{color:"#000", fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"400"}}>Fonctionne partout dans le monde à tout moment de la journée.</span>
                                             </li>
                                             <li className="list-group-item" style={{border:"none"}}>
                                                 <Button className="mb-0" style={{boxShadow:"0 4px 12px 0 rgba(42,125,251,.6)", background:"#1391c1", padding:"4px 5px",alignItem:"center", border:"1px solid #cfcfcf", borderRadius:"18px"}}>
                                                     <ArrowRight size={20} />
                                                 </Button>
+                                                <span className="mx-2" style={{color:"#000", fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"400"}}>Le visage humain derrière votre site Web, accessible, accueillant et proactif.</span>
                                             </li>
                                             <li className="list-group-item" style={{border:"none"}}>
                                                 <Button className="mb-0" style={{boxShadow:"0 4px 12px 0 rgba(42,125,251,.6)", background:"#1391c1", padding:"4px 5px",alignItem:"center", border:"1px solid #cfcfcf", borderRadius:"18px"}}>
                                                     <ArrowRight size={20} />
                                                 </Button>
+                                                <span className="mx-2" style={{color:"#000", fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"400"}}>Améliorez la satisfaction et la fidélité de vos clients.</span>
                                             </li>
 
                                         </ul>
@@ -107,6 +128,39 @@ class Home extends Component {
                     </Row>
                 </div>
             </section>
+            <section className="py-4" style={{backgroundColor:"#eff2f6"}}>
+                <div className="container">
+                    <Row>
+                        <Col sm="12">
+
+                            <Row>
+                                <Col sm="12" className="">
+                                    <Card>
+                                        <CardBody className="d-flex justify-content-start">
+
+                                        <div class="">
+                                            <span>
+                                                <HelpCircle color="orange" className="mx-3" size={60} />
+                                            </span>
+                                        </div>
+                                        <div class="">
+                                        <p className="text-center"  style={{fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"500"}}> 
+                                            Un centre de contact web est un
+                                            système de relation client dans lequel le point d'entrée est le site internet de l'entreprise.
+                                            En d’autres termes elle permet à une personne de contacter directement une structure
+                                            via son site.
+                                        </p>
+                                        </div>
+                                        </CardBody>
+                                    </Card>
+                                </Col>
+                            </Row>
+
+                        </Col>
+                    </Row>
+                </div>
+            </section>
+
             <section  style={{backgroundColor:"#1391c1"}} className="py-4">
                 <div className="container">
                     <Row>
