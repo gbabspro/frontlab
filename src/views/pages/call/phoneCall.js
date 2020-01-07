@@ -72,7 +72,7 @@ class PhoneCall extends Component {
             {/* <ContentHeader className="pl-1">
             <span style={{fontSize:"14px"}}><Users size={22} className="" />  Opérateurs</span> </ContentHeader> */}
             <Row>
-                <Col className="pr-0 col-md-6 col-lg-6">
+                <Col className="pr-0 col-sm-8 col-xs-8 col-md-6 col-lg-6">
                     <Card style={{boxShadow:"0 1px 2px 0 rgba(0,0,0,0.06)", minHeight: "500px",}} className="pr-0">                  
                         <CardHeader className="bg-white p-2" style={{borderBottom: '1px solid rgba(0, 0, 0, 0.125)'}} >   
 
@@ -161,10 +161,11 @@ class PhoneCall extends Component {
 
                                     </DropdownMenu>
                                 <DropdownMenu style={{width: "250px"}}>
-                                    <DropdownItem onClick={() => {this.onProjectChange(project.id)}} className="px-2">
+                                    <DropdownItem  className="px-2">
                                         Online
                                     </DropdownItem>
-                                    <DropdownItem onClick={() => {this.onProjectChange(project.id)}} className="px-2">
+                                    {/* onClick={() => {this.onProjectChange(project.id)}} */}
+                                    <DropdownItem  className="px-2">
                                         Offline
                                     </DropdownItem>
                                 </DropdownMenu>

@@ -56,21 +56,53 @@ class Home extends Component {
             </nav>
 
 
-            <section className="mb-1" style={{paddingTop:"120px", paddingBottom:"120px", boxShadow:"0 2px 2px rgba(0,0,60,.08)", backgroundImage: `url(${backfont})`, backgroundPosition: 'right', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
+            <section className="mb-1" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)", backgroundImage: `url(${backfont})`, backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
                 <div className="container" >
-                    <Row >
-                        <Col sm="6" className="">
-                            <h3 className="text-left bg-transparent" style={{fontSize:"40px", lineHeight:"1.3", color: "#000", fontWeight:"600"}}>
+                    <Row style={{paddingTop:"100px", paddingBottom:"100px"}}>
+                        <Col style={{background:"#1391c16e", color:"#fff"}} className="col-sm-8 col-md-6 col-lg-6">
+                            <h3 style={{color:"#fff"}} className="text-left text-white bg-transparent" style={{fontSize:"40px", lineHeight:"1.3", color: "#000", fontWeight:"600"}}>
                                 Premiére plateforme permettant de créer des centres d'appel web au Sénégal.
                             </h3>
-                            <h5 className="text-left" style={{lineHeight:"1.5", letterSpacing:"", color: "#000", fontWeight:"400"}}>
+                            <h5 className="text-left text-white" style={{lineHeight:"1.5", letterSpacing:"", color: "#000", fontWeight:"400"}}>
                                 Nous fournissons un service CCaaS (Contact Center as a Service) qui propose une application de gestion et d'exploitation de centre d'appel web.
                             </h5>
                         </Col>
-                        <Col sm="6" className="" >
+                        <Col className="col-sm-4 col-md-6 col-lg-6">
 
                         </Col>
                     </Row> 
+                </div>
+            </section>
+            <section className="py-4" style={{backgroundColor:"#eff2f6"}}>
+                <div className="container">
+                    <Row>
+                        <Col sm="12">
+
+                            <Row>
+                                <Col sm="12" className="">
+                                    <Card>
+                                        <CardBody className="d-flex justify-content-start">
+
+                                        <div class="">
+                                            <span>
+                                                <HelpCircle color="orange" className="mx-3" size={60} />
+                                            </span>
+                                        </div>
+                                        <div class="">
+                                        <p className="text-center"  style={{fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"500"}}> 
+                                            Un centre de contact web est un
+                                            système de relation client dans lequel le point d'entrée est le site internet de l'entreprise.
+                                            En d’autres termes elle permet à une personne de contacter directement une structure
+                                            via son site.
+                                        </p>
+                                        </div>
+                                        </CardBody>
+                                    </Card>
+                                </Col>
+                            </Row>
+
+                        </Col>
+                    </Row>
                 </div>
             </section>
         
@@ -121,38 +153,6 @@ class Home extends Component {
 
                                         </ul>
                                     </div>
-                                </Col>
-                            </Row>
-
-                        </Col>
-                    </Row>
-                </div>
-            </section>
-            <section className="py-4" style={{backgroundColor:"#eff2f6"}}>
-                <div className="container">
-                    <Row>
-                        <Col sm="12">
-
-                            <Row>
-                                <Col sm="12" className="">
-                                    <Card>
-                                        <CardBody className="d-flex justify-content-start">
-
-                                        <div class="">
-                                            <span>
-                                                <HelpCircle color="orange" className="mx-3" size={60} />
-                                            </span>
-                                        </div>
-                                        <div class="">
-                                        <p className="text-center"  style={{fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"500"}}> 
-                                            Un centre de contact web est un
-                                            système de relation client dans lequel le point d'entrée est le site internet de l'entreprise.
-                                            En d’autres termes elle permet à une personne de contacter directement une structure
-                                            via son site.
-                                        </p>
-                                        </div>
-                                        </CardBody>
-                                    </Card>
                                 </Col>
                             </Row>
 
@@ -238,7 +238,7 @@ class Home extends Component {
                     <Row>
                         <Col sm="12">
 
-                            <Row>
+                            <Row className="d-flex justify-content-center">
                                 <Col sm="2" xs="4" md="2" lg="2" className="">
                                     <Card style={{borderRadius:"50px"}}>
                                         <CardBody className="d-flex justify-content-center">
@@ -306,102 +306,6 @@ class Home extends Component {
                                 </Col>
                             </Row>
 
-                        </Col>
-                    </Row>
-                </div>
-            </section>
-            <section  style={{backgroundImage: `url(${world})`, backgroundSize: "cover", backgroundRepeat:"no-repeat"}} className="py-4">
-                <div className="container">
-                    <h3 className="text-center" style={{lineHeight:"1.25", color: "#fff", fontWeight:"500"}}>
-                        NOS SERVICES
-                    </h3>
-                    <Row>
-                        <Col sm="6" className="px-4">
-
-                            <Card className="bg-transparent" style={{}}>
-                                <CardBody className="">
-                                <h5 className="text-center" style={{lineHeight:"1.25", color: "#fff", fontWeight:"500"}}>
-                                    LIVE CHAT
-                                </h5>
-                                <ListGroup className="bg-transparent">
-                                    <ListGroupItem style={{border:"none", fontSize:"18px", color:"#fff", fontWeight:"400", fontFamily:"Montserrat", borderBottom:"1px solid #fff"}} className="bg-transparent pb-3 pl-0">
-                                        <CheckCircle color="#00d9b8" size={22} className="mr-3 text-bold-500" />
-                                        <span className="">Service gratuit</span>
-                                    </ListGroupItem>
-                                    <ListGroupItem style={{border:"none", fontSize:"18px", color:"#fff", fontWeight:"400", fontFamily:"Montserrat", borderBottom:"1px solid #fff"}} className="bg-transparent pb-3 pl-0">
-                                        <CheckCircle color="#00d9b8" size={22} className="mr-3 text-bold-500" />
-                                        <span className="">Nombre d'opérateurs limité à 5</span>
-                                    </ListGroupItem>
-                                    <ListGroupItem style={{border:"none", fontSize:"18px", color:"#fff", fontWeight:"400", fontFamily:"Montserrat", borderBottom:"1px solid #fff"}} className="bg-transparent pb-3 pl-0">
-                                        <CheckCircle color="#00d9b8" size={22} className="mr-3 text-bold-500" />
-                                        <span className="">Communiquez par chat</span>
-                                    </ListGroupItem>
-                                    <ListGroupItem style={{border:"none", fontSize:"18px", color:"#fff", fontWeight:"400", fontFamily:"Montserrat", borderBottom:"1px solid #fff"}} className="bg-transparent pb-3 pl-0">
-                                        <CheckCircle color="#00d9b8" size={22} className="mr-3 text-bold-500" />
-                                        <span className="">Historisation des conversations</span>
-                                    </ListGroupItem>
-                                    <ListGroupItem style={{border:"none", fontSize:"18px", color:"#fff", fontWeight:"400", fontFamily:"Montserrat", borderBottom:"1px solid #fff"}} className="bg-transparent pb-3 pl-0">
-                                        <CheckCircle color="#00d9b8" size={22} className="mr-3 text-bold-500" />
-                                        <span className="">Statistiques des opérateurs</span>
-                                    </ListGroupItem>
-                                    <ListGroupItem style={{border:"none", fontSize:"18px", color:"#fff", fontWeight:"400", fontFamily:"Montserrat", borderBottom:"1px solid #fff"}} className="bg-transparent pb-3 pl-0">
-                                        <CheckCircle color="#00d9b8" size={22} className="mr-3 text-bold-500" />
-                                        <span className="">Tableau de monitoring</span>
-                                    </ListGroupItem>
-                                </ListGroup>
-                                </CardBody>
-                                <CardFooter className="bg-transparent">
-                                   <FormGroup className="d-flex justify-content-center mb-0" block>
-                                        <Button className="text-center my-0 text-bold-600" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"rgb(30, 131, 172)", width:"300px", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
-                                            ACTIVER GRATUITEMENT
-                                        </Button>
-                                    </FormGroup>
-                                </CardFooter>
-                            </Card>
-                        </Col>
-
-                        <Col sm="6" className="px-4">
-
-                            <Card className="bg-transparent" style={{}}>
-                                <CardBody className="">
-                                    <h5 className="text-center" style={{lineHeight:"1.25", color: "#fff", fontWeight:"500"}}>
-                                        WEB TO CALL
-                                    </h5>
-                                    <ListGroup className="bg-transparent">
-                                    <ListGroupItem style={{border:"none", fontSize:"18px", color:"#fff", fontWeight:"400", fontFamily:"Montserrat", borderBottom:"1px solid #fff"}} className="bg-transparent pb-3 pl-0">
-                                        <CheckCircle color="#00d9b8" size={22} className="mr-3 text-bold-500" />
-                                        <span className="">Service payant</span>
-                                    </ListGroupItem>
-                                    <ListGroupItem style={{border:"none", fontSize:"18px", color:"#fff", fontWeight:"400", fontFamily:"Montserrat", borderBottom:"1px solid #fff"}} className="bg-transparent pb-3 pl-0">
-                                        <CheckCircle color="#00d9b8" size={22} className="mr-3 text-bold-500" />
-                                        <span className="">Nombre d'opérateurs dépend de l'offre</span>
-                                    </ListGroupItem>
-                                    <ListGroupItem style={{border:"none", fontSize:"18px", color:"#fff", fontWeight:"400", fontFamily:"Montserrat", borderBottom:"1px solid #fff"}} className="bg-transparent pb-3 pl-0">
-                                        <CheckCircle color="#00d9b8" size={22} className="mr-3 text-bold-500" />
-                                        <span className="">Communication vocale </span>
-                                    </ListGroupItem>
-                                    <ListGroupItem style={{border:"none", fontSize:"18px", color:"#fff", fontWeight:"400", fontFamily:"Montserrat", borderBottom:"1px solid #fff"}} className="bg-transparent pb-3 pl-0">
-                                        <CheckCircle color="#00d9b8" size={22} className="mr-3 text-bold-500" />
-                                        <span className="">Historisation des conversations</span>
-                                    </ListGroupItem>
-                                    <ListGroupItem style={{border:"none", fontSize:"18px", color:"#fff", fontWeight:"400", fontFamily:"Montserrat", borderBottom:"1px solid #fff"}} className="bg-transparent pb-3 pl-0">
-                                        <CheckCircle color="#00d9b8" size={22} className="mr-3 text-bold-500" />
-                                        <span className="">Statistiques des opérateurs</span>
-                                    </ListGroupItem>
-                                    <ListGroupItem style={{border:"none", fontSize:"18px", color:"#fff", fontWeight:"400", fontFamily:"Montserrat", borderBottom:"1px solid #fff"}} className="bg-transparent pb-3 pl-0">
-                                        <CheckCircle color="#00d9b8" size={22} className="mr-3 text-bold-500" />
-                                        <span className="">Tableau de monitoring</span>
-                                    </ListGroupItem>
-                                </ListGroup>
-                                </CardBody>
-                                <CardFooter className="bg-transparent">
-                                   <FormGroup className="d-flex justify-content-center mb-0" block>
-                                        <Button className="text-center my-0 text-bold-600" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"rgb(30, 131, 172)", width:"300px", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
-                                            COMMANDER
-                                        </Button>
-                                    </FormGroup>
-                                </CardFooter>
-                            </Card>
                         </Col>
                     </Row>
                 </div>
