@@ -9,7 +9,7 @@ import opera from  "../../../assets/img/opera.png";
 import idee from  "../../../assets/img/idee.PNG";
 import friend from  "../../../assets/img/friend.png";
 import world from  "../../../assets/img/world.PNG";
-import backfont from "../../../assets/img/backfont.jpg";
+import backfront from "../../../assets/img/backfront.jpg";
 import { Link } from "react-router-dom";
 
 
@@ -56,12 +56,11 @@ class Home extends Component {
             </nav>
 
 
-            <section className="mb-1" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)", backgroundImage: `url(${backfont})`, backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
-                <div className="container" >
-                    <Row style={{paddingTop:"100px", paddingBottom:"100px"}}>
+            <section className="mb-1" style={{paddingTop: "150px", paddingBottom: "400px", paddingLeft: "100px", paddingRight: "100px", boxShadow:"0 2px 2px rgba(0,0,60,.08)", backgroundImage: `url(${backfront})`, backgroundPosition: 'center 0', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
+                    <Row >
                         <Col style={{background:"#1391c16e", color:"#fff"}} className="col-sm-8 col-md-6 col-lg-6">
-                            <h3 style={{color:"#fff"}} className="text-left text-white bg-transparent" style={{fontSize:"40px", lineHeight:"1.3", color: "#000", fontWeight:"600"}}>
-                                Premiére plateforme permettant de créer des centres d'appel web au Sénégal.
+                            <h3 style={{color:"#fff"}} className="text-left text-white bg-transparent" style={{fontSize:"50px", lineHeight:"1.3", color: "#000", fontWeight:"600"}}>
+                                Premiére plateforme de création de Web Call-center au Sénégal.
                             </h3>
                             <h5 className="text-left text-white" style={{lineHeight:"1.5", letterSpacing:"", color: "#000", fontWeight:"400"}}>
                                 Nous fournissons un service CCaaS (Contact Center as a Service) qui propose une application de gestion et d'exploitation de centre d'appel web.
@@ -71,7 +70,6 @@ class Home extends Component {
 
                         </Col>
                     </Row> 
-                </div>
             </section>
             <section className="py-4" style={{backgroundColor:"#eff2f6"}}>
                 <div className="container">
@@ -89,7 +87,7 @@ class Home extends Component {
                                             </span>
                                         </div>
                                         <div class="">
-                                        <p className="text-center"  style={{fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"500"}}> 
+                                        <p className="text-center"  style={{fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"400"}}> 
                                             Un centre de contact web est un
                                             système de relation client dans lequel le point d'entrée est le site internet de l'entreprise.
                                             En d’autres termes elle permet à une personne de contacter directement une structure

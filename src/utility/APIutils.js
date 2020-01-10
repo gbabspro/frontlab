@@ -200,6 +200,8 @@ export function updateServiceWidget(widget) {
 }
 
 
+
+
 export function getUserOperator() {
     return request({
         url: API_BASE_URL + "/operator/me",
@@ -262,6 +264,23 @@ export function confirmRegister(token) {
     });
 }
 
+
+
 export function logOut() {
     localStorage.removeItem(ACCESS_TOKEN);
+}
+
+
+export function operatorLogin(userId) {
+    return request({
+        url: API_BASE_URL + "/operator/login/" + userId,
+        method: 'GET',
+    });
+}
+
+export function operatorLogOut(userId) {
+    return request({
+        url: API_BASE_URL + "/operator/logout/" + userId,
+        method: 'GET',
+    });
 }

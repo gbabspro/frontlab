@@ -91,9 +91,13 @@ class Operators extends Component {
         });
         }).catch(error => {
             console.log("error", error);
-            this.setState({
-                loadingEdit: false
-            });
+            if(error.status && error.status === 400){
+
+            }else{
+                this.setState({
+                    loadingEdit: false
+                });
+            }
         });
     }
 
@@ -216,7 +220,7 @@ class Operators extends Component {
                                                     required
                                                 />
                                                 {this.state.emailInput.validateStatus === "error" ? (
-                                                   <div className="form-control-position pr-2 pt-1">
+                                                   <div className="form-control-position text-center pr-2 pt-1">
                                                       <AlertCircle id="emailTooltip" className="danger"/>
                                                       <UncontrolledTooltip
                                                          placement="right"
@@ -234,7 +238,7 @@ class Operators extends Component {
                                     </ModalBody>
                                     <ModalFooter className="d-flex justify-content-center">
 
-                                        <Button disabled={this.state.loadingEdit}  type="submit" className="mt-0" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"rgb(30, 131, 172)", width:"200px", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
+                                        <Button disabled={this.state.loadingEdit}  type="submit" className="mt-0" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"rgb(30, 131, 172)", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
                                             
                                             {(this.state.loadingEdit)?
                                                 (<BounceLoader  					

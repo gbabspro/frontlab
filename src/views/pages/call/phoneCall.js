@@ -1,13 +1,14 @@
 import React, { Component, Fragment } from "react";
 import { Card, CardBody, UncontrolledTooltip, CardTitle, Row, Col, Table, Button, CardHeader, CardFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
-import {ChevronDown, Globe
+import {ChevronDown, Globe, Disc
  } from "react-feather";
  import { connect } from 'react-redux';
  import { Bell, BellOff, Edit, Mic, Headphones, PhoneIncoming, PhoneCall as PhoneCallIcon } from "react-feather";
  import { Redirect } from 'react-router-dom';
  import verto from "../verto/verto";
 import {verto_params, verto_callbacks} from "./verto";
+import { operatorLogin, operatorLogOut } from "../../../utility/APIutils";
 
 class PhoneCall extends Component {
 
@@ -60,6 +61,32 @@ class PhoneCall extends Component {
         this.setState(prevState => ({
            dropdownOpen: !prevState.dropdownOpen
         }));
+    }
+
+    logOut = () => {
+
+        operatorLogOut(this.props.currentProject.defaultextension.extension)
+        .then(response => {
+  
+            console.log("error", response);
+
+        }).catch(error => {
+              console.log("error", error);
+        });
+
+    }
+
+    logIn = () => {
+        console.log("loging...");
+        operatorLogin(this.props.currentProject.defaultextension.extension)
+        .then(response => {
+  
+            console.log("error", response);
+
+        }).catch(error => {
+              console.log("error", error);
+        });
+        
     }
 
    render() {
@@ -151,22 +178,21 @@ class PhoneCall extends Component {
                 
                                 <DropdownToggle className="text-left mb-0" style={{boxShadow: "0 1px 2px 0 rgba(60,64,67,0.302)", color:"#60848c", background: "#3c485b", width:"100%"}}>
                                 <div>
-                                <Globe size={18} className="mr-2" />  
-
+                                <Disc color="#d84804" size={18} className="mr-2" />  
+                                 {
+                                    (this.props.status)?"En ligne":"Hors ligne"
+                                    
+                                 }
                                 <ChevronDown size={18} className="ml-3 pull-right mt-1" />  
                                 </div>
 
                                 </DropdownToggle>
                                 <DropdownMenu style={{width: "250px"}}>
-
-                                    </DropdownMenu>
-                                <DropdownMenu style={{width: "250px"}}>
-                                    <DropdownItem  className="px-2">
-                                        Online
-                                    </DropdownItem>
-                                    {/* onClick={() => {this.onProjectChange(project.id)}} */}
-                                    <DropdownItem  className="px-2">
-                                        Offline
+                                    <DropdownItem onClick={() => {this.logIn()}} className="px-2">
+                                        Se connecter
+                                    </DropdownItem> 
+                                    <DropdownItem onClick={() => {this.logOut()}} className="px-2">
+                                        Se déconnecter
                                     </DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
@@ -185,7 +211,8 @@ class PhoneCall extends Component {
     currentProject: state.currentProject,
     call_state: state.call_state,
     micConfig: state.micConfig,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    status: state.operatorStatus
  })
  
   

@@ -10,6 +10,7 @@ import callReducer from "./call/";
 import { reducer as toastrReducer } from "react-redux-toastr";
 import currentProjectReducer from "./projects/currentProjectReducer";
 import OperatorsReducer from "./operators/operatorsReducer";
+import OperatorStatusReducer from "./operators/operatorStatusReducer";
 import currentUser from "./user/userReducer";
 import widgetReducer from "./widget/widgetReducer";
 
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
    currentProject: currentProjectReducer,
    operators: OperatorsReducer,
    currentUser: currentUser,
-   widgetReducer: widgetReducer
+   widgetReducer: widgetReducer,
+   operatorStatus: OperatorStatusReducer
 });
 
 export default rootReducer;
