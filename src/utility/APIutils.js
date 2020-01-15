@@ -284,3 +284,34 @@ export function operatorLogOut(userId) {
         method: 'GET',
     });
 }
+
+export function loadOperatorsFromAPI(domaine) {
+    return request({
+        url: API_BASE_URL + "/operator/list/" + domaine,
+        method: 'GET',
+    });
+}
+
+export function loadcallsWaitingFromAPI(domaine) {
+    return request({
+        url: API_BASE_URL + "/list/call/waiting/" + domaine,
+        method: 'GET',
+    });
+}
+
+export function listAgentsIn(domaine) {
+    return request({
+        url: API_BASE_URL + "/list/agents/in/" + domaine,
+        method: 'GET',
+    });
+}
+
+export function listAgentsOut(domaine) {
+    return request({
+        url: API_BASE_URL + "/list/agents/out/" + domaine,
+        method: 'GET',
+    });
+}
+
+
+

@@ -899,6 +899,7 @@ class Verto {
 		}
 
 		function checkTypes(devs) {
+
 			for (var i = 0; i !== devs.length; ++i) {
 
 				if (devs[i].kind === 'audioinput') {
@@ -907,7 +908,7 @@ class Verto {
 			}
 
 			if (!has_audio) return false;
-
+			
 			navigator.mediaDevices.getUserMedia({
 					audio: (has_audio > 0 ? true : false)
 				}, function(stream) {
@@ -920,7 +921,7 @@ class Verto {
 				});
 		}
 
-		navigator.mediaDevices.enumerateDevices().then(checkTypes).catch(handleError);
+		return navigator.mediaDevices.enumerateDevices().then(checkTypes).catch(handleError);
 
 	}
 

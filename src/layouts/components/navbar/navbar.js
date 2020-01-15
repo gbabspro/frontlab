@@ -28,7 +28,9 @@ import {
    CardDeck,
    CardTitle,
    CardSubtitle,
-   CustomInput
+   CustomInput,
+   NavItem,
+   Tooltip 
 } from "reactstrap";
 import {
    Menu,
@@ -38,7 +40,10 @@ import {
    ChevronRight,
    Plus,
    AlertCircle,
-   Globe
+   Globe,
+   Mail,
+   Mic,
+   MicOff
 } from "react-feather";
 import { BounceLoader } from 'react-spinners';
 import NavbarSearch from "../../../components/search/Search";
@@ -48,6 +53,8 @@ import  { Redirect } from 'react-router-dom';
 
 import {addProject} from "../../../redux/actions/projects/projectsActions";
 import { connect } from 'react-redux';
+import { setMicError } from "../../../redux/actions/config/micActions";
+import verto from "../../../views/pages/verto/verto";
 
 class ThemeNavbar extends Component {
    handleClick = e => {
@@ -76,6 +83,7 @@ class ThemeNavbar extends Component {
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleCheck = this.handleCheck.bind(this);
       this.isFormInvalid = this.isFormInvalid.bind(this);
+      this.toggleTooltip = this.toggleTooltip.bind(this);
    }
    toggle() {
       this.setState({
@@ -83,9 +91,29 @@ class ThemeNavbar extends Component {
       });
    }
 
+   toggleTooltip = () => {
+      this.setState({
+         tooltipOpen: !this.state.tooltipOpen
+      });
+   };
+
    setLogout = () => {
       logOut();
       this.setState({ redirect: true });
+   }
+
+   componentDidMount(){
+  
+         verto.checkDevices(true)
+         .then(response => {
+  
+            if(response == false){
+               this.props.hasMicError();
+            }
+
+        }).catch(error => {
+              console.log("error", error);
+        });
    }
 
    
@@ -347,19 +375,38 @@ class ThemeNavbar extends Component {
                   <Collapse isOpen={this.state.isOpen} navbar>
                      <Nav className="ml-auto float-right" navbar>
 
+                        <NavItem className="pr-1 mr-3">
+                           {
+                              (this.props.micConfig.hasError==true)?
+                              (<div className="nav-link">
+                                 <Button color="primary" style={{fontSize:"12px", padding: "0 8px", lineHeight: "1.5", borderRadius: "3px", minWidth: "60px", height: "22px"}} className="mr-2 px-1 mb-0">
+                                    Actualiser
+                                 </Button>
+                                 <MicOff id={"mic-off"} size={22} color="red" className="text-dark notification-danger animate-shake" />
+                                 <Tooltip
+                                    // placement={this.props.item.placement}
+                                    isOpen={this.state.tooltipOpen}
+                                    target={"mic-off"}
+                                    toggle={this.toggleTooltip}
+                                 >
+                                    votre micro est introuvable
+                                 </Tooltip>
+                              </div>):""
+                           }
+                        </NavItem>
+
                         <UncontrolledDropdown nav inNavbar className="pr-1">
-                           <DropdownToggle style={{borderRadius: '5px'}} className="rounded bg-white" nav>
-                              {/* <img src={userImage} alt="logged-in-user" className="rounded-circle width-35" /> */}
-                              {/* <span className="font-small-5 .font-medium-2 font-weight-normal ml-1 text-black">
-                                    {this.props.currentUser ? this.props.currentUser.firstname+' '+
-                                    this.props.currentUser.lastname  : ''}
-                              </span> */}
-                              <div style={{background: "#dee2e6", padding: "0px 9px", borderBottom: "1px solid rgba(0,0,0,0.125)"}} className="rounded-circle">
-                              <User size={16} color="white" className="" />
-                              </div>
+                           <DropdownToggle nav>
+                              <img src={userImage} alt="logged-in-user" className="rounded-circle width-35" />
                            </DropdownToggle>
                            <DropdownMenu right>
-
+                              <DropdownItem>
+                                 <span className="font-small-3">
+                                    {this.props.currentUser ? this.props.currentUser.firstname+' '+
+                                    this.props.currentUser.lastname  : ''}
+                                 </span>
+                              </DropdownItem>
+                              <DropdownItem divider />
                               <Link to="/pages/user-profile" className="p-0">
                                  <DropdownItem>
                                     <User size={16} color="white" style={{color: "white"}} className="mr-1" /> Mon Profile
@@ -407,11 +454,13 @@ class ThemeNavbar extends Component {
 
 const mapStateToProps = state => ({
    currentUser: state.currentUser,
-   currentProject: state.currentProject
+   currentProject: state.currentProject,
+   micConfig: state.micConfig
 })
 
 const mapDispatchToProps = dispatch => ({
    setNewProject: (project) => dispatch(addProject(project)),
+   hasMicError: () => dispatch(setMicError())
 })
  
 export default connect(

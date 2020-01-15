@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
-import { Card, CardBody, UncontrolledTooltip, CardTitle, Row, Col, Table, Button, CardHeader, CardFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, ModalFooter, Card, CardBody, UncontrolledTooltip, CardTitle, Row, Col, Table, Button, CardHeader, CardFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
-import {ChevronDown, Globe, Disc
+import {ChevronDown, Globe, Disc, AlertTriangle
  } from "react-feather";
  import { connect } from 'react-redux';
  import { Bell, BellOff, Edit, Mic, Headphones, PhoneIncoming, PhoneCall as PhoneCallIcon } from "react-feather";
@@ -15,13 +15,24 @@ class PhoneCall extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        dropdownOpen: false
-      };  
+        dropdownOpen: false,
+        micErrorModal: false
+      }; 
+      this.toggleMicError = this.toggleMicError.bind(this); 
+    }
+
+    toggleMicError = () => {
+        this.setState({
+            micErrorModal: !this.state.micErrorModal
+        });
     }
 
     componentDidMount(){
       this.loginUserSip();
-      verto.checkDevices(true);
+    //   verto.checkDevices(true);
+       if(this.props.micConfig.hasError){
+            this.toggleMicError()
+       }
     }
 
     loginUserSip () {
@@ -29,8 +40,8 @@ class PhoneCall extends Component {
         if(this.props.currentUser.authorities[0].authority == "ROLE_MANAGER"){
 
             const params = {
-                    login: this.props.currentProject.extensionUser.extension+"@srv.babacargaye.com",
-                    passwd: this.props.currentProject.extensionUser.sipPassword,
+                    login: this.props.currentProject.defaultPersonnel.extension.extension+"@srv.babacargaye.com",
+                    passwd: this.props.currentProject.defaultPersonnel.extension.sipPassword,
                     socketUrl: "wss://srv.babacargaye.com:8082",
                     tag: "webcam",
                     ringFile: "/assets/sounds/bell_ring2.mp3",
@@ -65,7 +76,7 @@ class PhoneCall extends Component {
 
     logOut = () => {
 
-        operatorLogOut(this.props.currentProject.defaultextension.extension)
+        operatorLogOut(this.props.currentProject.defaultPersonnel.extension.extension)
         .then(response => {
   
             console.log("error", response);
@@ -78,7 +89,7 @@ class PhoneCall extends Component {
 
     logIn = () => {
         console.log("loging...");
-        operatorLogin(this.props.currentProject.defaultextension.extension)
+        operatorLogin(this.props.currentProject.defaultPersonnel.extension.extension)
         .then(response => {
   
             console.log("error", response);
@@ -202,6 +213,22 @@ class PhoneCall extends Component {
             </Row>
             <audio id="ringer" autoPlay="autoplay"/>
 			<audio id="webcam" className="webcam" autoPlay="autoplay"/>
+            <Modal
+               isOpen={this.state.micErrorModal}
+               toggle={this.toggleMicError}
+               backdrop="static"
+            >
+               <ModalHeader toggle={this.toggleMicError}>Configuration requise</ModalHeader>
+               <ModalBody className="text-center">
+               <AlertTriangle className="text-warning" size={55} /><br />
+               <span className="mt-2">Votre micro est introuvable, merci de vérifier si votre machine dispose d'un microphone intégré</span>
+               </ModalBody>
+               <ModalFooter>
+                  <Button color="danger" onClick={this.toggleMicError}> 
+                     Fermer
+                  </Button>
+               </ModalFooter>
+            </Modal>
         </Fragment>
       );
    }

@@ -1,27 +1,27 @@
 import React, { PureComponent } from "react";
 import { Card, CardBody, Media } from "reactstrap";
-import PropTypes from 'prop-types';
 import classnames from "classnames";
+import PropTypes from 'prop-types';
 
-class MinimalStatistics extends PureComponent {
+class MinimalStatisticsBGCust extends PureComponent {
    render() {
       
       let iconLeft;
       let iconRight;
       let textDirection;
-      
+
       if (this.props.iconSide === "right") {
-         iconRight = this.props.children;         
+         iconRight = this.props.children;
       } else {
          iconLeft = this.props.children;
-         textDirection = "text-right"
+         textDirection = "text-right";
       }
       return (
-         <Card>
+         <Card className={classnames(this.props.cardBgColor)}>
             <CardBody className="px-3 py-3">
                <Media>
                   {iconLeft}
-                  <Media body className={textDirection}>
+                  <Media body className={classnames("white", textDirection)}>
                      <h3 className={classnames("mb-1", this.props.statisticsColor)}>{this.props.statistics}</h3>
                      <span style={{fontSize:"14px"}}>{this.props.text}</span>
                   </Media>
@@ -33,11 +33,12 @@ class MinimalStatistics extends PureComponent {
    }
 }
 
-MinimalStatistics.propTypes = {
+MinimalStatisticsBGCust.propTypes = {
    iconSide: PropTypes.string,   
+   cardBgColor: PropTypes.string,
    statisticsColor: PropTypes.string,
    statistics: PropTypes.string,
    text: PropTypes.string,
  };
 
-export default MinimalStatistics;
+export default MinimalStatisticsBGCust;
