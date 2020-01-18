@@ -1,7 +1,7 @@
 // import external modules
 import { combineReducers } from "redux";
 import customizer from "./customizer/";
-import setMicErrorReducer from "./config/micErrorReducer";
+import micReducer from "./config/micReducer";
 import dialogReducer from "./dialog/dialogReducer";
 import callStateReducer from "./state/callStateReducer";
 import chats from "./chat/chats";
@@ -18,7 +18,7 @@ import widgetReducer from "./widget/widgetReducer";
 const rootReducer = combineReducers({
    toastr: toastrReducer, // <- Mounted at toastr.
    customizer: customizer,
-   micConfig: setMicErrorReducer,
+   micConfig: micReducer,
    call: callReducer,
    dialog: dialogReducer,
    call_state: callStateReducer,
