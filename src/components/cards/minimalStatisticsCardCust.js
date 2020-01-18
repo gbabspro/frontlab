@@ -3,7 +3,7 @@ import { Card, CardBody, Media } from "reactstrap";
 import PropTypes from 'prop-types';
 import classnames from "classnames";
 
-class MinimalStatistics extends PureComponent {
+class MinimalStatisticsCust extends PureComponent {
    render() {
       
       let iconLeft;
@@ -18,7 +18,7 @@ class MinimalStatistics extends PureComponent {
       }
       return (
          <Card>
-            <CardBody className="px-3 py-3">
+            <CardBody className="px-2 py-3">
                <Media>
                   {iconLeft}
                   <Media body className={textDirection}>
@@ -33,11 +33,11 @@ class MinimalStatistics extends PureComponent {
    }
 }
 
-MinimalStatistics.propTypes = {
+MinimalStatisticsCust.propTypes = {
    iconSide: PropTypes.string,   
    statisticsColor: PropTypes.string,
    statistics: PropTypes.string,
    text: PropTypes.string,
  };
 
-export default MinimalStatistics;
+export default MinimalStatisticsCust;

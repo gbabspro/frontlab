@@ -3,6 +3,7 @@
    "version": "0.1.0",
    "private": true,
    "dependencies": {
+      "@stomp/stompjs": "^5.4.2",
       "@types/chart.js": "^2.9.3",
       "@types/chartist": "^0.9.46",
       "@types/jest": "^24.0.23",
@@ -59,6 +60,8 @@
       "redux-debounced": "^0.5.0",
       "redux-thunk": "^2.3.0",
       "simple-line-icons": "^2.4.1",
+      "sockjs-client": "^1.4.0",
+      "stompjs": "^2.3.3",
       "typescript": "^3.7.3",
       "uuid": "^3.3.3",
       "yup": "^0.26.6"
