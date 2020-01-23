@@ -14,8 +14,6 @@ import {LoadOperators} from "../redux/actions/operators/operatorsActions";
 import {setCurrentUser} from "../redux/actions/user/userActions";
 import {getUserProjects, getServiceOperators, getUserOperator} from "../utility/APIutils";
 import { connect } from 'react-redux';
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
 
 import Spinner from "../components/spinner/spinner";
 
@@ -58,30 +56,7 @@ class MainLayout extends PureComponent {
       this.setState({ layout });
    }
 
-   onConnected() {
-      // Subscribe to the Public Topic
-      stompClient.subscribe('/user/queue/agent-update', (payload)=>{console.log("payload ", payload)} );
-  }
-
-  onError(error) {
-   console.log("error ", error);
-  }
-
-  onMessageReceived(payload) {
-   console.log("payload ", payload);
-}
-
-
-
    componentDidMount() {
-
-      var socket = new SockJS('http://localhost:5000/ws');
-
-      stompClient = Stomp.over(socket);
-
-      stompClient.connect({}, this.onConnected, this.onError);
-
-
 
       if (window !== "undefined") {
          window.addEventListener("resize", this.updateWidth, false);
@@ -218,6 +193,7 @@ class MainLayout extends PureComponent {
 
 const mapStateToProps = state => ({
    currentUser: state.currentUser,
+   currentProject: state.currentProject
 })
 
 

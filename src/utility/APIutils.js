@@ -271,16 +271,16 @@ export function logOut() {
 }
 
 
-export function operatorLogin(userId) {
+export function operatorLogin(domaine, userId) {
     return request({
-        url: API_BASE_URL + "/operator/login/" + userId,
+        url: API_BASE_URL + "/operator/login/"+domaine+"/"+userId,
         method: 'GET',
     });
 }
 
-export function operatorLogOut(userId) {
+export function operatorLogOut(domaine, userId) {
     return request({
-        url: API_BASE_URL + "/operator/logout/" + userId,
+        url: API_BASE_URL + "/operator/logout/"+domaine+"/"+userId,
         method: 'GET',
     });
 }

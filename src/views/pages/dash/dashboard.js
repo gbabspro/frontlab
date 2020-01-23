@@ -8,6 +8,9 @@ import MinimalStatisticsBGCust from "../../../components/cards/minimalStatistics
 import MinimalStatistics from "../../../components/cards/minimalStatisticsCard";
 import FitnessStatisticsCardWithChart from "../../../components/cards/fitnessStatisticsWithChartCard";
 import MinimalStatisticsCust from "../../../components/cards/minimalStatisticsCardCust";
+import ContentLoader, { Code, BulletList } from 'react-content-loader';
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
 
 class Dashboard extends Component {
 
@@ -39,13 +42,60 @@ class Dashboard extends Component {
 
     componentDidMount(){
       
-      this.loadOperators();
-      this.loadCallsWaiting();
-      this.loadOperatorsStatusIn();
+      this.loadOperators(true);
+      this.loadCallsWaiting(true);
+      this.loadOperatorsStatusIn(true);
       this.loadOperatorsStatusOut();
+      this.setSocketConnect();
+      
     }
 
+    onConnected(frame) {
 
+      var sessionId = "";
+      var url = this.stompClient.ws._transport.url;
+      url = url.replace("ws://localhost:5000/ws/",  "");
+      url = url.replace("/websocket", "");
+      url = url.replace(/^[0-9]+\//, "");
+      console.log("Your current session is: " + url);
+      sessionId = url;
+
+      this.stompClient.subscribe('/user/'+this.props.currentProject.domaine+'/queue/update', (payload)=>{
+         
+        const message = JSON.parse(payload.body)
+        if(message.CCAction == "member-queue-start" || message.CCAction == "member-queue-end"){
+          this.loadCallsWaiting(false);
+        }else if(message.CCAction == "agent-status-change"){
+          this.loadOperators(false);
+          this.loadOperatorsStatusIn(false);
+        }
+      
+      });
+    }
+
+  onError(error) {
+   console.log("error ", error);
+  }
+
+  onMessageReceived(payload) {
+   console.log("payload ", payload);
+  }
+
+
+
+    setSocketConnect(){
+
+      var header = {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem("accessToken")
+      }
+
+     var socket = new SockJS('http://localhost:5000/ws');
+
+     this.stompClient = Stomp.over(socket);
+
+     this.stompClient.connect(header, (frame) => this.onConnected(frame), this.onError);
+    }
 
     loadOperatorsStatusOut = () => {
 
@@ -76,13 +126,15 @@ class Dashboard extends Component {
       });
     }
 
-    loadOperatorsStatusIn = () => {
+    loadOperatorsStatusIn = (canLoad) => {
 
-      this.setState({
-        operatorsStatusIn: {
-          loading: true
-        }
-      });
+      if(canLoad){
+        this.setState({
+          operatorsStatusIn: {
+            loading: true
+          }
+        });
+      }
 
       listAgentsIn(this.props.currentProject.domaine)
       .then(response => {
@@ -106,13 +158,18 @@ class Dashboard extends Component {
     }
 
 
-    loadCallsWaiting = () =>{
+    loadCallsWaiting = (canLoad) =>{
 
-      this.setState({
-        callsWaiting: {
-          loading: true
-        }
-      });
+
+      if(canLoad){
+        this.setState({
+          callsWaiting: {
+            loading: true
+          }
+        });
+      }
+
+
 
       loadcallsWaitingFromAPI(this.props.currentProject.domaine)
       .then(response => {
@@ -136,13 +193,16 @@ class Dashboard extends Component {
     }
 
 
-    loadOperators = () =>{
+    loadOperators = (canLoad) =>{
 
-      this.setState({
-        listeOperators: {
-          loading: true
-        }
-      });
+
+      if(canLoad){
+        this.setState({
+          listeOperators: {
+            loading: true
+          }
+        });
+      }
 
       loadOperatorsFromAPI(this.props.currentProject.domaine)
       .then(response => {
@@ -186,24 +246,41 @@ class Dashboard extends Component {
               <Col sm="12" xs="12" md="3" xl="3" lg="3">
                 <Row>
                   <Col sm="6" xs="6" md="6" xl="6" lg="6" className="pr-1">
-                    <MinimalStatisticsBGCust
-                      cardBgColor="gradient-ibiza-sunset"
-                      statistics={this.state.operatorsStatusOut.number}
-                      text="Hors ligne"
-                      iconSide="right"
-                  >
-                      <UserX size={36} strokeWidth="1.3" color="#fff" />
-                  </MinimalStatisticsBGCust>
+
+                    {
+                      (this.state.operatorsStatusOut.loading)?
+                      (<Card>
+                        <CardBody className="px-3 py-3">
+                        <Code />
+                        </CardBody>
+                       </Card>):(<MinimalStatisticsBGCust
+                        cardBgColor="gradient-ibiza-sunset"
+                        statistics={this.state.operatorsStatusOut.number.toString()}
+                        text="Hors ligne"
+                        iconSide="right"
+                      >
+                        <UserX size={36} strokeWidth="1.3" color="#fff" />
+                    </MinimalStatisticsBGCust>)
+                    }
                   </Col>
                   <Col sm="6" xs="6" md="6" xl="6" lg="6" className="pl-1">
-                    <MinimalStatisticsBGCust
-                      cardBgColor="gradient-green-teal"
-                      statistics={this.state.operatorsStatusIn.number}
-                      text="En ligne"
-                      iconSide="right"
-                  >
-                      <UserPlus size={36} strokeWidth="1.3" color="#fff" />
-                  </MinimalStatisticsBGCust>
+                    {
+                      (this.state.operatorsStatusIn.loading)?
+                      (<Card>
+                        <CardBody className="px-3 py-3">
+                        <Code />
+                        </CardBody>
+                       </Card>):
+                       (<MinimalStatisticsBGCust
+                        cardBgColor="gradient-green-teal"
+                        statistics={this.state.operatorsStatusIn.number.toString()}
+                        text="En ligne"
+                        iconSide="right"
+                      >
+                        <UserPlus size={36} strokeWidth="1.3" color="#fff" />
+                    </MinimalStatisticsBGCust>)
+
+                    }
                   </Col>
                 </Row>
               </Col>
@@ -211,9 +288,18 @@ class Dashboard extends Component {
               <Col sm="12" xs="12" md="3" xl="3" lg="3">
                 <Row>
                     <Col sm="6" xs="6" md="6" xl="6" lg="6" className="pr-1">
-                      <MinimalStatistics statistics={this.state.callsWaiting.number} statisticsColor="primary" text="En attente" iconSide="right">
-                          <PhoneIncoming size={36} strokeWidth="1.3" className="primary" />
-                      </MinimalStatistics>
+                      {
+                        (this.state.callsWaiting.loading)?
+                        (<Card>
+                          <CardBody className="px-3 py-3">
+                          <Code />
+                          </CardBody>
+                         </Card>):
+                         (<MinimalStatistics statistics={this.state.callsWaiting.number.toString()} statisticsColor="primary" text="En attente" iconSide="right">
+                         <PhoneIncoming size={36} strokeWidth="1.3" className="primary" />
+                         </MinimalStatistics>)
+                      }
+
                     </Col>
                     <Col sm="6" xs="6" md="6" xl="6" lg="6" className="pl-1">
                       <MinimalStatistics statistics="12" statisticsColor="warning" text="En cours" iconSide="right">
@@ -247,42 +333,51 @@ class Dashboard extends Component {
               <Col sm="6">
                 <Card>
                     <CardBody>
-                    <Table hover>
-                      <tbody>
+
+                    {
+                        (this.state.listeOperators.loading)?
+                        (<BulletList />):
+                        (<Table hover>
+                          <tbody>
+                            {
+                              this.state.listeOperators.data.map((operator, id) =>{
+                                return ( 
+                                  <tr key={id}>
+                                    <td>{
+                                      this.props.operators.map((agent, id) =>{
+                                        return (agent.extension.extension==operator.name)?(agent.lastname+" "+agent.firstname):""
+                                      })
+                                    
+                                    }</td>
+
+                                    <td>{
+                                      (operator.status == "Available")?
+                                      (<span className="text-success">Pret</span>)
+                                      :(operator.status == "Logged Out")?
+                                      (<span className="text-danger">Hors ligne</span>):
+                                      (operator.status == "On Break")?
+                                      (<span className="text-warning">Occupé</span>):
+                                      (operator.status == "Available (On Demand)")?
+                                      (<span className="text-warning">Occupé</span>):""
+                                      }
+                                    </td>
+                                    <td>{
+                                      (operator.state=="Waiting")?
+                                      (<span className="text-info">En attente</span>):
+                                      (operator.state=="Receiving")?
+                                      (<span className="text-danger">Appel entrant</span>):
+                                      (operator.state=="In a queue call")?
+                                      (<span className="text-success">En communication</span>):
+                                      ""
+                                    }</td>    
+                                  </tr>)
+                              })
+                            }
+                          </tbody>
+                        </Table>)
+                    }
 
 
-                      {
-                        (!this.state.listeOperators.loading)?
-                        this.state.listeOperators.data.map((operator, id) =>{
-                        return (
-                            <tr key={id}>
-                              <td>{operator.name}</td>
-                              <td>{
-                                (operator.status == "Available")?
-                                (<span className="text-success">Pret</span>)
-                                :(operator.status == "Logged Out")?
-                                (<span className="text-danger">Hors ligne</span>):
-                                (operator.status == "On Break")?
-                                (<span className="text-warning">Occupé</span>):
-                                (operator.status == "Available (On Demand)")?
-                                (<span className="text-warning">Occupé</span>):""
-                                }
-                              </td>
-                              <td>{
-                                (operator.state=="Waiting")?
-                                (<span className="text-info">En attente</span>):
-                                (operator.state=="Receiving")?
-                                (<span className="text-danger">Appel entrant</span>):
-                                (operator.state=="In a queue call")?
-                                (<span className="text-success">En communication</span>):
-                                ""
-                              }</td>    
-                            </tr>
-                            );
-                        }):""
-                      }
-                      </tbody>
-                    </Table>
                     </CardBody>
                 </Card>
               </Col>
@@ -293,7 +388,8 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  currentProject: state.currentProject
+  currentProject: state.currentProject,
+  operators: state.operators
 })
 
 

@@ -282,13 +282,16 @@ class Inputs extends Component {
                                     <FormGroup tag="fieldset">
                                         <h6>Custom Raido Buttons</h6>
                                         <FormGroup check className="px-0">
-                                            <CustomInput type="radio" id="exampleCustomRadio" name="customRadio" label="Custom radio" defaultChecked />
+                                            <CustomInput type="radio" id="exampleCustomRadio" name="customRadio" label="Célibataire" defaultChecked />
                                         </FormGroup>
                                         <FormGroup check className="px-0">
-                                            <CustomInput type="radio" id="exampleCustomRadio2" name="customRadio" label="Select this one" />
+                                            <CustomInput type="radio" id="exampleCustomRadio2" name="customRadio" label="Marié" />
                                         </FormGroup>
                                         <FormGroup check className="px-0">
-                                            <CustomInput type="radio" id="exampleCustomRadio3" label="But not this disabled one" disabled />
+                                            <CustomInput type="radio" id="exampleCustomRadio3" label="Divorcé" />
+                                        </FormGroup>
+                                        <FormGroup check className="px-0">
+                                            <CustomInput type="radio" id="exampleCustomRadio3" label="Veuf" />
                                         </FormGroup>
                                     </FormGroup>
                                 </Col>

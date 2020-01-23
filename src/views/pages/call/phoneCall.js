@@ -76,7 +76,7 @@ class PhoneCall extends Component {
 
     logOut = () => {
 
-        operatorLogOut(this.props.currentProject.defaultPersonnel.extension.extension)
+        operatorLogOut(this.props.currentProject.domaine, this.props.currentProject.defaultPersonnel.extension.extension)
         .then(response => {
   
             console.log("error", response);
@@ -89,7 +89,7 @@ class PhoneCall extends Component {
 
     logIn = () => {
         console.log("loging...");
-        operatorLogin(this.props.currentProject.defaultPersonnel.extension.extension)
+        operatorLogin(this.props.currentProject.domaine,this.props.currentProject.defaultPersonnel.extension.extension)
         .then(response => {
   
             console.log("error", response);
