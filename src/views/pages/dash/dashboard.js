@@ -3,11 +3,8 @@ import { Card, CardBody, CardTitle, Row, Col, Table, Badge } from "reactstrap";
 import { Briefcase, PhoneIncoming, UserCheck, PhoneMissed, PhoneCall, TrendingUp, TrendingDown, Activity, UserX, UserPlus, User } from "react-feather";
 import { loadOperatorsFromAPI, loadcallsInProgressFromAPI, loadcallsWaitingFromAPI, listAgentsIn, listAgentsOut } from "../../../utility/APIutils";
 import { connect } from 'react-redux';
-import MinimalStatisticsBG from "../../../components/cards/minimalStatisticsBGCard";
-import MinimalStatisticsBGCust from "../../../components/cards/minimalStatisticsBGCardCust";
+
 import MinimalStatistics from "../../../components/cards/minimalStatisticsCard";
-import FitnessStatisticsCardWithChart from "../../../components/cards/fitnessStatisticsWithChartCard";
-import MinimalStatisticsCust from "../../../components/cards/minimalStatisticsCardCust";
 import SalesPerVisitChartCard from "../../../components/cards/salesPerVisitChartCard";
 import ContentLoader, { Code, BulletList } from 'react-content-loader';
 import * as Stomp from 'stompjs';

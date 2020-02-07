@@ -451,15 +451,15 @@ class WidgetSetting extends Component {
                                              </Row>
                                              
    
-                                          <div className="d-flex justify-content-center col-md-12 col-xs-12 col-sm-12">
-   
-                                             <div style={{background: this.props.widget.theme, opacity: "0.3", padding: "110px"}} className="rounded-circle d-flex align-items-center fg-white">
-   
+                                             <div className="d-flex justify-content-center col-md-12 col-xs-12 col-sm-12">
+      
+                                                <div style={{background: this.props.widget.theme, opacity: "0.3", padding: "110px"}} className="rounded-circle d-flex align-items-center fg-white">
+      
+                                                </div>
+                                                <span style={{position: "absolute", display: "block", marginTop: "50px"}}>
+                                                <User  style={{color:this.props.widget.theme, opacity:"1", fontWeight: "normale"}} size={120} />
+                                                </span>
                                              </div>
-                                             <span style={{position: "absolute", display: "block", marginTop: "50px"}}>
-                                               <User  style={{color:this.props.widget.theme, opacity:"1", fontWeight: "normale"}} size={120} />
-                                             </span>
-                                          </div>
                                           
                                              {/* <div style={{position: "relative", height:"50%"}} className="p-2 pt-5 bd-highlight">
    
