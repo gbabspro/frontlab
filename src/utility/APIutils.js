@@ -1,4 +1,4 @@
-import { API_BASE_URL, POLL_LIST_SIZE, ACCESS_TOKEN } from '../constants';
+import { API_BASE_URL, ACCESS_TOKEN } from '../constants';
 
 const request = (options) => {
     const headers = new Headers({
@@ -117,12 +117,12 @@ export function newService(query) {
     });
 }
 
-export function checkUsernameAvailability(username) {
-    return request({
-        url: API_BASE_URL + "/user/checkUsernameAvailability?username=" + username,
-        method: 'GET'
-    });
-}
+// export function checkUsernameAvailability(email) {
+//     return request({
+//         url: API_BASE_URL + "/auth/checkEmailAvailability/" + email,
+//         method: 'GET'
+//     });
+// }
 
 export function serviceGetListAgent(idService) {
     return request({
@@ -143,6 +143,13 @@ export function getUserProjects() {
 export function getUserOperators() {
     return request({
         url: API_BASE_URL + "/operators/list",
+        method: 'GET'
+    });
+}
+
+export function getOperatorService() {
+    return request({
+        url: API_BASE_URL + "/operator/service",
         method: 'GET'
     });
 }
@@ -220,7 +227,14 @@ export function updateService(idService, updateServiceRequest) {
 
 export function checkEmailAvailability(email) {
     return request({
-        url: API_BASE_URL + "/user/checkEmailAvailability?email=" + email,
+        url: API_BASE_URL + "/auth/checkEmailAvailability/" + email,
+        method: 'GET'
+    });
+}
+
+export function operatorCheckEmailAvailability(email) {
+    return request({
+        url: API_BASE_URL + "/operator/checkEmailAvailability/" + email,
         method: 'GET'
     });
 }
@@ -295,6 +309,27 @@ export function loadOperatorsFromAPI(domaine) {
 export function loadcallsWaitingFromAPI(domaine) {
     return request({
         url: API_BASE_URL + "/list/call/waiting/" + domaine,
+        method: 'GET',
+    });
+}
+
+export function loadcallsInProgressFromAPI(domaine) {
+    return request({
+        url: API_BASE_URL + "/list/call/progress/" + domaine,
+        method: 'GET',
+    });
+}
+
+export function checkUrlExiste(idservice) {
+    return request({
+        url: API_BASE_URL + "/has/widget/url/" + idservice,
+        method: 'GET',
+    });
+}
+
+export function generateUrl(idservice) {
+    return request({
+        url: API_BASE_URL + "/widget/generate/url/" + idservice,
         method: 'GET',
     });
 }

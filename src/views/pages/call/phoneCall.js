@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter, Card, CardBody, UncontrolledTooltip, CardTitle, Row, Col, Table, Button, CardHeader, CardFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
 
-import {ChevronDown, Globe, Disc, AlertTriangle
+import {ChevronDown, Globe, Disc, AlertTriangle, Phone
  } from "react-feather";
  import { connect } from 'react-redux';
  import { Bell, BellOff, Edit, Mic, Headphones, PhoneIncoming, PhoneCall as PhoneCallIcon } from "react-feather";
@@ -166,7 +166,7 @@ class PhoneCall extends Component {
                             <div className="d-flex  align-self-center">
                                 {
                                     (this.props.call_state == "")?
-                                    (<Bell style={{color: "#46485563"}} size={150} />):
+                                    (<Phone style={{color: "#46485563"}} size={150} />):
                                     (this.props.call_state == "ringing")?
                                     (<div>
                                     <PhoneIncoming style={{color: "#fd480091"}} size={150} />

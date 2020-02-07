@@ -235,25 +235,25 @@ class ThemeNavbar extends Component {
                      <Col sm="10"  >
                         <Menu
                            size={14}
-                           className="navbar-toggle d-lg-none"
+                           className="navbar-toggle d-lg-none float-left"
                            onClick={this.handleClick.bind(this)}
                            data-toggle="collapse"
                         />
 
                         {
                            (this.props.currentUser.authorities && this.props.currentUser.authorities[0].authority == "ROLE_MANAGER")?
-                           (<Form className="navbar-form" role="search">
+                           (<Form className="navbar-form float-left" role="search">
                               <NavbarSearch />
                            </Form>):
                            ("")
                         }
 
-                        {
-                           (this.props.currentUser.roles && this.props.currentUser.roles[0].name == "ROLE_AGENT")?
+                        {/* {
+                           (this.props.currentUser.authorities && this.props.currentUser.authorities[0].authority == "ROLE_MANAGER")?
                            (<div style={{width: "250px"}}>
                               <Globe size={22} className="mr-2" /><span style={{fontSize: "0.95rem", fontWeight: "400", letterSpacing: "0.6px", }} className="">{(this.props.currentProject)?this.props.currentProject.domaine:""}</span>
                            </div>):""
-                        }
+                        } */}
 
 
                         {/* <Moon size={20} color="#333" className="m-2 cursor-pointer"/> */}
@@ -313,7 +313,7 @@ class ThemeNavbar extends Component {
                            
                                              <CardBody>
                                                 <CardTitle className="font-weight-bold text-center">Live Chat</CardTitle>
-                                                <CardSubtitle className="text-center">Gratuit à vie</CardSubtitle>
+                                                <CardSubtitle className="text-center text-warning">Disponible Bientôt</CardSubtitle>
                                                 {/* <CardText className="text-center"><span style={{fontSize: "30px"}} color="orange" className="text-bold-400">25 000<b style={{fontSize: "14px"}} className="ml-1 text-bold-400">Fcfa / mois</b></span></CardText> */}
                                                 <CardFooter className="pb-0 ">
                                                    <Col md="12" className="d-flex justify-content-center">
@@ -335,7 +335,7 @@ class ThemeNavbar extends Component {
                   
                                              <CardBody >
                                                 <CardTitle className="font-weight-bold text-center">Web to Call</CardTitle>
-                                                <CardSubtitle className="text-center">Gratuit en béta</CardSubtitle>
+                                                <CardSubtitle className="text-center">Disponible</CardSubtitle>
                                                 {/* <CardText className="text-center"><span style={{fontSize: "30px"}} color="orange" className="text-bold-400">75 000<b style={{fontSize: "14px"}} className="ml-1 text-bold-400">Fcfa / mois</b></span></CardText> */}
                                                 <CardFooter className="pb-0 ">
                                                    <Col md="12" className="d-flex justify-content-center">

@@ -92,7 +92,7 @@ class MainLayout extends PureComponent {
             console.log("error ", error);
          });
          
-      }else if(this.props.currentUser.roles && this.props.currentUser.roles[0].name == "ROLE_AGENT"){
+      }else if(this.props.currentUser.authorities && this.props.currentUser.authorities[0].authority == "ROLE_AGENT"){
 
          getUserOperator()
          .then(response => {

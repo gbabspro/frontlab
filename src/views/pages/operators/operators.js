@@ -10,19 +10,15 @@ import { Card, CardBody, CardTitle, Row, Col, Table, Button,
     UncontrolledTooltip
     } from "reactstrap";
     import { BounceLoader } from 'react-spinners';
-import CustomTabs from "../../../components/tabs/customTabs";
 import ContentHeader from "../../../components/contentHead/contentHeader";
-import ContentSubHeader from "../../../components/contentHead/contentSubHeader";
  import { connect } from 'react-redux';
-import { getUserOperators, newPersonnel, getServiceOperators } from "../../../utility/APIutils";
+import { newPersonnel, operatorCheckEmailAvailability } from "../../../utility/APIutils";
 import { LoadOperators, addOperator } from "../../../redux/actions/operators/operatorsActions";
 import { Users, Trash2, Edit, Plus, AlertCircle } from "react-feather";
 import Toggle from "react-toggle";
 import { 
     NAME_MIN_LENGTH, NAME_MAX_LENGTH, 
-    USERNAME_MIN_LENGTH, USERNAME_MAX_LENGTH,
     EMAIL_MAX_LENGTH,
-    PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH
  } from '../../../constants';
  
 class Operators extends Component {
@@ -47,6 +43,7 @@ class Operators extends Component {
       }
       this.isFormInvalid = this.isFormInvalid.bind(this);
       this.handleSubmitPersonnel = this.handleSubmitPersonnel.bind(this);
+      this.validateEmailAvailability = this.validateEmailAvailability.bind(this);
     }
 
     componentDidMount(){
@@ -113,7 +110,7 @@ class Operators extends Component {
         const target = event.target;
         const inputName = target.name;        
         const inputValue = target.value;
-  
+        console.log("event.target ", inputValue)
         this.setState({
            [inputName] : {
               value: inputValue,
@@ -129,7 +126,7 @@ class Operators extends Component {
             <ContentHeader className="pl-1">
             <span style={{fontSize:"14px"}}><Users size={22} className="" />  Opérateurs</span> </ContentHeader>
             <Row>
-                <Col sm="12">
+                <Col className="col-xs-12" sm="12" md="8" lg="8" >
                     <Card>
                         <CardBody>
                             <div className="d-flex justify-content-end">
@@ -184,10 +181,9 @@ class Operators extends Component {
                                                 onFocus={(event) => {this.setState({lastnameInput:{validateStatus: '',
                                                 errorMsg: null,}})}}
                                                 onBlur={(event) => this.handleInputChange(event, this.validateName)}
+                                                
                                                 placeholder="Nom"
                                                 disabled={this.state.loadingEdit}
-                                                onChange={this.handleChange}
-                                                // onChange={(event) => this.handlePasswordChange(event, this.validatePassword)}
                                                 required
                                             />
                                             {this.state.lastnameInput.validateStatus === "error" ? (
@@ -206,17 +202,14 @@ class Operators extends Component {
                                         <Col md="12">
                                             <FormGroup>
                                                 <Input
-                                                    type="text"
+                                                    type="email"
                                                     className="form-control py-3"
                                                     name="emailInput"
-                                                    autoComplete="off"
                                                     onFocus={(event) => {this.setState({emailInput:{validateStatus: '',
                                                     errorMsg: null,}})}}
-                                                    placeholder="Adresse e-mail"
-                                                    onBlur={(event) => this.handleInputChange(event, this.validateEmail)}
+                                                    placeholder="E-mail"
+                                                    onBlur={(event) => this.handleInputChange(event, this.validateEmailAvailability)}
                                                     disabled={this.state.loadingEdit}
-                                                    onChange={this.handleChange}
-                                                    // onChange={(event) => this.handleProfileChange(event, this.validateConfirmPassword)}
                                                     required
                                                 />
                                                 {this.state.emailInput.validateStatus === "error" ? (
@@ -255,7 +248,7 @@ class Operators extends Component {
                                     </Form>
                                 </Modal>
                             </div>
-                            <Table striped style={{borderTop: "0px solid #fff"}} className="">
+                            <Table responsive className="">
                                 <thead>
                                     <tr>
                                         <th>Nom et prénom</th>
@@ -317,11 +310,12 @@ class Operators extends Component {
     }
 }
 
- validateEmail = (email) => {
+validateEmail = (email) => {
+
     if(!email) {
         return {
             validateStatus: 'error',
-            errorMsg: 'Email may not be empty'                
+            errorMsg: 'L\'email ne peut pas être vide'                
         }
     }
 
@@ -334,7 +328,7 @@ class Operators extends Component {
     }else if(email.length > EMAIL_MAX_LENGTH) {
         return {
             validateStatus: 'error',
-            errorMsg: `Email is too long (Maximum ${EMAIL_MAX_LENGTH} characters allowed)`
+            errorMsg: `L\'email est trop long (Maximum ${EMAIL_MAX_LENGTH} caractères nécessaires)`
         }
     }else{
        return {
@@ -342,6 +336,57 @@ class Operators extends Component {
           errorMsg: null
       }
     }
+}
+
+
+validateEmailAvailability(email) {
+    // First check for client side errors in email
+    
+    const emailValue = email;
+    const emailValidation = this.validateEmail(emailValue);
+
+    if(emailValidation.validateStatus === 'error') { 
+        
+        return emailValidation;
+    }
+
+    this.setState({
+        emailInput: {
+            value: emailValue,
+            validateStatus: 'success',
+            errorMsg: null
+        }
+    });
+
+    operatorCheckEmailAvailability(emailValue)
+    .then(response => {
+        if(response.available) {
+            this.setState({
+                emailInput: {
+                    value: emailValue,
+                    validateStatus: 'success',
+                    errorMsg: null
+                }
+            });
+        } else {
+            this.setState({
+                emailInput: {
+                    value: emailValue,
+                    validateStatus: 'error',
+                    errorMsg: 'Cet e-mail est déjà enregistré'
+                }
+            });
+        }
+    }).catch(error => {
+        // Marking validateStatus as success, Form will be recchecked at server
+        this.setState({
+            emailInput: {
+                value: emailValue,
+                validateStatus: 'success',
+                errorMsg: null
+            }
+        });
+    });
 }
 
 

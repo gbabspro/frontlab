@@ -216,11 +216,8 @@ form .form-control {
   border: 1px solid grey;
 }
 .btnGoToApp{
-    border: 1px solid orange;
-    color:orange; 
     height:45px; 
     font-family: 'Montserrat'; 
-    background: #fff;
 }
 .btnGoToApp:hover{
     border: 1px solid orange;
@@ -244,4 +241,19 @@ form .form-control {
   background-color: #34bdff1f;
   color: #000;
   box-shadow: 0 2px 2px rgba(0,0,60,.08);
+}
+.nohover{
+  border: 0px solid #fff;
+}
+.overlay{
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
 }

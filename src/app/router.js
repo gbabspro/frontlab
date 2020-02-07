@@ -14,8 +14,9 @@ import {setCurrentUser} from "../redux/actions/user/userActions";
 // import ErrorLayoutRoute from "../layouts/routes/errorRoutes";
 
 import { connect } from 'react-redux';
-import { getCurrentUser, getUserOperator, getServiceOperators } from '../utility/APIutils';
+import { getCurrentUser, getOperatorService } from '../utility/APIutils';
 import {setCurrentProject} from "../redux/actions/projects/projectsActions";
+import HomePageLayout from "../layouts/routes/fullpageRoutesHome";
 
 
 
@@ -31,19 +32,11 @@ const LazyResetPassword = lazy(() => import("../views/pages/resetPassword"));
 // const LazyMaintainance = lazy(() => import("../views/pages/maintainance"));
 // const LazyLockScreen = lazy(() => import("../views/pages/lockScreen"));
 const LazyUserProfile = lazy(() => import("../views/pages/userProfile"));
-const LazyMarketPlace = lazy(() => import("../views/pages/marketPlace"));
 const LazyServices = lazy(() => import("../views/pages/services"));
-const LazySingleService = lazy(() => import("../views/pages/singleService"));
-const LazyCallInterface = lazy(() => import("../views/pages/call/callInterface"));
-const LazyChatInterface = lazy(() => import("../views/pages/chat/chatInterface"));
-const LazyBilling = lazy(() => import("../views/pages/billing"));
-const Catalogue = lazy(() => import("../views/pages/catalogue/catalogue"));
 const WidgetSetting = lazy(() => import("../views/pages/widget/widgetSetting"));
 const LazyHome = lazy(() => import("../views/pages/home/home"));
 const LazyLogout = lazy(() => import("../views/pages/logout/logout"));
-
-// Error Pages
-const LazyErrorPage = lazy(() => import("../views/pages/error"));
+const AlloSkyState = lazy(() => import("../views/pages/state/alloskyState"));
 
 const RegistrationConfirm = lazy(() => import("../views/pages/regitrationConfirm"));
 const LazyLiveChat = lazy(() => import("../views/pages/chat/liveChat"));
@@ -70,9 +63,10 @@ class Router extends Component {
       getCurrentUser()
       .then(response => {
 
+        
+
          if(response.authorities && response.authorities[0].authority == "ROLE_MANAGER"){
          
-            console.log("currentUser : ", response)
    
             this.props.handleCurrentUser({...response, isAuthenticated: true});
    
@@ -83,24 +77,19 @@ class Router extends Component {
    
          }else if(response.authorities && response.authorities[0].authority == "ROLE_AGENT"){
    
-            getUserOperator()
+           
+
+            getOperatorService()
             .then(response => {
-   
-               console.log("response project current ", response)
-   
-               this.props.handleCurrentProject(response.service);        
-               this.props.handleCurrentUser({...response, isAuthenticated: true});
-               this.setState({
-                  isLoading: false
-               })
-   
-   
+               this.props.handleCurrentProject(response);   
             }).catch(error => {
-               console.log("error ", error);
-               this.setState({
-                  isLoading: false
-               })
-            });
+
+            });    
+            this.props.handleCurrentUser({...response, isAuthenticated: true});
+            this.setState({
+               isLoading: false
+            })
+
          }else{
             this.setState({
                isLoading: false
@@ -177,12 +166,22 @@ class Router extends Component {
                />
 
                
-               <FullPageLayout
+               <HomePageLayout
                   exact
                   path="/"
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
                         <LazyHome {...matchprops} />
+                     </Suspense>
+                  )}
+               />
+
+               <HomePageLayout
+                  exact
+                  path="/states"
+                  render={matchprops => (
+                     <Suspense fallback={<Spinner />}>
+                        <AlloSkyState {...matchprops} />
                      </Suspense>
                   )}
                />
@@ -246,7 +245,7 @@ class Router extends Component {
 
                <MainLayoutRoutes
                   exact
-                  path="/pages/user-profile"
+                  path="/pages/account"
                   
                   render={matchprops => (
                      <Suspense fallback={<Spinner />}>
