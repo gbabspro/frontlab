@@ -100,7 +100,7 @@ class Login extends Component {
 
    render() {     
       return (
-         <div className="container-fluid gradient-deep-orange-orange">
+         <div className="container-fluid" style={{background:"linear-gradient(to right,#4f74fe,#70aafb)"}}>
             <Row className="full-height-vh">
                <Col xs="12" className="d-flex align-items-center justify-content-center">
                   <Card className="text-center width-400">
@@ -114,7 +114,7 @@ class Login extends Component {
                               <Col md="12">
                                  <Input
                                     type="email"
-                                    className="form-control"
+                                    className="input-style form-control py-3"
                                     name="email"
                                     onChange={this.handleChange}
                                     id="inputEmail"
@@ -128,7 +128,7 @@ class Login extends Component {
                               <Col md="12">
                                  <Input
                                     type="password"
-                                    className="form-control"
+                                    className="input-style form-control py-3"
                                     name="password"
                                     onChange={this.handleChange}
                                     id="inputPass"
@@ -156,9 +156,10 @@ class Login extends Component {
                                  </Col>
                               </Row>
                            </FormGroup> */}
+
                            <FormGroup>
-                              <Col md="12">
-                                 <Button type="submit" color="btnjokko" block className="btnjokko btn-raised">
+                              <Col md="12" className="d-flex justify-content-center" >
+                                 <Button block type="submit" className="mt-2" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"#4f74fe", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
                                     Se connecter
                                  </Button>
                               </Col>

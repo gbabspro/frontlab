@@ -28,6 +28,7 @@ import {
 } from '../../constants';
 import Spinner from "../../components/spinner/spinner";
 import avatarm8 from "../../assets/img/portrait/medium/avatar-m-8.png";
+import { connect } from 'react-redux';
 
 class UserProfile extends Component {
 
@@ -606,4 +607,14 @@ class UserProfile extends Component {
 
 }
 
-export default UserProfile;
+
+
+const mapStateToProps = state => ({
+   currentUser: state.currentUser,
+})
+
+ 
+export default connect(
+   mapStateToProps,
+   null
+)(UserProfile)

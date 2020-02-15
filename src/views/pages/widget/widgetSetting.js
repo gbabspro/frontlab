@@ -6,13 +6,17 @@ import { Card, CardBody, CardHeader, CardTitle, Row, Col, FormGroup, Button, Inp
    NavItem,
    NavLink,
    CardText,
+   Collapse,
+   ListGroup,
+   ListGroupItem,
+   Alert 
 } from "reactstrap";
  import { connect } from 'react-redux';
  import imgBack from "../../../assets/img/background.gif";
-import { User, Mic, Speaker, Volume2, Delete, X, Phone, MessageSquare } from "react-feather";
+import { User, Mic, Speaker, Volume2, Delete, X, Phone, MessageSquare, ChevronDown, ChevronUp, AlertTriangle } from "react-feather";
 import phoneCall from "../call/phoneCall";
 import Spinner from "../../../components/spinner/spinner";
-import { getServiceWidget, updateServiceWidget } from "../../../utility/APIutils";
+import { getServiceWidget, updateServiceWidget, checkUrlExiste, generateUrl } from "../../../utility/APIutils";
 import classnames from "classnames";
 import { CirclePicker } from 'react-color';
 import { BounceLoader } from 'react-spinners';
@@ -20,6 +24,10 @@ import { SetWidget, SetWidgetTheme } from "../../../redux/actions/widget/widgetA
 import Prism from "prismjs";  //Include JS
 import "prismjs/themes/prism-okaidia.css"; //Include CSS
 import { PrismCode } from "react-prism"; //Prism Component
+import logoWordPress from "../../../assets/img/logoWordPress.jpg";
+import logoPrestashop from "../../../assets/img/logoPrestashop.png";
+import logoShopify from "../../../assets/img/logoShopify.png";
+import {toastr} from 'react-redux-toastr';
 
 class WidgetSetting extends Component {
 
@@ -30,6 +38,11 @@ class WidgetSetting extends Component {
          toggleView: false,
          loadingView: true,
          loading: false,
+         collapseJS: false,
+         collapsePresta: false,
+         collapseShopify: false,
+         collapseWord: false,
+         hasUrl:true,
          activeTab: "1",
          colors : ["#004D40", "#00695C", "#00796B", "#00897B", 
                   "#006064", "#00838F", "#0097A7", "#00ACC1",
@@ -39,7 +52,15 @@ class WidgetSetting extends Component {
 
       this.loadWidget = this.loadWidget.bind(this);
       this.updateWidget = this.updateWidget.bind(this);
+      this.toggleCollaps = this.toggleCollaps.bind(this);
+      this.widgetGenerateUrl = this.widgetGenerateUrl.bind(this);
+
    }
+
+   toggleCollaps = (collapse, state) => {
+      this.setState({ [collapse]: !state });
+   }
+
 
    toggle = tab => {
       if (this.state.activeTab !== tab) {
@@ -52,13 +73,37 @@ class WidgetSetting extends Component {
    componentDidMount(){
       
       this.loadWidget();
+      
+   }
+
+
+   
+
+   widgetGenerateUrl(id){
+
+      if(this.props.currentProject){
+         generateUrl(this.props.currentProject.id)
+         .then(response => {
+            console.log("response", response);
+            this.setState({hasUrl: true})
+         }).catch(error => {
+            console.log("error", error);
+            
+         });
+      }
+   }
+
+   hasWidgetUrl(id){
+      checkUrlExiste(id)
+      .then(response => {
+
+         console.log("response", response);
+      }).catch(error => {
+         this.setState({hasUrl: false})
+      });
    }
 
    loadWidget = () =>{
-
-      
-
-      console.log("this.props.currentProject ", this.props.currentProject)
 
       getServiceWidget(this.props.currentProject.id)
       .then(response => {
@@ -67,6 +112,7 @@ class WidgetSetting extends Component {
 
          this.props.handleWidget(response);
          this.setState({loadingView: false})
+         this.hasWidgetUrl(this.props.currentProject.id);
       }).catch(error => {
             console.log("error", error);
             this.setState({loadingView: false})
@@ -79,22 +125,27 @@ class WidgetSetting extends Component {
   };
 
 
-  updateWidget = () => {
+   updateWidget = () => {
 
-   updateServiceWidget(this.props.widget)
-   .then(response => {
-
-      console.log("response", response);
-      this.setState({theme: response.theme})
       this.setState({
-         loading: false
+         loading: true
       })
-   }).catch(error => {
-         console.log("error", error);
+
+      updateServiceWidget(this.props.widget)
+      .then(response => {
+
+         this.setState({theme: response.theme})
          this.setState({
             loading: false
          })
-   });
+
+         toastr.success('', 'Mise à jour effectuée')
+      }).catch(error => {
+            console.log("error", error);
+            this.setState({
+               loading: false
+            })
+      });
 
   }
 
@@ -107,35 +158,51 @@ class WidgetSetting extends Component {
       return (
         <Fragment>
            <Row>
-                <Col sm="12" lg="8" className="">
-                   <Card>   
-                        <CardHeader className="">                    
-                           <Button disabled={this.state.loading} onClick={() => {this.updateWidget()}}  className="px-3 py-1" style={{fontFamily: 'Montserrat', background:"rgb(19, 145, 193)", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
+
+               <Col sm="12" md="9" lg="9" className="col-12 mt-3">
+                  {
+                     (this.state.hasUrl)?"":(
+                        <Alert color="warning">
+                           {/* <AlertTriangle className="text-warning mr-2" size={20} /> */}
+                           L'url de votre widget n'est pas bien configurée,
+                           <Button onClick={this.widgetGenerateUrl} color="primary" style={{fontSize:"12px", padding: "0 8px", lineHeight: "1.5", borderRadius: "3px", minWidth: "60px", height: "22px"}} className="mr-2 ml-2 px-1 mb-0">
+                              Corriger
+                           </Button>
+                        </Alert>
+                     )
+                  }
+
+               </Col>
+                <Col sm="12" md="9" lg="9" className="col-12">
+                     <Card>   
+                        <CardHeader className="border-bottom mb-2 py-2">                    
+                           <Button disabled={this.state.loading} onClick={() => {this.updateWidget()}}  className="px-3 mb-0 py-1" style={{fontSize:"14.1px", height:"34px", lineHeight:"20px", padding:"0 12px", fontFamily: 'Montserrat', background:"rgb(19, 145, 193)", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
                                                                              
-                           {(this.state.loadingEdit)?
-                              (<BounceLoader  					
+                           {(this.state.loading)?
+                              (<BounceLoader 			
                                     className="clip-loader left"
                                     sizeUnit={"px"}
                                     size={25}
                                     color={'#fff'}
                                     loading={true} 
-                              />):'Sauvegarder'
+                              />):'Enregistrer'
 
                            }
                            </Button>
-                        </CardHeader>               
+                        </CardHeader>
+
                         <CardBody className="pt-0">
                            <Row>
-                              <Col sm="7" className="">
+                              <Col sm="8" className="">
                                  <Card>                  
-                                    <CardBody className="pl-0">
-                                       <div className="tabs-vertical">
-                                          <Nav style={{width:"120px"}} tabs>
+                                    <CardBody className="px-0 bg-white">
+                                       <div>
+                                          <Nav tabs className="nav-justified">
                                              <NavItem>
                                                 <NavLink
                                                    className={classnames({
                                                       active: this.state.activeTab === "1"
-                                                   }), "pl-1 "}
+                                                   })}
                                                    onClick={() => {
                                                       this.toggle("1");
                                                    }}
@@ -147,7 +214,7 @@ class WidgetSetting extends Component {
                                                 <NavLink
                                                    className={classnames({
                                                       active: this.state.activeTab === "2"
-                                                   }), "pl-1 "}
+                                                   })}
                                                    onClick={() => {
                                                       this.toggle("2");
                                                    }}
@@ -156,12 +223,10 @@ class WidgetSetting extends Component {
                                                 </NavLink>
                                              </NavItem>
                                           </Nav>
-                                          <TabContent style={{width: "100%", marginTop:"-30px"}} className="pt-0" activeTab={this.state.activeTab}>
+                                          <TabContent activeTab={this.state.activeTab}>
                                              <TabPane tabId="1">
                                                 <Row>
-                                                   <Col sm="12">
-                                                      
-                                                      <h5 style={{borderBottom:"1px solid #E0E0E0"}} className="pb-2">Configurer votre widget</h5>
+                                                   <Col sm="12" className="bg-light px-0">
                                                       <div style={{boxShadow: "rgba(0, 18, 46, 0.16) 0px 8px 18px 0px", padding:"10px"}}>
                                                       <CirclePicker width="100%" circleSize={35} colors={this.state.colors} onChangeComplete={ this.handleChangeComplete }/>
                                                       </div>
@@ -170,18 +235,183 @@ class WidgetSetting extends Component {
                                              </TabPane>
                                              <TabPane tabId="2">
                                                 <Row>
-                                                   <Col sm="12">
+                                                   <Col sm="12" className="bg-white px-0">
                                                       <Card>                  
-                                                            <CardBody>
-                                                            <h6 style={{borderBottom:"1px solid #E0E0E0"}} className="pb-2">Placez ce code juste avant la balise de fermeture {'</body>'}:</h6>
-                                                            <div style={{boxShadow: "rgba(0, 18, 46, 0.16) 0px 8px 18px 0px", padding:"15px"}}>
-                                                               <PrismCode component="pre" className="language-markup">
-                                                                  {'<script \nid="jokkoappswidget" \ntype="text/javascript" \nasync=""\n'+
-                                                                     'src="https://www.babacargaye.com/\nvi58sobudxxxogym7hevf2jh08mx.js?\nsipuserpass='+this.props.currentProject.extensionUser.sipPassword+'\n&sipuser='+this.props.currentProject.extensionUser.extension+'\n&center='+this.props.currentProject.contactId+'\n&theme='+this.props.widget.theme+'">'+
-                                                                  '\n</script>'}
-                                                               </PrismCode>
-                                                            
-                                                            </div>
+                                                            <CardBody className="px-0">
+
+                                                               <ListGroup>
+                                                                  <ListGroupItem style={{boxShadow:"0 0 0 0.1rem rgba(152, 159, 166, 0.5)",borderRadius: "5px"}} className="mb-2">
+                                                                     <div className="d-flex justify-content-between">
+                                                                        <div className="media-left">
+                                                                           <img className="media-object d-flex mr-3 bg-primary height-40 rounded-circle" src="https://randomuser.me/api/portraits/med/women/10.jpg" />
+                                                                        </div>
+                                                                        <div style={{color:"rgba(0, 157, 160, 1)"}} className="align-text-bottom mt-1">
+                                                                           HTLM/JavaScript
+                                                                        </div>
+                                                                        <div>
+                                                                           <Button
+                                                                              className="mb-0 bg-white mt-1 p-1 nohover"
+                                                                              onClick={() => this.toggleCollaps("collapseJS", this.state.collapseJS)}
+                                                                              style={{boxShadow:"0 0 0 0.2rem rgba(0, 157, 160, 0.25)", fontSize:"12px", padding: "0 8px", lineHeight: "1.5", borderRadius: "18px"}}>
+                                                                              
+                                                                              {
+                                                                                 (!this.state.collapseJS)?
+                                                                                 (<ChevronDown color="black" />):
+                                                                                 (<ChevronUp color="black" />)
+                                                                              }
+                                                                              
+                                                                           </Button>
+                                                                        </div>
+                                                                     </div>
+                                                                     <Collapse isOpen={this.state.collapseJS}>
+                                                                        <Card>
+                                                                           <CardBody className="px-0">
+                                                                              <p>
+                                                                                 Placez ce code juste avant la balise de fermeture <code>{'</body>'}</code> :
+                                                                              </p>
+
+                                                                              <div style={{fontSize:"14px", boxShadow: "rgba(0, 18, 46, 0.16) 0px 8px 18px 0px"}}>
+                                                                                 <PrismCode component="pre" className="language-markup">
+                                                                                    {'<script src="https://srv.babacargaye.com/testfile/js/'+this.props.widget.url+'" ></script>'}
+                                                                                 </PrismCode>
+                                                                              </div>
+                                                                           </CardBody>
+                                                                        </Card>
+                                                                     </Collapse>
+                                                                  </ListGroupItem>
+                                                                  
+                                                                  <ListGroupItem className="mb-2" style={{boxShadow:"0 0 0 0.1rem rgba(152, 159, 166, 0.5)",borderRadius: "5px"}}>
+
+                                                                     <div className="d-flex justify-content-between">
+                                                                        <div className="media-left">
+                                                                           <img className="media-object d-flex mr-3 bg-primary height-40 rounded-circle" src={logoWordPress} />
+                                                                        </div>
+                                                                        <div style={{color:"rgba(0, 157, 160, 1)"}} className="align-text-bottom mt-1">
+                                                                           WordPress
+                                                                        </div>
+                                                                        <div>
+
+                                                                           <Button
+                                                                              className="mb-0 bg-white mt-1 p-1 nohover"
+                                                                              onClick={() => this.toggleCollaps("collapseWord", this.state.collapseWord)}
+                                                                              style={{boxShadow:"0 0 0 0.2rem rgba(0, 157, 160, 0.25)", fontSize:"12px", padding: "0 8px", lineHeight: "1.5", borderRadius: "18px"}}>
+                                                                              
+                                                                              {
+                                                                                 (!this.state.collapseWord)?
+                                                                                 (<ChevronDown color="black" />):
+                                                                                 (<ChevronUp color="black" />)
+                                                                              }
+                                                                              
+                                                                           </Button>
+                                                                        </div>
+                                                                     </div>
+                                                                     
+                                                                     <Collapse isOpen={this.state.collapseWord}>
+                                                                        <Card>
+                                                                           <CardBody className="px-0">
+                                                                              <ol style={{paddingLeft:"18px", fontSize:"14px"}}>
+                                                                                 <li>Connectez-vous à votre espace d'administration WordPress</li>
+                                                                                 <li>Allez dans Apparence> Éditeur de thème</li>
+                                                                                 <li>Sous Fichiers de thème, recherchez le pied de page du thème (footer.php) et sélectionnez-le</li>
+                                                                                 <li>Collez votre code avant la balise <code>{'</body>'}</code> en bas</li>
+                                                                                 <li>Cliquez sur Mettre à jour le fichier pour enregistrer les modifications</li>
+                                                                              </ol>
+
+                                                                              {/* <h6 style={{borderBottom:"1px solid #E0E0E0"}} className="pb-2">Placez ce code juste avant la balise de fermeture {'</body>'}:</h6> */}
+                                                                              <div style={{fontSize:"14px",boxShadow: "rgba(0, 18, 46, 0.16) 0px 8px 18px 0px"}}>
+                                                                                 <PrismCode component="pre" className="language-markup">
+                                                                                    {'<script src="https://srv.babacargaye.com/testfile/js/'+this.props.widget.url+'" ></script>'}
+                                                                                 </PrismCode>
+                                                                              
+                                                                              </div>
+                                                                           </CardBody>
+                                                                        </Card>
+                                                                     </Collapse>
+                                                                  </ListGroupItem>
+                                                                  <ListGroupItem className="mb-2" style={{boxShadow:"0 0 0 0.1rem rgba(152, 159, 166, 0.5)",borderRadius: "5px"}}>
+
+                                                                     <div className="d-flex justify-content-between">
+                                                                        <div className="media-left">
+                                                                           <img className="media-object d-flex mr-3 bg-primary height-40 rounded-circle" src={logoPrestashop} />
+                                                                        </div>
+                                                                        <div style={{color:"rgba(0, 157, 160, 1)"}} className="align-text-bottom mt-1">
+                                                                           PrestaShop
+                                                                        </div>
+                                                                        <div>
+
+                                                                           <Button
+                                                                              className="mb-0 bg-white mt-1 p-1 nohover"
+                                                                              onClick={() => this.toggleCollaps("collapsePresta", this.state.collapsePresta)}
+                                                                              style={{boxShadow:"0 0 0 0.2rem rgba(0, 157, 160, 0.25)", fontSize:"12px", padding: "0 8px", lineHeight: "1.5", borderRadius: "18px"}}>
+                                                                              
+                                                                              {
+                                                                                 (!this.state.collapsePresta)?
+                                                                                 (<ChevronDown color="black" />):
+                                                                                 (<ChevronUp color="black" />)
+                                                                              }
+                                                                              
+                                                                           </Button>
+                                                                        </div>
+                                                                     </div>
+
+                                                                     <Collapse isOpen={this.state.collapsePresta}>
+                                                                        <Card>
+                                                                           <CardBody className="px-0">
+                                                                              <h6 style={{borderBottom:"1px solid #E0E0E0"}} className="pb-2">Placez ce code juste avant la balise de fermeture {'</body>'}:</h6>
+                                                                              <div style={{fontSize:"14px",boxShadow: "rgba(0, 18, 46, 0.16) 0px 8px 18px 0px"}}>
+                                                                                 <PrismCode component="pre" className="language-markup">
+                                                                                    {'<script src="https://srv.babacargaye.com/testfile/js/'+this.props.widget.url+'" ></script>'}
+                                                                                 </PrismCode>
+                                                                              
+                                                                              </div>
+                                                                           </CardBody>
+                                                                        </Card>
+                                                                     </Collapse>
+                                                                  </ListGroupItem>
+
+                                                                  <ListGroupItem className="mb-2" style={{boxShadow:"0 0 0 0.1rem rgba(152, 159, 166, 0.5)",borderRadius: "5px"}}>
+
+                                                                     <div className="d-flex justify-content-between">
+                                                                        <div className="media-left">
+                                                                           <img className="media-object d-flex mr-3 height-40 rounded-circle" src={logoShopify} />
+                                                                        </div>
+                                                                        <div style={{color:"rgba(0, 157, 160, 1)"}} className="align-text-bottom mt-1">
+                                                                           Shopify
+                                                                        </div>
+                                                                        <div>
+
+                                                                           <Button
+                                                                              className="mb-0 bg-white mt-1 p-1 nohover"
+                                                                              onClick={() => this.toggleCollaps("collapseShopify", this.state.collapseShopify)}
+                                                                              style={{boxShadow:"0 0 0 0.2rem rgba(0, 157, 160, 0.25)", fontSize:"12px", padding: "0 8px", lineHeight: "1.5", borderRadius: "18px"}}>
+                                                                              
+                                                                              {
+                                                                                 (!this.state.collapseShopify)?
+                                                                                 (<ChevronDown color="black" />):
+                                                                                 (<ChevronUp color="black" />)
+                                                                              }
+                                                                              
+                                                                           </Button>
+                                                                        </div>
+                                                                     </div>
+
+                                                                     <Collapse isOpen={this.state.collapseShopify}>
+                                                                        <Card>
+                                                                           <CardBody className="px-0">
+                                                                              <h6 style={{borderBottom:"1px solid #E0E0E0"}} className="pb-2">Placez ce code juste avant la balise de fermeture {'</body>'}:</h6>
+                                                                              <div style={{fontSize:"14px",boxShadow: "rgba(0, 18, 46, 0.16) 0px 8px 18px 0px"}}>
+                                                                                 <PrismCode component="pre" className="language-markup">
+                                                                                    {'<script src="https://srv.babacargaye.com/testfile/js/'+this.props.widget.url+'" ></script>'}
+                                                                                 </PrismCode>
+                                                                              
+                                                                              </div>
+                                                                           </CardBody>
+                                                                        </Card>
+                                                                     </Collapse>
+                                                                     </ListGroupItem>
+
+                                                                  
+                                                               </ListGroup>
                                                             </CardBody>
                                                       </Card>
                                                    </Col>
@@ -195,7 +425,7 @@ class WidgetSetting extends Component {
 
                               {
                                  (this.props.currentProject.id && this.props.currentProject.typeService == "SERVICE_CALL")?
-                                 (<Col sm="5" className="" style={{height:"470px"}}>
+                                 (<Col sm="4" className="" style={{height:"470px"}}>
 
                                  <div style={{padding: "15px", backgroundImage: `url(${imgBack})`, height:"470px"}} className="">
    
@@ -221,15 +451,15 @@ class WidgetSetting extends Component {
                                              </Row>
                                              
    
-                                          <div className="d-flex justify-content-center col-md-12 col-xs-12 col-sm-12">
-   
-                                             <div style={{background: this.props.widget.theme, opacity: "0.3", padding: "110px"}} className="rounded-circle d-flex align-items-center fg-white">
-   
+                                             <div className="d-flex justify-content-center col-md-12 col-xs-12 col-sm-12">
+      
+                                                <div style={{background: this.props.widget.theme, opacity: "0.3", padding: "110px"}} className="rounded-circle d-flex align-items-center fg-white">
+      
+                                                </div>
+                                                <span style={{position: "absolute", display: "block", marginTop: "50px"}}>
+                                                <User  style={{color:this.props.widget.theme, opacity:"1", fontWeight: "normale"}} size={120} />
+                                                </span>
                                              </div>
-                                             <span style={{position: "absolute", display: "block", marginTop: "50px"}}>
-                                               <User  style={{color:this.props.widget.theme, opacity:"1", fontWeight: "normale"}} size={120} />
-                                             </span>
-                                          </div>
                                           
                                              {/* <div style={{position: "relative", height:"50%"}} className="p-2 pt-5 bd-highlight">
    

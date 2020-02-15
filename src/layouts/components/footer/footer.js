@@ -20,13 +20,13 @@ const Footer = props => (
       )}
       <div className="container-fluid">
          <p className="text-center">
-            © 2019{" "}
+            © 2020{" "}
             <a
                href="https://pixinvent.com/demo/apex-react-redux-bootstrap-admin-dashboard-template/landing-page/"
                rel="noopener noreferrer"
                target="_blank"
             >
-               Jokko - Apps{" "}
+               AlloSky{" "}
             </a>
          </p>
       </div>

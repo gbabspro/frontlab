@@ -3,15 +3,17 @@ import React from "react";
 import { Route } from "react-router-dom";
 import  { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
+import { ACCESS_TOKEN } from '../../constants';
 // import internal(own) modules
 import AuthLayout from "../authLayout";
 
+
 const AuthPageLayoutRoute = ({ render, ...rest }) => {
 
-    console.log("props auth login ", rest)
-
-   if(rest.currentUser.isAuthenticated){
-    return <Redirect to='/pages/dashboard'  />
+   if(rest.currentUser.isAuthenticated && rest.currentUser.authorities[0].authority == "ROLE_MANAGER"){
+      return <Redirect to='/pages/dashboard'  />
+   }else if(rest.currentUser.isAuthenticated && rest.currentUser.authorities[0].authority == "ROLE_AGENT"){
+      return <Redirect to='/pages/phone-call'  />
    }
    return (
       <Route

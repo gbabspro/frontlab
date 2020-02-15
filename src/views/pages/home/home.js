@@ -1,18 +1,20 @@
 import React, { Component, Fragment } from "react";
-import { Card, CardBody, CardTitle, Row, Col, Table, Button, FormGroup, Input, CardFooter, ListGroup, ListGroupItem } from "reactstrap";
-import { ArrowRight, Search, Mail, Phone, Headphones, MessageSquare, Check, CheckCircle, HelpCircle } from "react-feather";
+import { Card, CardBody, Row, Col, Button } from "reactstrap";
+import { Edit, Activity, Sliders, PhoneIncoming, Save, PhoneForwarded, BookOpen, Book } from "react-feather";
 import chromLogo from  "../../../assets/img/chrome.png";
 import fireFoxLogo from  "../../../assets/img/firefox.png";
-import edge from  "../../../assets/img/edge.jpg";
+import edge from  "../../../assets/img/edge.png";
 import safari from  "../../../assets/img/safari.png";
 import opera from  "../../../assets/img/opera.png";
-import idee from  "../../../assets/img/idee.PNG";
-import friend from  "../../../assets/img/friend.png";
-import world from  "../../../assets/img/world.PNG";
 import backfront from "../../../assets/img/backfront.jpg";
+
+
+import logoWordPress from "../../../assets/img/logoWordPress.jpg";
+import logoPrestashop from "../../../assets/img/logoPrestashop.png";
+import logoShopify from "../../../assets/img/logoShopify.png";
+import statitique from "../../../assets/img/state.jpg";
+import footerhead from "../../../assets/img/footerhead.png";
 import { Link } from "react-router-dom";
-
-
 class Home extends Component {
 
     constructor(props) {
@@ -27,212 +29,315 @@ class Home extends Component {
 
       return (
     <div className="">
-            <nav style={{background:this.state.navBackground, border:"1px solid #cfcfcf", boxShadow:"0 2px 2px rgba(0,0,60,.08)", zIndex:"999"}}>
-                <div className="container" style={{backgroundColor:this.state.navBackground}}>
-                    <Row>
-                        <Col sm="6">
-                            <Card style={{boxShadow:"none", backgroundColor:this.state.navBackground}}>
-                                <CardBody className="py-1">
-
-                                </CardBody>
-                            </Card>
-                        </Col>
-                        <Col sm="6" className="px-0">
-                            <Card style={{boxShadow:"none", backgroundColor:this.state.navBackground}}>
-                                <CardBody className="py-1 d-flex justify-content-end">
-
-                                    <FormGroup className="d-flex justify-content-center mb-0" block>
-                                        <Link to="/pages/login">
-                                            <Button className="btnGoToApp px-4 py-1 text-center my-0 text-bold-600" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)", display: 'flex', alignItem:"center", borderRadius: "6px", justifyContent: 'center',}}>
-                                                Connexion
-                                            </Button>
-                                        </Link>
-                                    </FormGroup>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
+            <section className="mb-1" style={{position:"relative", backgroundImage: `url(${backfront})`, backgroundPosition: 'center 0', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
+                    
+                <div  className="d-none d-xl-block d-md-block" style={{padding:"200px 50px",background:"linear-gradient(to right,#4f74fe,#70aafb)", maxWidth:"900px"}} >
+                    <h3 style={{color:"#fff"}} className="text-left text-bold-500 text-white bg-transparent" style={{fontSize:"50px", lineHeight:"1.3",fontFamily:"Montserrat"}}>
+                        Vous cherchez un moyen rapide et facile pour vos clients d'entrer en contact avec vous, <span className="text-bold-600">Bienvenue chez AlloSky</span>
+                    </h3>
+                    <h5 className="text-left text-white" style={{lineHeight:"1.5", letterSpacing:"", color: "#000", fontWeight:"400"}}>
+                        Nous fournissons des solutions CCaaS de téléphonie et de centre de contact basées sur le web pour faire évoluer les entreprises.
+                    </h5>
                 </div>
-            </nav>
 
-
-            <section className="mb-1" style={{paddingTop: "150px", paddingBottom: "400px", paddingLeft: "100px", paddingRight: "100px", boxShadow:"0 2px 2px rgba(0,0,60,.08)", backgroundImage: `url(${backfront})`, backgroundPosition: 'center 0', backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
-                    <Row >
-                        <Col style={{background:"#1391c16e", color:"#fff"}} className="col-sm-8 col-md-6 col-lg-6">
-                            <h3 style={{color:"#fff"}} className="text-left text-white bg-transparent" style={{fontSize:"50px", lineHeight:"1.3", color: "#000", fontWeight:"600"}}>
-                                Premiére plateforme de création de Web Call-center au Sénégal.
-                            </h3>
-                            <h5 className="text-left text-white" style={{lineHeight:"1.5", letterSpacing:"", color: "#000", fontWeight:"400"}}>
-                                Nous fournissons un service CCaaS (Contact Center as a Service) qui propose une application de gestion et d'exploitation de centre d'appel web.
-                            </h5>
-                        </Col>
-                        <Col className="col-sm-4 col-md-6 col-lg-6">
-
-                        </Col>
-                    </Row> 
-            </section>
-            <section className="py-4" style={{backgroundColor:"#eff2f6"}}>
-                <div className="container">
-                    <Row>
-                        <Col sm="12">
-
-                            <Row>
-                                <Col sm="12" className="">
-                                    <Card>
-                                        <CardBody className="d-flex justify-content-start">
-
-                                        <div class="">
-                                            <span>
-                                                <HelpCircle color="orange" className="mx-3" size={60} />
-                                            </span>
-                                        </div>
-                                        <div class="">
-                                        <p className="text-center"  style={{fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"400"}}> 
-                                            Un centre de contact web est un
-                                            système de relation client dans lequel le point d'entrée est le site internet de l'entreprise.
-                                            En d’autres termes elle permet à une personne de contacter directement une structure
-                                            via son site.
-                                        </p>
-                                        </div>
-                                        </CardBody>
-                                    </Card>
-                                </Col>
-                            </Row>
-
-                        </Col>
-                    </Row>
+                <div  className="d-block d-xl-none .d-md-none " style={{padding:"50px 50px 70px 50px",background:"linear-gradient(to right,#4f74fe,#70aafb)", maxWidth:"900px"}} >
+                    <h3 style={{color:"#fff"}} className="text-left text-bold-500 text-white bg-transparent" style={{fontSize:"25px", lineHeight:"1.3",fontFamily:"Montserrat"}}>
+                        Vous cherchez un moyen rapide et facile pour vos clients d'entrer en contact avec vous, <span className="text-bold-600">Bienvenue chez AlloSky</span>
+                    </h3>
+                    <h5 className="text-left text-white" style={{lineHeight:"1.5", letterSpacing:"", color: "#000", fontWeight:"400"}}>
+                        Nous fournissons des solutions CCaaS de téléphonie et de centre de contact basées sur le web pour faire évoluer les entreprises.
+                    </h5>
                 </div>
+
+
+                <img
+                    className="rounded height-auto"
+                    src={footerhead}
+                    width="100%"
+                    style={{position:"absolute", left:"0",bottom:"-7px",width:"100%",height:"70px"}}
+                    alt="bg-image04"
+                />
+
             </section>
         
-            <section  className="bg-white py-4">
+            <section  className="bg-white py-5">
                 <div className="container">
+                <h3 style={{fontSize:"35px",fontFamily:"Montserrat"}} className="text-center text-bold-600 mb-3">Fonctionnalités AlloSky</h3>
                     <Row>
+                        <Col sm="4" className="text-center">
+                           <div style={{padding:"30px 50px"}}>
+                                <Card style={{borderRadius:"100px"}} className="">
+                                    <CardBody style={{}} className="d-flex justify-content-center">
+                                        <Edit size={120} style={{color: "#4f74fe"}} />
+                                    </CardBody>
+                                </Card>
+                            </div>
+                            <div className="text-center px-2 text-bold-600 mb-3" style={{fontFamily:"Montserrat", fontSize:"21px"}}>
+                                Simplifiez la communication
+                            </div>
+                            <div className="text-center px-3 text-bold-400" style={{fontFamily:"Montserrat",fontSize:"16px"}}>
+                                Personnalisez l'apparence du widget et offrez une expérience inoubliable.
+                            </div>
+                        </Col>
+
+                        <Col sm="4" className="text-center">
+                           <div style={{padding:"30px 50px"}}>
+                                <Card style={{borderRadius:"100px"}} className="">
+                                    <CardBody className="d-flex justify-content-center">
+                                        <Activity size={120} style={{color:"#4f74fe"}} />
+                                    </CardBody>
+                                </Card>
+                            </div>
+                            <div className="text-center px-2 text-bold-600 mb-3" style={{fontFamily:"Montserrat", fontSize:"21px"}}>
+                                Tout superviser
+                            </div>
+                            <div className="text-center px-3 text-bold-400" style={{fontFamily:"Montserrat",fontSize:"16px"}}>
+                                Le gestionnaire de centres d'appels vous fournit toutes les informations dont vous avez besoin.
+                            </div>
+                        </Col>
+
+                        <Col sm="4" className="text-center">
+                           <div style={{padding:"30px 50px"}}>
+                                <Card style={{borderRadius:"100px"}} className="">
+                                    <CardBody className="d-flex justify-content-center">
+                                        <Sliders size={120} style={{color:"#4f74fe"}} />
+                                    </CardBody>
+                                </Card>
+                            </div>
+                            <div className="text-center px-2 text-bold-600 mb-3" style={{fontFamily:"Montserrat", fontSize:"21px"}}>
+                                Modifications en temps réel
+                            </div>
+                            <div className="text-center px-3 text-bold-400" style={{fontFamily:"Montserrat",fontSize:"16px"}}>
+                                Basculez vos paramètres à tout moment, y compris en ajoutant de nouveaux utilisateurs en un seul clic.
+                            </div>
+                        </Col>
+
+                        <Col sm="4" className="text-center">
+                           <div style={{padding:"30px 50px"}}>
+                                <Card style={{borderRadius:"100px"}} className="">
+                                    <CardBody className="d-flex justify-content-center">
+                                        <PhoneIncoming size={120} style={{color:"#4f74fe"}} />
+                                    </CardBody>
+                                </Card>
+                            </div>
+                            <div className="text-center px-2 text-bold-600 mb-3" style={{fontFamily:"Montserrat", fontSize:"21px"}}>
+                                File d'attente des appels
+                            </div>
+                            <div className="text-center px-3 text-bold-400" style={{fontFamily:"Montserrat",fontSize:"16px"}}>
+                                Possibilité aux appelants entrants de rester en attente jusqu'à ce qu'un de vos collaborateurs soit disponible.
+                            </div>
+                        </Col>
+
+                        <Col sm="4" className="text-center">
+                           <div style={{padding:"30px 50px"}}>
+                                <Card style={{borderRadius:"100px"}} className="">
+                                    <CardBody className="d-flex justify-content-center">
+                                        <Save size={120} style={{color:"#4f74fe"}} />
+                                    </CardBody>
+                                </Card>
+                            </div>
+                            <div className="text-center px-2 text-bold-600 mb-3" style={{fontFamily:"Montserrat", fontSize:"21px"}}>
+                                Enregistrement d'appel
+                            </div>
+                            <div className="text-center px-3 text-bold-400" style={{fontFamily:"Montserrat",fontSize:"16px"}}>
+                                Examinez les enregistrements d'appels pour aider à confirmer les détails, contrôler la qualité et guider les sessions de formation.
+                            </div>
+                        </Col>
+
+                        <Col sm="4" className="text-center">
+                           <div style={{padding:"30px 50px"}}>
+                                <Card style={{borderRadius:"100px"}} className="">
+                                    <CardBody className="d-flex justify-content-center">
+                                        <PhoneForwarded size={120} style={{color:"#4f74fe"}} />
+                                    </CardBody>
+                                </Card>
+                            </div>
+                            <div className="text-center px-2 text-bold-600 mb-3" style={{fontFamily:"Montserrat", fontSize:"21px"}}>
+                                Routage basé sur les compétences
+                            </div>
+                            <div className="text-center px-3 text-bold-400" style={{fontFamily:"Montserrat",fontSize:"16px"}}>
+                                Acheminez les appels vers vos collaborateurs regroupés par spécialité linguistique ou technique.
+                            </div>
+                        </Col>
+
+                        <Col sm="12" className="text-center mt-5">
+                            <div className="d-flex justify-content-center" block>
+                                <Link to="/states">
+                                    <Button className="text-center my-0 text-bold-600" style={{color:"#fff",boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"#4f74fe", width:"233px", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
+                                        VOIR TOUT
+                                    </Button>
+                                </Link>
+                            </div>
+                        </Col>
+                        
+                    </Row>
+                </div>
+            </section>
+
+            <section  style={{background:"linear-gradient(to right,#4f74fe,#70aafb)"}} className="py-5">
+                <div className="container">
+                
+                    <h3 style={{fontSize:"35px",fontFamily:"Montserrat"}} className="text-center text-bold-500 text-white mb-1">
+                        Commencez à utiliser <span className="text-bold-600">AlloSky</span> dès maintenant !
+                    </h3>
+                    <h3 style={{fontSize:"30px",fontFamily:"Montserrat"}} className="text-center text-bold-400 text-white mb-3">
+                        Au lieu d'un simple chat en ligne, vos visiteurs Web peuvent vous appeler directement.
+                    </h3>
+                    <Row className="mb-3 mt-2">
                         <Col sm="12">
 
+                            <Card className="my-0" style={{background:"none", boxShadow:"none"}}>
+                                <CardBody className="p-0">
+                                    <div className="d-flex justify-content-center" block>
+                                        <Link to="/pages/register">
+                                            <Button className="text-center my-0 text-bold-600" style={{color:"#4a8bfc",boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"#fff", width:"233px", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
+                                                C'EST PARTI !
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                </div>
+            </section>
+
+            <section className="p-5" style={{backgroundColor:"#f5fbff"}}>
+                <div className="container">
+                 <h3 className="text-center text-bold-600 mb-3">Fonctionne très bien sur n'importe quelle plateforme</h3>
+                    <Row className="">
+                        <Col sm="6" xs="6" md="3" lg="3" className="col-6">
+                            <Card style={{borderRadius:"20px"}}>
+                                <CardBody className="d-flex justify-content-between">
+                            
+                                    <div>
+                                        <img
+                                            className="rounded height-auto"
+                                            src={logoWordPress}
+                                            style={{alignItem:"left"}}
+                                            alt="bg-image04"
+                                        />
+                                    </div>
+                                    <div style={{fontSize:"20px",color:"rgba(0, 157, 160, 1)"}} className="align-text-bottom d-none d-sm-block text-bold-500 mt-2">
+                                        WordPress
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                        <Col sm="6" xs="6" md="3" lg="3" className="col-6">
+                            <Card style={{borderRadius:"20px"}}>
+                                <CardBody className="d-flex justify-content-between" style={{}}>
+                                    <div>
+                                        <img
+                                            className="rounded height-auto"
+                                            src={logoPrestashop}
+                                            style={{alignItem:"left"}}
+                                            alt="bg-image04"
+                                        />
+                                    </div>
+                                    <div style={{fontSize:"20px",color:"rgba(0, 157, 160, 1)"}} className="align-text-bottom d-none d-sm-block text-bold-500 mt-2">
+                                        Prestashop
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                        <Col sm="6" xs="6" md="3" lg="3" className="col-6">
+                        <Card style={{borderRadius:"20px"}}>
+                                <CardBody className="d-flex justify-content-between" style={{}}>
+                                    <div>
+                                        <img
+                                            className="rounded height-auto"
+                                            src={logoShopify}
+                                            style={{alignItem:"left",maxHeight:"50px"}}
+                                            alt="bg-image04"
+                                        />
+                                    </div>
+                                    <div style={{fontSize:"20px",color:"rgba(0, 157, 160, 1)"}} className="align-text-bottom d-none d-sm-block text-bold-500 mt-2">
+                                        Shopify
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+
+                        <Col sm="6" xs="6" md="3" lg="3" className="col-6">
+                        <Card style={{borderRadius:"20px"}}>
+                                <CardBody className="d-flex justify-content-between" style={{}}>
+                                    <div>
+                                        <img
+                                            className="rounded height-auto"
+                                            src={logoWordPress}
+                                            style={{alignItem:"left",maxHeight:"50px"}}
+                                            alt="bg-image04"
+                                        />
+                                    </div>
+                                    <div style={{fontSize:"20px",color:"rgba(0, 157, 160, 1)"}} className="align-text-bottom d-none d-sm-block text-bold-500 mt-2">
+                                        JavaScript
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                    <p className="text-center mt-3 text-bold-400">Utilisez nos outils prêt à l'emploi pour les plateformes de commerce électronique et les créateurs de sites Web</p>
+                </div>
+            </section>
+
+            <section className="py-5" style={{backgroundColor:"#f5fbff"}}>
+                <div className="container">
+                    <Card style={{borderRadius:"20px"}}>
+                        <CardBody>
                             <Row>
-                                <Col sm="3" className="d-flex justify-content-center">
-                                    <div style={{boxShadow:"rgba(0, 18, 46, 0.16) 0px 8px 18px 0px", borderRadius:"100px", height:"200px", width:"200px"}} className="align-self-center">
-                                    
+                                <Col sm="4" className="d-flex justify-content-center">
+                                    <div className="d-flex align-items-center" block>
+
+                                        <img
+                                            className="height-auto"
+                                            src={statitique}
+                                            width="100%"
+                                            style={{alignItem:"left",maxHeight:"500px"}}
+                                            alt="bg-image04"
+                                        />
                                     </div>
                                 </Col>
-                                <Col sm="9">
-                                    <div>
-                                        <ul className="list-group">
-                                            <li className="list-group-item" style={{border:"none"}}>
-                                                <Button className="mb-0" style={{boxShadow:"0 4px 12px 0 rgba(42,125,251,.6)", background:"#1391c1", padding:"4px 5px",alignItem:"center", border:"1px solid #cfcfcf", borderRadius:"18px"}}>
-                                                    <ArrowRight size={20} />
-                                                </Button>
-                                                <span className="mx-2" style={{color:"#000", fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"400"}}>Maximisez les opportunités de vente, un moyen rapide et simple de vous contacter.</span>
-                                            </li>
-                                            <li className="list-group-item" style={{border:"none"}}>
-                                                <Button className="mb-0" style={{boxShadow:"0 4px 12px 0 rgba(42,125,251,.6)", background:"#1391c1", padding:"4px 5px",alignItem:"center", border:"1px solid #cfcfcf", borderRadius:"18px"}}>
-                                                    <ArrowRight size={20} />
-                                                </Button>
-                                                <span className="mx-2" style={{color:"#000", fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"400"}}>Encouragez vos clients à vous appeler s'ils souhaiteraient des précisions.</span>
-                                            </li>
-                                            <li className="list-group-item" style={{border:"none"}}>
-                                                <Button className="mb-0" style={{boxShadow:"0 4px 12px 0 rgba(42,125,251,.6)", background:"#1391c1", padding:"4px 5px",alignItem:"center", border:"1px solid #cfcfcf", borderRadius:"18px"}}>
-                                                    <ArrowRight size={20} />
-                                                </Button>
-                                                <span className="mx-2" style={{color:"#000", fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"400"}}>Fonctionne partout dans le monde à tout moment de la journée.</span>
-                                            </li>
-                                            <li className="list-group-item" style={{border:"none"}}>
-                                                <Button className="mb-0" style={{boxShadow:"0 4px 12px 0 rgba(42,125,251,.6)", background:"#1391c1", padding:"4px 5px",alignItem:"center", border:"1px solid #cfcfcf", borderRadius:"18px"}}>
-                                                    <ArrowRight size={20} />
-                                                </Button>
-                                                <span className="mx-2" style={{color:"#000", fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"400"}}>Le visage humain derrière votre site Web, accessible, accueillant et proactif.</span>
-                                            </li>
-                                            <li className="list-group-item" style={{border:"none"}}>
-                                                <Button className="mb-0" style={{boxShadow:"0 4px 12px 0 rgba(42,125,251,.6)", background:"#1391c1", padding:"4px 5px",alignItem:"center", border:"1px solid #cfcfcf", borderRadius:"18px"}}>
-                                                    <ArrowRight size={20} />
-                                                </Button>
-                                                <span className="mx-2" style={{color:"#000", fontFamily: 'Montserrat', lineHeight:"1.5", fontWeight:"400"}}>Améliorez la satisfaction et la fidélité de vos clients.</span>
-                                            </li>
+                                <Col sm="8">
+                                    <h3 className="text-center text-bold-600 mb-3"> Statistiques du centre d'appels</h3>
+                                    <Row className="mb-3 mt-5"> 
+                                        <Col sm="6" style={{fontFamily:"Montserrat"}} className="text-justify text-bold-400 mb-2">
+                                            Gardez une trace des indicateurs de performance clés comme le temps d'attente.
+                                        </Col>
+                                        <Col sm="6" style={{fontFamily:"Montserrat"}} className="text-justify text-bold-400 mb-2">
+                                            Obtenez une perspective en temps réel de l'activité de l'équipe afin de pouvoir optimiser la productivité.
+                                        </Col>
+                                    </Row>
 
-                                        </ul>
-                                    </div>
+                                    <Row >
+                                        <Col sm="6" style={{fontFamily:"Montserrat"}} className="text-justify text-bold-400 mb-2">
+                                            Accélérez la formation des employés et améliorez l'assurance qualité en écoutant les appels en direct.
+                                        </Col>
+                                        <Col sm="6" style={{fontFamily:"Montserrat"}} className="text-justify text-bold-400 mb-2">
+                                            Parlez en secret à vos coéquipiers lors d'un appel en direct afin que vous puissiez fournir des conseils en temps opportun.
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col sm="12" className="text-center mb-3 mt-5">
+                                            <div className="d-flex justify-content-center" block>
+                                                
+                                                <Button className="text-center my-0 text-bold-600" style={{color:"#fff",boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"#4f74fe", width:"233px", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
+                                                    EN SAVOIR PLUS
+                                                </Button>
+                                            </div>
+                                        </Col>
+                                    </Row>
                                 </Col>
                             </Row>
 
-                        </Col>
-                    </Row>
+                        </CardBody>
+                    </Card>
                 </div>
             </section>
 
-            <section  style={{backgroundColor:"#1391c1"}} className="py-4">
+            <section className="py-5" style={{background:"linear-gradient(0deg,rgba(245,250,249,.64) 9%,#f5faf9)"}}>
                 <div className="container">
-                    <Row>
-                        <Col sm="12">
-
-                            <Card className="my-0" style={{backgroundColor:"#1391c1", boxShadow:"none"}}>
-                                <CardBody className="p-0">
-                                    <div className="d-flex justify-content-center" block>
-                                        <Button className="text-center my-0 text-bold-600" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"rgb(23, 163, 217)", width:"233px", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
-                                            C'EST PARTI !
-                                        </Button>
-                                    </div>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
-                </div>
-            </section>
-            <section  className="bg-white py-4">
-                <div className="container">
-                    <Row>
-                        <Col sm="12">
-
-                            <Card style={{boxShadow:"none"}}>
-                                <CardBody>
-                                <h3 className="text-center" style={{lineHeight:"1.25", color: "#000", fontWeight:"500"}}>POURQUOI JOKKO APPS ?</h3>
-                                    <Row>
-                                        <Col sm="6">
-                                        <h5 className="text-left p-2 mt-3" style={{lineHeight:"1.30", letterSpacing:"", color: "#000", fontWeight:"500"}}>
-                                            Premiére plateforme proposant des services Live chat et Click to call
-                                            au Sénégal et en Afrique.
-                                        </h5>
-                                        <p className="mb-8 p-2 text-justify" style={{fontFamily: 'Montserrat', letterSpacing:"-.6px", lineHeight:"1.5", fontWeight:"500"}}>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                                        </p>
-                                        </Col>
-                                        <Col sm="6">                   
-                                            <img
-                                                className="rounded height-auto"
-                                                src={idee}
-                                                width="100%"
-                                                style={{alignItem:"center",maxWidth:"600px"}}
-                                                alt="bg-image04"
-                                            />
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Col sm="6">
-                                        <img
-                                            className="rounded height-auto"
-                                            src={friend}
-                                            width="100%"
-                                            style={{alignItem:"center",maxWidth:"600px"}}
-                                            alt="bg-image04"
-                                            />
-                                        </Col>
-                                        <Col sm="6">
-                                        <h5 className="text-left p-2 mt-3" style={{lineHeight:"1.30", letterSpacing:"", color: "#000", fontWeight:"500"}}>
-                                            Premiére plateforme proposant des services Live chat et Click to call
-                                            au Sénégal et en Afrique.
-                                        </h5>
-                                        <p className="mb-8 p-2 text-justify" style={{fontFamily: 'Montserrat', letterSpacing:"-.6px", lineHeight:"1.5", fontWeight:"500"}}>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                                        </p>
-                                        </Col>
-                                    </Row>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
-                </div>
-            </section>
-            <section className="py-4" style={{backgroundColor:"#eff2f6"}}>
-                <div className="container">
+                <h3 className="text-center text-bold-600 mb-3">Testez sur les dernieres versions de navigateur web</h3>
                     <Row>
                         <Col sm="12">
 
@@ -303,98 +408,12 @@ class Home extends Component {
                                     </Card>
                                 </Col>
                             </Row>
-
+                 
                         </Col>
                     </Row>
                 </div>
             </section>
-            <section className="py-4">
-                <div className="container">
-                    <Row>
-                        <Col sm="12">
-
-                            <Card >
-                                <CardBody>
-                                    <Row>
-                                        <Col sm="6">
-                                            <h3 style={{lineHeight:"1.25", letterSpacing:"-1.9px", fontSize:"45px"}} className="text-bold-700">
-                                                Créer gratuitement un web chat
-                                            </h3>
-                                            <p className="mt-4 mb-8" style={{fontFamily: 'Montserrat', letterSpacing:"-.6px", lineHeight:"1.5", fontWeight:"500"}}>
-                                                Créer gratuitement un web chat gyvvuhb ebh eetvbtevjhb etjhtvjht etvhjbvth vte
-                                            </p>
-                                            <p className="mt-4 mb-8" style={{fontFamily: 'Montserrat', letterSpacing:"-.6px", lineHeight:"1.5", fontWeight:"500"}}>
-                                                Créer gratuitement un web chat etvjnvtj etvjh vetj vevvtvt j etv evvjkvtjkvnjnetv tvjnvtj
-                                            </p>
-                                            <div className="d-flex justify-content-center" block>
-                                                <Button className="text-center mt-3 text-bold-600" style={{fontFamily: 'Montserrat', background:"rgb(19, 145, 193)", width:"233px", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
-                                                    Créer gratuitement
-                                                </Button>
-                                            </div>
-                                        </Col>
-                                    </Row>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
-                </div>
-            </section>
-            <footer className="py-4" style={{backgroundColor:"rgb(19, 145, 193)"}}>
-                <div className="container">
-                    <Row>
-                        <Col sm="3">
-
-                            <Card style={{backgroundColor:"rgb(19, 145, 193)"}}>
-                                <CardBody>
-
-                                </CardBody>
-                            </Card>
-                        </Col>
-                        <Col sm="3">
-                            <Card style={{backgroundColor:"rgb(19, 145, 193)"}}>
-                                <CardBody>
-                                <h6 style={{color: "#a8e4ff", fontWeight:"500"}}>NOS SERVICES</h6>
-                                    <div className="">
-                                        <p className="" style={{fontSize:"14px",fontFamily: 'Montserrat', color:"#fff", letterSpacing:"-.6px", lineHeight:"1.5", fontWeight:"500"}}>
-                                            <MessageSquare size={14} className="mr-1" /> Live chat
-                                        </p>
-                                        <p className="" style={{fontSize:"14px",fontFamily: 'Montserrat', color:"#fff", letterSpacing:"-.6px", lineHeight:"1.5", fontWeight:"500"}}>
-                                            <Headphones size={14} className="mr-1" /> Click to call
-                                        </p>
-                                    </div>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                        <Col sm="6">
-
-                            <Card style={{backgroundColor:"rgb(19, 145, 193)"}}>
-                                <CardBody>
-                                    <h6 style={{color: "#a8e4ff", fontWeight:"500"}}>CONTACTS</h6>
-                                    <div className="">
-                                        <p className="" style={{fontSize:"14px",fontFamily: 'Montserrat', color:"#fff", letterSpacing:"-.6px", lineHeight:"1.5", fontWeight:"500"}}>
-                                            <Phone size={14} className="mr-1" /> +221 77 380 19 30 <Mail size={14} className="mr-1 ml-3" /> gaye.babspro@gmail.com
-                                        </p>
-                                        <p className="" style={{fontSize:"14px",fontFamily: 'Montserrat', color:"#fff", letterSpacing:"-.6px", lineHeight:"1.5", fontWeight:"500"}}>
-                                            <Phone size={14} className="mr-1" /> +221 77 477 58 01 <Mail size={14} className="mr-1 ml-3" /> tallfabi111.babspro@gmail.com
-                                        </p>
-                                    </div>
-                                    <FormGroup>
-                                        <h6 style={{color: "#a8e4ff", fontWeight:"500"}}>ABONNEZ VOUS À LA NEWSLETTER</h6>
-                                        <div className="position-relative has-icon-left">
-                                            <Input style={{padding:".375rem 45px"}} type="text" id="iconLeft" name="iconLeft" />
-                                            <div style={{position: "absolute", top:"0", right:"auto", left:"5px", textAlign:"center", lineHeight:"2.2rem", zIndex:"2", display:"block",width:"2.5rem",height:"2.5rem"}} className="form-control-position">
-                                                <Mail size={30} className="info" />
-                                            </div>
-                                        </div>
-                                    </FormGroup>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
-                </div>
-            </footer>
-        
-
+    
 </div>
 
 

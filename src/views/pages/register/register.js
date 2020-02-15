@@ -1,11 +1,8 @@
 // import external modules
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import { register, checkUsernameAvailability, checkEmailAvailability } from '../../../utility/APIutils';
+import { register, checkEmailAvailability } from '../../../utility/APIutils';
 import { UncontrolledTooltip } from "reactstrap";
-import StepZilla from "./wizard-steps/main";
-import Step1 from "./wizard-steps/Step1";
-import Step2 from "./wizard-steps/Step2";
 import "../../../assets/scss/views/form/wizard.scss"
 import { 
    NAME_MIN_LENGTH, NAME_MAX_LENGTH, 
@@ -54,7 +51,9 @@ class Register extends Component {
           },
 
           selectedService: {
-            value: ''
+            value: 'SERVICE_CALL',
+            validateStatus:"success",
+            errorMessage: ""
           },
           domaine: {
             value: ''
@@ -83,6 +82,7 @@ class Register extends Component {
   
 
   handleInputChange(event, validationFun) {
+
       const target = event.target;
       const inputName = target.name;        
       const inputValue = target.value;
@@ -93,6 +93,7 @@ class Register extends Component {
             ...validationFun(inputValue)
          }
       });
+
    }
 
    goNext  = () => {
@@ -203,7 +204,7 @@ onServiceChanged(e){
 
         <div className="">
             <section className="">
-            <div className="container">
+            <div className="container py-3">
 
                     {
                        (this.state.registerDone)?
@@ -320,7 +321,7 @@ onServiceChanged(e){
                                                    onFocus={(event) => {this.setState({email:{validateStatus: '',
                                                    errorMsg: null,}})}}
                                                    placeholder="Adresse e-mail"
-                                                   onBlur={(event) => this.handleInputChange(event, this.validateEmail)}
+                                                   onBlur={(event) => this.handleInputChange(event, this.validateEmailAvailability)}
                                                    required
                                                 />
                                                 
@@ -371,7 +372,7 @@ onServiceChanged(e){
                            
                                           <FormGroup>
                                              <Col md="12" className="d-flex justify-content-center" >
-                                                <Button className="mt-2" onClick={this.goNext} style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"rgb(30, 131, 172)", width:"200px", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
+                                                <Button block className="mt-2" onClick={this.goNext} style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"#4f74fe", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
                                                    SUIVANT
                                                 </Button>
                                              </Col>
@@ -419,7 +420,7 @@ onServiceChanged(e){
                                        
                                                          <CardBody>
                                                             <CardTitle className="font-weight-bold text-center">Live Chat</CardTitle>
-                                                            <CardSubtitle className="text-center">Gratuit à vie</CardSubtitle>
+                                                            <CardSubtitle className="text-center text-warning">Disponible bientôt</CardSubtitle>
                                                             {/* <CardText className="text-center"><span style={{fontSize: "30px"}} color="orange" className="text-bold-400">25 000<b style={{fontSize: "14px"}} className="ml-1 text-bold-400">Fcfa / mois</b></span></CardText> */}
                                                             <CardFooter className="pb-0 ">
                                                                <Col md="12" className="d-flex justify-content-center">
@@ -441,7 +442,7 @@ onServiceChanged(e){
                               
                                                          <CardBody >
                                                             <CardTitle className="font-weight-bold text-center">Web to Call</CardTitle>
-                                                            <CardSubtitle className="text-center">Gratuit en béta</CardSubtitle>
+                                                            <CardSubtitle className="text-center text-success">Disponible</CardSubtitle>
                                                             {/* <CardText className="text-center"><span style={{fontSize: "30px"}} color="orange" className="text-bold-400">75 000<b style={{fontSize: "14px"}} className="ml-1 text-bold-400">Fcfa / mois</b></span></CardText> */}
                                                             <CardFooter className="pb-0 ">
                                                                <Col md="12" className="d-flex justify-content-center">
@@ -457,7 +458,7 @@ onServiceChanged(e){
                                              </Col>
                                           <Col md="12">
                                              <FormGroup className="d-flex justify-content-center">
-                                                <Button type="submit" className="mt-2" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"rgb(30, 131, 172)", width:"200px", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
+                                                <Button block type="submit" className="mt-2" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"#4f74fe", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
                                                    Créer un compte
                                                 </Button>
                                              </FormGroup>
@@ -481,30 +482,6 @@ onServiceChanged(e){
                 </div>
             </section>
         </div>
-        //  <div className="container-fluid gradient-deep-orange-orange">
-        //     <Row className="full-height-vh">
-        //        <Col xs="12" className="d-flex align-items-center justify-content-center">
-        //           <Card className="register-card text-center width-400">
-        //              <CardBody>
-        //                 <h6 className="text-uppercase text-bold-500 black py-2">Créer votre compte</h6>
-                        
-        //              </CardBody>
-        //              <CardFooter>
-        //                 <div className="float-left">
-        //                    <NavLink to="/pages/forgot-password" className="text-black">
-        //                       Mot de passe oublié ?
-        //                    </NavLink>
-        //                 </div>
-        //                 <div className="float-right">
-        //                    <NavLink to="/pages/login" className="text-black">
-        //                       Vous avez déjà un compte ? Se connecter
-        //                    </NavLink>
-        //                 </div>
-        //              </CardFooter>
-        //           </Card>
-        //        </Col>
-        //     </Row>
-        //  </div>
       );
    }
 
@@ -516,12 +493,12 @@ onServiceChanged(e){
          if(name.length < NAME_MIN_LENGTH) {
              return {
                  validateStatus: 'error',
-                 errorMsg: `Name is too short (Minimum ${NAME_MIN_LENGTH} characters needed.)`
+                 errorMsg: `Le nom/prenom est trop court (Minimum ${NAME_MIN_LENGTH} caractères nécessaires.)`
              }
          } else if (name.length > NAME_MAX_LENGTH) {
              return {
                  validationStatus: 'error',
-                 errorMsg: `Name is too long (Maximum ${NAME_MAX_LENGTH} characters allowed.)`
+                 errorMsg: `Le nom/prenom est trop court (Maximum ${NAME_MAX_LENGTH} caractères nécessaires.)`
              }
          } else {
              return {
@@ -535,7 +512,7 @@ onServiceChanged(e){
          if(!email) {
              return {
                  validateStatus: 'error',
-                 errorMsg: 'Email may not be empty'                
+                 errorMsg: 'L\'email ne peut pas être vide'                
              }
          }
    
@@ -548,7 +525,7 @@ onServiceChanged(e){
          }else if(email.length > EMAIL_MAX_LENGTH) {
              return {
                  validateStatus: 'error',
-                 errorMsg: `Email is too long (Maximum ${EMAIL_MAX_LENGTH} characters allowed)`
+                 errorMsg: `L\'email est trop long (Maximum ${EMAIL_MAX_LENGTH} caractères nécessaires)`
              }
          }else{
             return {
@@ -603,79 +580,19 @@ onServiceChanged(e){
          }
      }
    
-     validateUsernameAvailability() {
-         // First check for client side errors in username
-         const usernameValue = this.state.username.value;
-         const usernameValidation = this.validateUsername(usernameValue);
-   
-         if(usernameValidation.validateStatus === 'error') {
-             this.setState({
-                 username: {
-                     value: usernameValue,
-                     ...usernameValidation
-                 }
-             });
-             return;
-         }
-   
-         this.setState({
-             username: {
-                 value: usernameValue,
-                 validateStatus: 'validating',
-                 errorMsg: null
-             }
-         });
-   
-         checkUsernameAvailability(usernameValue)
-         .then(response => {
-             if(response.available) {
-                 this.setState({
-                     username: {
-                         value: usernameValue,
-                         validateStatus: 'success',
-                         errorMsg: null
-                     }
-                 });
-             } else {
-                 this.setState({
-                     username: {
-                         value: usernameValue,
-                         validateStatus: 'error',
-                         errorMsg: 'This username is already taken'
-                     }
-                 });
-             }
-         }).catch(error => {
-             // Marking validateStatus as success, Form will be recchecked at server
-             this.setState({
-                 username: {
-                     value: usernameValue,
-                     validateStatus: 'success',
-                     errorMsg: null
-                 }
-             });
-         });
-     }
-   
-     validateEmailAvailability() {
+     validateEmailAvailability(email) {
          // First check for client side errors in email
-         const emailValue = this.state.email.value;
+         const emailValue = email;
          const emailValidation = this.validateEmail(emailValue);
    
          if(emailValidation.validateStatus === 'error') {
-             this.setState({
-                 email: {
-                     value: emailValue,
-                     ...emailValidation
-                 }
-             });    
-             return;
+             return emailValidation;
          }
    
          this.setState({
              email: {
                  value: emailValue,
-                 validateStatus: 'validating',
+                 validateStatus: 'success',
                  errorMsg: null
              }
          });
@@ -695,7 +612,7 @@ onServiceChanged(e){
                      email: {
                          value: emailValue,
                          validateStatus: 'error',
-                         errorMsg: 'This Email is already registered'
+                         errorMsg: 'Cet e-mail est déjà enregistré'
                      }
                  });
              }

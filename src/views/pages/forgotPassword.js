@@ -37,7 +37,7 @@ class ForgotPassword extends Component {
 
    render(){
    return (
-      <div className="container-fluid gradient-deep-orange-orange">
+      <div className="container-fluid" style={{background:"linear-gradient(to right,#4f74fe,#70aafb)"}}>
          <Row className="full-height-vh">
             <Col xs="12" className="d-flex align-items-center justify-content-center ">
                <Card className="text-center width-400">                  
@@ -49,22 +49,21 @@ class ForgotPassword extends Component {
                         <FormGroup>
                            <Col md="12">
                               <Input
+                                 required
                                  type="email"
-                                 className="form-control"
+                                 className="input-style form-control py-3"
                                  name="email"
                                  onChange={this.handleChange}
                                  placeholder="Votre adresse e-mail"
                               />
                            </Col>
                         </FormGroup>
-                        <FormGroup className="pt-2">
-                           <Col md="12">
-                              <div className="text-center">
-                                 <Button color="default" className="btnjokko" block>
-                                    Submit
+                        <FormGroup>
+                              <Col md="12" className="d-flex justify-content-center" >
+                                 <Button block type="submit" className="mt-2" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"#4f74fe", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
+                                    Valider
                                  </Button>
-                              </div>
-                           </Col>
+                              </Col>
                         </FormGroup>
                      </Form>
                   </CardBody>
