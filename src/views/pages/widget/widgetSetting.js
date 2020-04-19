@@ -13,7 +13,7 @@ import { Card, CardBody, CardHeader, CardTitle, Row, Col, FormGroup, Button, Inp
 } from "reactstrap";
  import { connect } from 'react-redux';
  import imgBack from "../../../assets/img/background.gif";
-import { User, Mic, Speaker, Volume2, Delete, X, Phone, MessageSquare, ChevronDown, ChevronUp, AlertTriangle } from "react-feather";
+import { User, Mic, Speaker, Volume2, Delete, X, Phone, MessageSquare, ChevronDown, ChevronUp, AlertTriangle, Save } from "react-feather";
 import phoneCall from "../call/phoneCall";
 import Spinner from "../../../components/spinner/spinner";
 import { getServiceWidget, updateServiceWidget, checkUrlExiste, generateUrl } from "../../../utility/APIutils";
@@ -84,10 +84,10 @@ class WidgetSetting extends Component {
       if(this.props.currentProject){
          generateUrl(this.props.currentProject.id)
          .then(response => {
-            console.log("response", response);
+            //console.log("response", response);
             this.setState({hasUrl: true})
          }).catch(error => {
-            console.log("error", error);
+            //console.log("error", error);
             
          });
       }
@@ -97,7 +97,7 @@ class WidgetSetting extends Component {
       checkUrlExiste(id)
       .then(response => {
 
-         console.log("response", response);
+         //console.log("response", response);
       }).catch(error => {
          this.setState({hasUrl: false})
       });
@@ -108,13 +108,13 @@ class WidgetSetting extends Component {
       getServiceWidget(this.props.currentProject.id)
       .then(response => {
 
-         console.log("response", response);
+         //console.log("response", response);
 
          this.props.handleWidget(response);
          this.setState({loadingView: false})
          this.hasWidgetUrl(this.props.currentProject.id);
       }).catch(error => {
-            console.log("error", error);
+            //console.log("error", error);
             this.setState({loadingView: false})
       });
    }
@@ -141,7 +141,7 @@ class WidgetSetting extends Component {
 
          toastr.success('', 'Mise à jour effectuée')
       }).catch(error => {
-            console.log("error", error);
+            //console.log("error", error);
             this.setState({
                loading: false
             })
@@ -159,24 +159,24 @@ class WidgetSetting extends Component {
         <Fragment>
            <Row>
 
-               <Col sm="12" md="9" lg="9" className="col-12 mt-3">
+               <Col className="col-12 mt-3">
                   {
                      (this.state.hasUrl)?"":(
                         <Alert color="warning">
                            {/* <AlertTriangle className="text-warning mr-2" size={20} /> */}
                            L'url de votre widget n'est pas bien configurée,
                            <Button onClick={this.widgetGenerateUrl} color="primary" style={{fontSize:"12px", padding: "0 8px", lineHeight: "1.5", borderRadius: "3px", minWidth: "60px", height: "22px"}} className="mr-2 ml-2 px-1 mb-0">
-                              Corriger
+                             Cliquez ici pour corriger
                            </Button>
                         </Alert>
                      )
                   }
 
                </Col>
-                <Col sm="12" md="9" lg="9" className="col-12">
+                <Col className="col-sm-12">
                      <Card>   
                         <CardHeader className="border-bottom mb-2 py-2">                    
-                           <Button disabled={this.state.loading} onClick={() => {this.updateWidget()}}  className="px-3 mb-0 py-1" style={{fontSize:"14.1px", height:"34px", lineHeight:"20px", padding:"0 12px", fontFamily: 'Montserrat', background:"rgb(19, 145, 193)", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
+                        <Button disabled={this.state.loading} onClick={() => {this.updateWidget()}} style={{backgroundColor:"#0e5cad"}}  className="mb-0 py-1">
                                                                              
                            {(this.state.loading)?
                               (<BounceLoader 			
@@ -185,7 +185,7 @@ class WidgetSetting extends Component {
                                     size={25}
                                     color={'#fff'}
                                     loading={true} 
-                              />):'Enregistrer'
+                              />):(<Save />)
 
                            }
                            </Button>
@@ -242,8 +242,8 @@ class WidgetSetting extends Component {
                                                                <ListGroup>
                                                                   <ListGroupItem style={{boxShadow:"0 0 0 0.1rem rgba(152, 159, 166, 0.5)",borderRadius: "5px"}} className="mb-2">
                                                                      <div className="d-flex justify-content-between">
-                                                                        <div className="media-left">
-                                                                           <img className="media-object d-flex mr-3 bg-primary height-40 rounded-circle" src="https://randomuser.me/api/portraits/med/women/10.jpg" />
+                                                                        <div style={{borderRadius:"100%", background: "#cfcfcf", padding: "5px 10px", fontWeight: "bold", fontSize:"18"}} className="media-left">
+                                                                           JS
                                                                         </div>
                                                                         <div style={{color:"rgba(0, 157, 160, 1)"}} className="align-text-bottom mt-1">
                                                                            HTLM/JavaScript

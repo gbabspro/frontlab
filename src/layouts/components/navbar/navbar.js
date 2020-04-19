@@ -43,7 +43,8 @@ import {
    Globe,
    Mail,
    Mic,
-   MicOff
+   MicOff,
+   Target
 } from "react-feather";
 import { BounceLoader } from 'react-spinners';
 import NavbarSearch from "../../../components/search/Search";
@@ -240,13 +241,13 @@ class ThemeNavbar extends Component {
                            data-toggle="collapse"
                         />
 
-                        {
+                        {/* {
                            (this.props.currentUser.authorities && this.props.currentUser.authorities[0].authority == "ROLE_MANAGER")?
                            (<Form className="navbar-form float-left" role="search">
                               <NavbarSearch />
                            </Form>):
                            ("")
-                        }
+                        } */}
 
                         {/* {
                            (this.props.currentUser.authorities && this.props.currentUser.authorities[0].authority == "ROLE_MANAGER")?
@@ -267,7 +268,7 @@ class ThemeNavbar extends Component {
                         {
                            (this.props.currentUser.authorities && this.props.currentUser.authorities[0].authority == "ROLE_MANAGER")?
                            (<Col sm="2" className=""> 
-                           <Button onClick={this.openModalNewAgent} className="mt-0 p-1 bg-light" style={{border: "1px solid #868e96"}}><Plus  color="#868e96" size={25} /></Button>
+                           {/* <Button onClick={this.openModalNewAgent} className="mt-0 p-1 bg-light" style={{border: "1px solid #868e96"}}><Plus  color="#868e96" size={25} /></Button> */}
                            <Modal
                               isOpen={this.state.modalNewAgent}
                               toggle={this.toggle}
@@ -395,9 +396,16 @@ class ThemeNavbar extends Component {
                            }
                         </NavItem>
 
+                        <NavItem className="pr-1 mr-3">
+                           <Target className="mt-2" color={(this.props.logStatut.statut=="online")?"#28a745":
+                                             (this.props.logStatut.statut=="offline")?"#d84804":""} size={20} />  
+                        </NavItem>
+
                         <UncontrolledDropdown nav inNavbar className="pr-1">
-                           <DropdownToggle nav>
-                              <img src={userImage} alt="logged-in-user" className="rounded-circle width-35" />
+                           <DropdownToggle style={{borderRadius:"100%", background: "#cfcfcf", padding: "5px 10px", fontWeight: "bold", fontSize:"18"}} nav>
+                           {(this.props.currentUser && this.props.currentUser.firstname && this.props.currentUser.lastname) ? 
+                            (this.props.currentUser.firstname.charAt(0).toUpperCase()+""+this.props.currentUser.lastname.charAt(0).toUpperCase()):
+                            ("")}
                            </DropdownToggle>
                            <DropdownMenu right>
                               <DropdownItem>
@@ -407,11 +415,11 @@ class ThemeNavbar extends Component {
                                  </span>
                               </DropdownItem>
                               <DropdownItem divider />
-                              <Link to="/pages/user-profile" className="p-0">
+                              {/* <Link to="/pages/user-profile" className="p-0">
                                  <DropdownItem>
                                     <User size={16} color="white" style={{color: "white"}} className="mr-1" /> Mon Profile
                                  </DropdownItem>
-                              </Link>
+                              </Link> */}
                               <DropdownItem divider />
                               <Link to="/logout" className="danger p-0">
                                  <DropdownItem>
@@ -455,7 +463,8 @@ class ThemeNavbar extends Component {
 const mapStateToProps = state => ({
    currentUser: state.currentUser,
    currentProject: state.currentProject,
-   micConfig: state.micConfig
+   micConfig: state.micConfig,
+   logStatut: state.logSatutReducer
 })
 
 const mapDispatchToProps = dispatch => ({

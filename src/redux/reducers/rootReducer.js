@@ -13,6 +13,7 @@ import OperatorsReducer from "./operators/operatorsReducer";
 import OperatorStatusReducer from "./operators/operatorStatusReducer";
 import currentUser from "./user/userReducer";
 import widgetReducer from "./widget/widgetReducer";
+import logSatutReducer from "./logstatut/logStatutReducer";
 
 
 const rootReducer = combineReducers({
@@ -28,7 +29,8 @@ const rootReducer = combineReducers({
    operators: OperatorsReducer,
    currentUser: currentUser,
    widgetReducer: widgetReducer,
-   operatorStatus: OperatorStatusReducer
+   operatorStatus: OperatorStatusReducer,
+   logSatutReducer: logSatutReducer
 });
 
 export default rootReducer;

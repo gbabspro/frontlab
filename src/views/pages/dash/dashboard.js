@@ -66,7 +66,7 @@ class Dashboard extends Component {
       url = url.replace("ws://localhost:5000/ws/",  "");
       url = url.replace("/websocket", "");
       url = url.replace(/^[0-9]+\//, "");
-      console.log("Your current session is: " + url);
+      //console.log("Your current session is: " + url);
       sessionId = url;
 
       this.stompClient.subscribe('/user/'+this.props.currentProject.domaine+'/queue/update', (payload)=>{
@@ -93,11 +93,11 @@ class Dashboard extends Component {
     }
 
   onError(error) {
-   console.log("error ", error);
+   //console.log("error ", error);
   }
 
   onMessageReceived(payload) {
-   console.log("payload ", payload);
+   //console.log("payload ", payload);
   }
 
 
@@ -128,7 +128,7 @@ class Dashboard extends Component {
       listAgentsOut(this.props.currentProject.domaine)
       .then(response => {
 
-         console.log("response", response);
+         //console.log("response", response);
          this.setState({
           operatorsStatusOut: {
             loading: false,
@@ -137,7 +137,7 @@ class Dashboard extends Component {
         });
 
       }).catch(error => {
-          console.log("error", error);
+          //console.log("error", error);
           this.setState({
             operatorsStatusOut: {
               loading: false
@@ -160,7 +160,7 @@ class Dashboard extends Component {
       listAgentsIn(this.props.currentProject.domaine)
       .then(response => {
 
-         console.log("response", response);
+         //console.log("response", response);
          this.setState({
           operatorsStatusIn: {
             loading: false,
@@ -169,7 +169,7 @@ class Dashboard extends Component {
         });
 
       }).catch(error => {
-          console.log("error", error);
+          //console.log("error", error);
           this.setState({
             operatorsStatusIn: {
               loading: false
@@ -198,7 +198,7 @@ class Dashboard extends Component {
       loadcallsInProgressFromAPI(this.props.currentProject.domaine)
       .then(response => {
 
-         console.log("response", response);
+         //console.log("response", response);
          this.setState({
           callsInProgress: {
             loading: false,
@@ -207,7 +207,7 @@ class Dashboard extends Component {
         });
 
       }).catch(error => {
-          console.log("error", error);
+          //console.log("error", error);
           this.setState({
             callsInProgress: {
               loading: false
@@ -234,7 +234,7 @@ class Dashboard extends Component {
       loadcallsWaitingFromAPI(this.props.currentProject.domaine)
       .then(response => {
 
-         console.log("response", response);
+         //console.log("response", response);
          this.setState({
           callsWaiting: {
             loading: false,
@@ -243,7 +243,7 @@ class Dashboard extends Component {
         });
 
       }).catch(error => {
-          console.log("error", error);
+          //console.log("error", error);
           this.setState({
             callsWaiting: {
               loading: false
@@ -267,7 +267,7 @@ class Dashboard extends Component {
       loadOperatorsFromAPI(this.props.currentProject.domaine)
       .then(response => {
 
-         console.log("response", response);
+         //console.log("response", response);
          this.setState({
           listeOperators: {
             loading: false,
@@ -276,7 +276,7 @@ class Dashboard extends Component {
         });
 
       }).catch(error => {
-          console.log("error", error);
+          //console.log("error", error);
           this.setState({
             listeOperators: {
               loading: false
@@ -365,7 +365,7 @@ class Dashboard extends Component {
                       <SalesPerVisitChartCard
                         salesPerVisitData={this.state.SalesPerVisitData}
                         
-                        cardTitle="Appels reçus sur Appels manqués"
+                        // cardTitle="Appels reçus sur Appels manqués"
                         salesText="Appels Reçus"
                         visitText="Appels manqués"
                       />
@@ -392,7 +392,7 @@ class Dashboard extends Component {
                         (<BulletList />):
                         (<Table responsive>
                           <tbody>
-                            {
+                            { (this.state.listeOperators != undefined)?
                               this.state.listeOperators.data.map((operator, id) =>{
                                 return ( 
                                   <tr key={id}>
@@ -424,7 +424,7 @@ class Dashboard extends Component {
                                       ""
                                     }</td>    
                                   </tr>)
-                              })
+                              }):""
                             }
                           </tbody>
                         </Table>)

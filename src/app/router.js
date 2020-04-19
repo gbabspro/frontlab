@@ -243,7 +243,7 @@ class Router extends Component {
                     />):""
                }
 
-               <MainLayoutRoutes
+               {/* <MainLayoutRoutes
                   exact
                   path="/pages/account"
                   
@@ -252,7 +252,7 @@ class Router extends Component {
                         <LazyUserProfile  {...matchprops} />
                      </Suspense>
                   )}
-               />
+               /> */}
 
                <MainLayoutRoutes
                   exact

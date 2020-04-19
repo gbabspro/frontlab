@@ -13,22 +13,15 @@ class SalesPerVisit extends PureComponent {
    render() {
       return (
          <Card>
-            {/* <CardHeader>
-               <CardTitle className="mb-0">{this.props.cardTitle}</CardTitle>
-            </CardHeader> */}
             <CardBody className="pt-2 pb-0">
                <div className="chart-info mb-2">
                   <span className="text-uppercase mr-3">
                      <i className="fa fa-circle primary font-small-2 mr-1" />{" "}
                      {this.props.salesText}
                   </span>
-                  <span className="text-uppercase mr-3">
-                     <i className="fa fa-circle warning font-small-2 mr-1" />{" "}
-                     {this.props.visitText}
-                  </span>
                </div>
             </CardBody>
-            <ChartistGraph
+            <ChartistGraph 
                className="height-300 lineAreaChart mb-1"
                data={this.props.salesPerVisitData}
                type="Line"

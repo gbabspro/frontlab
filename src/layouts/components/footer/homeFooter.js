@@ -1,12 +1,24 @@
 import React from "react";
-import { ShoppingCart, Headphones, MessageSquare, BookOpen, Book, Phone, Mail } from "react-feather";
+import { ShoppingCart, Headphones, MessageSquare, BookOpen, Book, Phone, Mail, Twitter, Facebook, Linkedin } from "react-feather";
 import { Card, CardBody, Row, Col, FormGroup, Button, Input} from "reactstrap";
 import templateConfig from "../../../templateConfig";
-
+import logoAlloSkyBlanc from "../../../assets/img/logoalloskyblanc.png";
 const HomeFooter = props => (
    <footer style={{background:"linear-gradient(to right, rgb(39, 82, 243), rgb(107, 157, 226))"}}>
       <div className="container">
         <Row>
+        <Col sm="3" className="mt-3">
+        <div>
+            <img
+                className="rounded height-auto"
+                src={logoAlloSkyBlanc}
+                width="150px"
+                height="auto"
+                style={{alignItem:"left"}}
+                alt="bg-image04"
+            />
+        </div>
+        </Col>
             <Col sm="3">
 
                 <Card style={{backgroundColor:"transparent"}}>
@@ -38,7 +50,7 @@ const HomeFooter = props => (
                     </CardBody>
                 </Card>
             </Col>
-            <Col sm="6">
+            <Col sm="3">
 
                 <Card style={{backgroundColor:"transparent"}}>
                     <CardBody>
@@ -51,27 +63,32 @@ const HomeFooter = props => (
                                 <Phone size={14} className="mr-1" /> +221 77 477 58 01 
                             </p>
                         </div>
+                    </CardBody>
+                </Card>
+            </Col>
+        </Row>
+        <Row>
+            <Col sm="3" className="">
 
-                    <Row>
-                        <h6 className="ml-2" style={{color: "#a8e4ff", fontWeight:"500"}}>ABONNEZ VOUS À LA NEWSLETTER</h6>
-                        <Col sm="9" xs="9" md="9" lg="9" className="col-9"> 
-                            <FormGroup>
-                                <div className="position-relative has-icon-left">
-                                    <Input style={{padding:".375rem 45px"}} type="text" id="iconLeft" name="iconLeft" />
-                                    <div style={{position: "absolute", top:"0", right:"auto", left:"5px", textAlign:"center", lineHeight:"2.2rem", zIndex:"2", display:"block",width:"2.5rem",height:"2.5rem"}} className="form-control-position">
-                                        <Mail size={30} className="info" />
-                                    </div>
-                                </div>
-                            </FormGroup>
-                        </Col>
-                        <Col sm="3" xs="3" md="3" lg="3" className="col-3">
-                            <FormGroup className="mb-0">
-                                <Button block type="submit" className="mb-0" style={{color:"#4a8bfc",fontFamily: 'Montserrat', background:"#fff", boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat',borderRadius: "4px",}}>
-                                    Valider
-                                </Button>
-                            </FormGroup>
-                        </Col>
-                    </Row>
+            </Col>
+            <Col sm="3">
+                <Card style={{borderRight:"7px solid #1da1f2",borderRadius:"50px 00px 100px 50px"}}>
+                    <CardBody className="d-flex py-2 justify-content-left">
+                        <Twitter style={{color:"#1da1f2"}} className="mr-2" /> Twitter
+                    </CardBody>
+                </Card>
+            </Col>
+            <Col sm="3">
+                <Card style={{borderRight:"7px solid #1877f2",borderRadius:"50px 00px 100px 50px"}}>
+                    <CardBody className="d-flex py-2 justify-content-left">
+                        <Facebook style={{color:"#1877f2"}} className="mr-2" /> Facebook
+                    </CardBody>
+                </Card>
+            </Col>
+            <Col sm="3">
+               <Card style={{borderRight:"7px solid #007bb5",borderRadius:"50px 00px 100px 50px"}}>
+                    <CardBody className="d-flex py-2 justify-content-left">
+                        <Linkedin style={{color:"#007bb5"}} className="mr-2" /> Linkedin
                     </CardBody>
                 </Card>
             </Col>

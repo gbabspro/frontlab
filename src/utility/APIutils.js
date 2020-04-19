@@ -299,6 +299,13 @@ export function operatorLogOut(domaine, userId) {
     });
 }
 
+export function getOperatorStatut(domaine, userId) {
+    return request({
+        url: API_BASE_URL + "/operator/get/statut/"+domaine+"/"+userId,
+        method: 'GET',
+    });
+}
+
 export function loadOperatorsFromAPI(domaine) {
     return request({
         url: API_BASE_URL + "/operator/list/" + domaine,

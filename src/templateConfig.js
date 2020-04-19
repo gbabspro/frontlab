@@ -13,7 +13,7 @@ const templateConfig = {
    sidebar: {
       collapsed: false, // Options: true, false | Set false to keep the sidebar open / set it to true for collapsed sidebar by default
       size: 'sidebar-md', // Options: 'sidebar-lg', 'sidebar-md', 'sidebar-sm'
-      backgroundColor: "man-of-steel",
+      backgroundColor: "navy-blue",
       // Gradient Options: 'pomegranate', 'king-yna', 'ibiza-sunset', 'flickr', 'purple-bliss', 'man-of-steel', 'purple-love'
       // Solid Options: 'black', 'white', 'blue', 'purple', 'red', 'orange', 'navy-blue'
       backgroundImage: true, // Options: true, false | Set true to show background image

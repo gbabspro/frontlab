@@ -7,7 +7,8 @@
    .nav-link {
 		padding: 0.5rem 0.8rem 0.2rem 0.8rem;
       &.active {
-         border-bottom: 2px solid theme-color("primary");
+		 border-bottom: 2px solid theme-color("primary");
+		 background-color: #f8f9fa;
       }
       border: none;
    }

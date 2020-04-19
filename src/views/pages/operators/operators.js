@@ -249,14 +249,6 @@ class Operators extends Component {
                                 </Modal>
                             </div>
                             <Table responsive className="">
-                                <thead>
-                                    <tr>
-                                        <th>Nom et prénom</th>
-                                        <th>Adresse e-mail</th>
-                                        <th>Statu</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
                                 <tbody>
                                 
                                     {
@@ -265,7 +257,7 @@ class Operators extends Component {
                                         return (
                                             <tr key={id}><td>{operator.firstname+" "+operator.lastname}</td>
                                                 <td>{operator.email}</td>
-                                                <td>{<Toggle 
+                                                {/* <td>{<Toggle 
                                                         defaultChecked={operator.enabled}
                                                         onChange={() => {}}
                                                     />}</td>
@@ -273,7 +265,7 @@ class Operators extends Component {
                                                     
                                                     <Button className="btn-sm btn-grey rounded-circle"><Edit size={15} /></Button>
                                                     <Button className="btn-sm btn-red ml-2 rounded-circle"><Trash2 size={15} /></Button>
-                                                </td>
+                                                </td> */}
                                                     
                                             </tr>
                                             );

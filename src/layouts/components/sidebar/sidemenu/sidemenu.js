@@ -86,14 +86,14 @@ class SideMenuContent extends Component {
             }
 
 
-            <SideMenu.MenuSingleItem badgeColor="danger">
+            {/* <SideMenu.MenuSingleItem badgeColor="danger">
                <NavLink to="/pages/account" activeclassname="active">
                   <i className="menu-icon">
                      <Settings size={18} />
                   </i>
                   <span className="menu-item-text">Mon compte</span>
                </NavLink>
-            </SideMenu.MenuSingleItem>
+            </SideMenu.MenuSingleItem> */}
 
          </SideMenu>
       );

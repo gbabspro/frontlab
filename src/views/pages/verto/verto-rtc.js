@@ -169,7 +169,10 @@ function onRemoteStream(self, stream) {
 
 	console.log("self.options ", self.options);
 
-	self.options.useAudio.play();
+	if(self.options.useAudio){
+		self.options.useAudio.play();
+	}
+	
 	self.remoteStream = stream;
 }
 

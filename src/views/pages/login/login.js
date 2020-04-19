@@ -13,7 +13,7 @@ import {
    CardBody,
    CardFooter
 } from "reactstrap";
-
+import { BounceLoader } from 'react-spinners';
 import { ACCESS_TOKEN } from '../../../constants';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -31,17 +31,20 @@ class Login extends Component {
             status: false,
             message:""
          },
-         isLogin: false
+         isLoading: false
       }
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleChange = this.handleChange.bind(this);
 
-      console.log("this.props ", this.props)
+      //console.log("this.props ", this.props)
   }
 
    handleSubmit = (event) => {
       event.preventDefault();   
 
+            this.setState({
+               isLoading: true
+            })
             const loginRequest = this.state;
             login(loginRequest)
             .then( (response) => {
@@ -49,7 +52,7 @@ class Login extends Component {
 
                   getCurrentUser()
                   .then(response => {
-                     console.log("currentUser : ", response)
+                     //console.log("currentUser : ", response)
                      if(response.authorities[0].authority == "ROLE_MANAGER"){
             
                         this.props.setCurrentUser({...response, isAuthenticated: true})
@@ -64,16 +67,22 @@ class Login extends Component {
             
                      }
             
-            
+                     this.setState({
+                        isLoading: false
+                     })
                   }).catch(error => {
                      
-                     console.log("error ", error)
+                     this.setState({
+                        isLoading: false
+                     })
 
                   });  
 
             }).catch(error => {
 
-               console.log("error ", error)
+               this.setState({
+                  isLoading: false
+               })
                   if(error.status === 401) {
                      this.setState({
                         hasError:{
@@ -160,7 +169,17 @@ class Login extends Component {
                            <FormGroup>
                               <Col md="12" className="d-flex justify-content-center" >
                                  <Button block type="submit" className="mt-2" style={{boxShadow:"0 2px 2px rgba(0,0,60,.08)",fontFamily: 'Montserrat', background:"#4f74fe", height:"52px", display: 'flex', alignItem:"center", borderRadius: "4px", justifyContent: 'center',}}>
-                                    Se connecter
+                                    
+                                    {(this.state.isLoading)?
+                                       (<BounceLoader 			
+                                             className="clip-loader left"
+                                             sizeUnit={"px"}
+                                             size={25}
+                                             color={'#fff'}
+                                             loading={true} 
+                                       />):("Se connecter")
+
+                                    }
                                  </Button>
                               </Col>
                            </FormGroup>

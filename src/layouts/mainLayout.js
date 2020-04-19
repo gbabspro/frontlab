@@ -12,11 +12,12 @@ import templateConfig from "../templateConfig";
 import {setCurrentProject, LoadProjects} from "../redux/actions/projects/projectsActions";
 import {LoadOperators} from "../redux/actions/operators/operatorsActions";
 import {setCurrentUser} from "../redux/actions/user/userActions";
-import {getUserProjects, getServiceOperators, getUserOperator} from "../utility/APIutils";
+import {getUserProjects, getServiceOperators, getUserOperator, getOperatorStatut} from "../utility/APIutils";
 import { connect } from 'react-redux';
-
+import { isLoading } from "../redux/actions/logstatut/offLineAction";
 import Spinner from "../components/spinner/spinner";
-
+import { setOnLine } from "../redux/actions/logstatut/onLineAction";
+import { setOffLine } from "../redux/actions/logstatut/offLineAction";
 
 var stompClient = null;
 
@@ -70,13 +71,33 @@ class MainLayout extends PureComponent {
 
             console.log("reponse ", response);
             this.props.getProjects(response);
-            this.props.setCurrent(response[0])
+            this.props.setCurrent(response[0]);
+
+            var extension = "";
+
+            extension = this.props.currentProject.defaultPersonnel.extension.extension;
+
+            getOperatorStatut(this.props.currentProject.domaine, extension)
+            .then(response => {
+ 
+               if(response=="Available"){
+                  this.props.handleLoginStatut();
+               }else if(response=="Logged Out"){
+                  this.props.handleLogOutStatut();
+               }
+
+            }).catch(error => {
+               
+            });
 
             getServiceOperators(response[0].id)
             .then(response => {
    
                console.log("reponse ", response);
                this.props.getOperatorsList(response);
+
+
+
                this.setState({
                   isLoading: false
                })
@@ -97,14 +118,30 @@ class MainLayout extends PureComponent {
          getUserOperator()
          .then(response => {
 
-            console.log("response project current ", response)
-
-            this.props.setCurrent(response.service);        
             this.props.handleCurrentUser({...response, isAuthenticated: true});
             this.setState({
                isLoading: false
             })
 
+            var extension = "";
+
+            extension = response.sipExtension;
+
+            console.log("extension user ", response);
+
+            this.props.handleLoadingStatut();
+            getOperatorStatut(this.props.currentProject.domaine, extension)
+            .then(response => {
+ 
+               if(response=="Available"){
+                  this.props.handleLoginStatut();
+               }else if(response=="Logged Out"){
+                  this.props.handleLogOutStatut();
+               }
+
+            }).catch(error => {
+               
+            });
 
          }).catch(error => {
             console.log("error ", error);
@@ -180,6 +217,7 @@ class MainLayout extends PureComponent {
                            // currentUser={this.props.currentUser}
                            sidebarState={this.state.sidebarState}
                         />
+                        <div className="text-white bg-dark px-3">Notre plateforme est en cours de construction, pour le moment, uniquement le module appel est déployé. Merci de votre patience.</div>
                         <main>{this.props.children}</main>
                         <Footer />
                      </div>
@@ -202,6 +240,9 @@ const mapDispatchToProps = dispatch => ({
    getProjects: (projects) => dispatch(LoadProjects(projects)),
    getOperatorsList: (operators) => dispatch(LoadOperators(operators)),
    handleCurrentUser: (user) => dispatch(setCurrentUser(user)),
+   handleLoginStatut: () => dispatch(setOnLine()),
+   handleLogOutStatut: () => dispatch(setOffLine()),
+   handleLoadingStatut: () => dispatch(isLoading())
 })
  
 export default connect(
