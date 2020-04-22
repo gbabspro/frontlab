@@ -63,7 +63,7 @@ class Dashboard extends Component {
 
       var sessionId = "";
       var url = this.stompClient.ws._transport.url;
-      url = url.replace("ws://localhost:5000/ws/",  "");
+      url = url.replace("ws://srv.babacargaye.com:5089/ws/",  "");
       url = url.replace("/websocket", "");
       url = url.replace(/^[0-9]+\//, "");
       //console.log("Your current session is: " + url);
@@ -109,7 +109,7 @@ class Dashboard extends Component {
         'Authorization': localStorage.getItem("accessToken")
       }
 
-     var socket = new SockJS('http://localhost:5000/ws');
+     var socket = new SockJS('https://srv.babacargaye.com:5089/ws');
 
      this.stompClient = Stomp.over(socket);
 
