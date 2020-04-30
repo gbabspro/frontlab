@@ -22,7 +22,7 @@
       "formik": "^1.5.8",
       "google-map-react": "^1.1.7",
       "history": "^4.10.1",
-      "jquery": "^1.12.4",
+      "jquery": "^3.5.0",
       "lodash": "^4.17.15",
       "match-sorter": "^2.2.3",
       "moment": "^2.22.2",
